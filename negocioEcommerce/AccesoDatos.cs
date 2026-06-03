@@ -18,7 +18,7 @@ namespace negocioEcommerce
         }
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=localhost; database=CATALOGO_P3_DB; user id=sa; password=BaseDatos#2;");
+            conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=BaseDatos#2;");
             comando = new SqlCommand();
         }
         public void ejecutarLectura()
