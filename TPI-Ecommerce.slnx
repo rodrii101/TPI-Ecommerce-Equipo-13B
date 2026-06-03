@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="dominioEcommerce/dominioEcommerce.csproj" />
-  <Project Path="Ecommerce/Ecommerce.csproj" />
-  <Project Path="negocioEcommerce/negocioEcommerce.csproj" />
+  <Project Path="dominioEcommerce/dominioEcommerce.csproj" Id="1e915478-6d9c-4519-a5d8-4fcc75ad26a1" />
+  <Project Path="Ecommerce/Ecommerce.csproj" Id="a2b5501a-1133-49da-8bb1-860378675f24" />
+  <Project Path="negocioEcommerce/negocioEcommerce.csproj" Id="7dc0c8d6-a074-479d-ab8a-2b18334950d8" />
 </Solution>
