@@ -11,34 +11,43 @@ namespace Ecommerce
 {
 
 
-    public partial class Master
+    public partial class FormularioCategoria
     {
 
         /// <summary>
-        /// Control head.
+        /// Control txtIdCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.TextBox txtIdCategoria;
 
         /// <summary>
-        /// Control frmMaster.
+        /// Control txtDescripcionCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmMaster;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCategoria;
 
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Control btmAgregarCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button btmAgregarCategoria;
+
+        /// <summary>
+        /// Control btmEliminarCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btmEliminarCategoria;
     }
 }

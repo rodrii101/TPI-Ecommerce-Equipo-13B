@@ -16,5 +16,10 @@ namespace Ecommerce
             dgvListadoCategorias.DataSource = negocioCategoria.listarCategorias();
             dgvListadoCategorias.DataBind();
         }
+
+        protected void dgvListadoCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

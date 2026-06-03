@@ -1,4 +1,20 @@
 <Solution>
+  <Project Path="../../../../../Program Files/Docker/Docker/Docker Desktop.exe">
+    <BuildType Project="Release" />
+    <Platform Project="x64" />
+    <Properties Name="DebuggerProjectSystem">
+      <Property Name="AttachLaunchAction" Value="No" />
+      <Property Name="Environment" Value="Predeterminado" />
+      <Property Name="Executable" Value="C:\Program Files\Docker\Docker\Docker Desktop.exe" />
+      <Property Name="IORedirection" Value="Auto" />
+      <Property Name="LaunchingEngine" Value="00000000-0000-0000-0000-000000000000" />
+      <Property Name="LaunchSQLEngine" Value="No" />
+      <Property Name="PortSupplier" Value="00000000-0000-0000-0000-000000000000" />
+      <Property Name="RemoteMachine" Value="DESKTOP-7D5H85R" />
+      <Property Name="StartingDirectory" Value="C:\Program Files\Docker\Docker" />
+      <Property Name="UseLegacyDebugEngines" Value="No" />
+    </Properties>
+  </Project>
   <Project Path="dominioEcommerce/dominioEcommerce.csproj" Id="1e915478-6d9c-4519-a5d8-4fcc75ad26a1" />
   <Project Path="Ecommerce/Ecommerce.csproj" Id="a2b5501a-1133-49da-8bb1-860378675f24" />
   <Project Path="negocioEcommerce/negocioEcommerce.csproj" Id="7dc0c8d6-a074-479d-ab8a-2b18334950d8" />
