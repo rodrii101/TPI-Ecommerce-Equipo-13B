@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using negocioEcommerce;
 
 namespace Ecommerce
 {
@@ -11,7 +12,9 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CategoriaNegocio negocioCategoria = new CategoriaNegocio();
+            dgvListadoCategorias.DataSource = negocioCategoria.listarCategorias();
+            dgvListadoCategorias.DataBind();
         }
     }
 }

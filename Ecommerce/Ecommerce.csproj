@@ -111,6 +111,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dominioEcommerce\dominioEcommerce.csproj">
+      <Project>{1e915478-6d9c-4519-a5d8-4fcc75ad26a1}</Project>
+      <Name>dominioEcommerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocioEcommerce\negocioEcommerce.csproj">
+      <Project>{7dc0c8d6-a074-479d-ab8a-2b18334950d8}</Project>
+      <Name>negocioEcommerce</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
