@@ -25,13 +25,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listados
-                            </a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listado</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Default.aspx">Producto</a></li>
-                                <li><a class="dropdown-item" href="/ListarCategorias.aspx">Categoria</a></li>
+                                <li><a class="dropdown-item" href="/ListarProductos.aspx">Productos</a></li>
+                                <li><a class="dropdown-item" href="/ListarCategorias.aspx">Categorias</a></li>
                             </ul>
-
                         </li>
                     </ul>
                 </div>
@@ -46,7 +44,6 @@
         <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-
         </div>
         
         <footer class="p-1" style="background-color:#299abc">

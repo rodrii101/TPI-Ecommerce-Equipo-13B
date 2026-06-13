@@ -5,7 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p class="fs-1">LISTADO CATEGORIAS </p>
 
-    <div class="row">
+    <div class="row"> 
+
         <div class="col">
             <asp:GridView runat="server" ID="dgvListadoCategorias" OnSelectedIndexChanged="dgvListadoCategorias_SelectedIndexChanged" CssClass="table table-hover border border-dark" AutoGenerateColumns="false">
                 <Columns>
@@ -14,11 +15,13 @@
                     <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>
+
             <div>
                 <a Class="btn btn-primary" href="/FormularioCategoria.aspx">Agregar</a>
-                
+
             </div>
         </div>
+
     </div>
     <br />
 

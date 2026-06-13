@@ -67,8 +67,10 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="FormularioCategoria.aspx" />
+    <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListarCategorias.aspx" />
+    <Content Include="ListarProductos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +88,13 @@
     <Compile Include="FormularioCategoria.aspx.designer.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormularioProducto.aspx.cs">
+      <DependentUpon>FormularioProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioProducto.aspx.designer.cs">
+      <DependentUpon>FormularioProducto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -95,6 +104,13 @@
     </Compile>
     <Compile Include="ListarCategorias.aspx.designer.cs">
       <DependentUpon>ListarCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarProductos.aspx.cs">
+      <DependentUpon>ListarProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarProductos.aspx.designer.cs">
+      <DependentUpon>ListarProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>

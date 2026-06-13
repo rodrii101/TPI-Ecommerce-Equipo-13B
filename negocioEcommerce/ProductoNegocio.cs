@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using dominioEcommerce;
@@ -9,13 +12,20 @@ namespace negocioEcommerce
 {
     public class ProductoNegocio
     {
-        /*public List<Producto> listarProductos()
+        public List<Producto> listarProductos(string id="")
         {
             List<Producto> lista = new List<Producto>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("listarProductos");
+                if (id != "")
+                {
+                    datos.setearProcedimiento("buscarSeleccionado");
+                    datos.setearParametro("@IdProducto", int.Parse(id));
+                }
+                else
+                    datos.setearProcedimiento("listarProductos");
+                
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -23,8 +33,10 @@ namespace negocioEcommerce
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (float)datos.Lector["Precio"];
-                    aux.Categoria = (Categoria)datos.Lector["Categoria"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Stock = (int)datos.Lector["Stock"];
                     aux.Estado = (bool)datos.Lector["Estado"];
                     lista.Add(aux);
@@ -39,9 +51,88 @@ namespace negocioEcommerce
             {
                 datos.cerrarConexion();
             }
-                
+        }
 
-        }*/
-        
+        public void agregar(Producto nuevoProducto, string id="")
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if(id != "")
+                {
+                    datos.setearProcedimiento("storedModificarProducto");
+                    datos.setearParametro("@Id", int.Parse(id));
+                    datos.setearParametro("@Nombre", nuevoProducto.Nombre);
+                    datos.setearParametro("@Descripcion", nuevoProducto.Descripcion);
+                    datos.setearParametro("@Precio", nuevoProducto.Precio);
+                    datos.setearParametro("@IdCategoria", nuevoProducto.Categoria.IdCategoria);
+                    datos.setearParametro("@Stock", nuevoProducto.Stock);
+                }
+                else
+                {
+                    datos.setearProcedimiento("storedAltaProducto");
+                    datos.setearParametro("@Nombre", nuevoProducto.Nombre);
+                    datos.setearParametro("@Descripcion", nuevoProducto.Descripcion);
+                    datos.setearParametro("@Precio", nuevoProducto.Precio);
+                    datos.setearParametro("@IdCategoria", nuevoProducto.Categoria.IdCategoria);
+                    datos.setearParametro("@Estado", 1);
+                    datos.setearParametro("@Stock", nuevoProducto.Stock);
+                }
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarProducto(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedEliminarProducto");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void desactivarProducto(int id, bool estado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedDesactivarProducto");
+                datos.setearParametro("@Id", id);
+                if (estado)
+                    datos.setearParametro("@Estado", false);
+                else
+                    datos.setearParametro("@Estado", true);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
