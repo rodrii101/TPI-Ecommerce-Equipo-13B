@@ -19,7 +19,8 @@ namespace Ecommerce
 
         protected void dgvListadoCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string Id = dgvListadoCategorias.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioCategoria.aspx?IdCategoria=" + Id);
         }
     }
 }
