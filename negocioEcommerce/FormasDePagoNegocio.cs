@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dominioEcommerce;
 namespace negocioEcommerce
 {
-    public class CategoriaNegocio
+    public class FormasDePagoNegocio
     {
-        public List<Categoria> listarCategorias()
+        public List<FormasDePagos> listarFormasDePagos()
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<FormasDePagos> lista = new List<FormasDePagos>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("listarCategorias");
+                datos.setearProcedimiento("listarFormasDePagos");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.IdCategoria = (int)datos.Lector["Id"];
+                    FormasDePagos aux = new FormasDePagos();
+                    aux.IdFormasDePago = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Estado = (bool)datos.Lector["Estado"];
                     lista.Add(aux);
@@ -35,27 +36,27 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
-        public List<Categoria> listarCategorias(string IdCategoria = "")
+        public List<FormasDePagos> listarFormasDePagos(string IdFormaDePago = "")
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<FormasDePagos> lista = new List<FormasDePagos>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                if (IdCategoria != "")
+                if (IdFormaDePago != "")
                 {
-                    datos.setearProcedimiento("BuscarCategoriaSeleccionado");
-                    datos.setearParametro("@IdCategoria", int.Parse(IdCategoria));
+                    datos.setearProcedimiento("BuscarFormaDePago");
+                    datos.setearParametro("@Id", int.Parse(IdFormaDePago));
                 }
                 else
-                    datos.setearProcedimiento("listarCategorias");
+                    datos.setearProcedimiento("listarFormasDePagos");
 
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.IdCategoria = (int)datos.Lector["Id"];
+                    FormasDePagos aux = new FormasDePagos();
+                    aux.IdFormasDePago = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Estado = (bool)datos.Lector["Estado"];
+                    aux.Estado = (bool)datos.Lector["Estado"];  
                     lista.Add(aux);
                 }
                 return lista;
@@ -69,13 +70,13 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
-        public void AgregarCategoria(Categoria nuevaCategoria)
+        public void AgregarFormaDePago(FormasDePagos nuevoPago)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("AgregarCategoria");
-                datos.setearParametro("@Descripcion", nuevaCategoria.Descripcion);
+                datos.setearProcedimiento("AgregarFormaDePago");
+                datos.setearParametro("@Descripcion", nuevoPago.Descripcion);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -87,14 +88,14 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
-        public void ModificarCategoria(Categoria modificarCategoria)
+        public void ModificarFormaDePago(FormasDePagos modificarPago)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("ModificarCategoria");
-                datos.setearParametro("@Id", modificarCategoria.IdCategoria);
-                datos.setearParametro("@Descrip", modificarCategoria.Descripcion);
+                datos.setearProcedimiento("ModificarFormaDePago");
+                datos.setearParametro("@Id", modificarPago.IdFormasDePago);
+                datos.setearParametro("@Descripcion", modificarPago.Descripcion);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -106,15 +107,14 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
-        public void DesativarYActivarCategoria(int id, bool estado = false)
+        public void DesactivarYActivarFormaDeProducto(int id, bool estado = false)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-               
-                datos.setearProcedimiento("CambiarEstadoCategoria");
-                datos.setearParametro("@id", id);
-                datos.setearParametro("@estado", estado);
+                datos.setearProcedimiento("CambiarEstadoFormaDePago");
+                datos.setearParametro("@Id", id);
+                datos.setearParametro("@Estado", estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

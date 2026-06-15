@@ -18,7 +18,7 @@
                 <div class="mb-4">
                     <asp:Button OnClick="btmAgregarCategoria_Click" Text="Agregar" CssClass="btn btn-primary" ID="btmAgregarCategoria" runat="server" />
                     <a class="btn btn-primary" href="/listarCategorias.aspx">Cancelar</a>
-                    <asp:Button Text="Eliminar" CssClass="btn btn-danger" ID="btmEliminarCategoria" runat="server" />
+                    <asp:Button Text="Inactivar" CssClass="btn btn-warning" Onclick="btnDesativarYActivarCategoria_Click" ID="btnDesativarYActivarCategoria" runat="server" />
 
                 </div>
             </div>

@@ -66,11 +66,5 @@ namespace negocioEcommerce
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-
-        public void setearConsulta(string consulta)
-        {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta;
-        }
     }
 }

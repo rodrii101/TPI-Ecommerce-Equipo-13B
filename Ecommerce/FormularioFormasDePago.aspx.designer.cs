@@ -11,43 +11,43 @@ namespace Ecommerce
 {
 
 
-    public partial class FormularioCategoria
+    public partial class FormularioFormasDePago
     {
 
         /// <summary>
-        /// Control txtIdCategoria.
+        /// Control txtIdFormasDePago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdCategoria;
+        protected global::System.Web.UI.WebControls.TextBox txtIdFormasDePago;
 
         /// <summary>
-        /// Control txtDescripcionCategoria.
+        /// Control txtDescripcionFormasDePago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCategoria;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionFormasDePago;
 
         /// <summary>
-        /// Control btmAgregarCategoria.
+        /// Control btmAgregarFormasDePago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btmAgregarCategoria;
+        protected global::System.Web.UI.WebControls.Button btmAgregarFormasDePago;
 
         /// <summary>
-        /// Control btnDesativarYActivarCategoria.
+        /// Control btmDesactivarYActivarFormasDePago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDesativarYActivarCategoria;
+        protected global::System.Web.UI.WebControls.Button btmDesactivarYActivarFormasDePago;
     }
 }

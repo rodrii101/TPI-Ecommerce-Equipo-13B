@@ -66,9 +66,11 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="FormularioCategoria.aspx" />
+    <Content Include="FormularioFormasDePago.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListarCategorias.aspx" />
+    <Content Include="ListarFormasDePago.aspx" />
     <Content Include="ListarProductos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Web.config" />
@@ -88,6 +90,13 @@
     <Compile Include="FormularioCategoria.aspx.designer.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormularioFormasDePago.aspx.cs">
+      <DependentUpon>FormularioFormasDePago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioFormasDePago.aspx.designer.cs">
+      <DependentUpon>FormularioFormasDePago.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormularioProducto.aspx.cs">
       <DependentUpon>FormularioProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -104,6 +113,13 @@
     </Compile>
     <Compile Include="ListarCategorias.aspx.designer.cs">
       <DependentUpon>ListarCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarFormasDePago.aspx.cs">
+      <DependentUpon>ListarFormasDePago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarFormasDePago.aspx.designer.cs">
+      <DependentUpon>ListarFormasDePago.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListarProductos.aspx.cs">
       <DependentUpon>ListarProductos.aspx</DependentUpon>
