@@ -16,6 +16,6 @@ namespace dominioEcommerce
         //public Marca Marca {get; set}
         public bool Estado { get; set; }
         public int Stock { get; set; }
-        //public ImagenProducto Imagen_URL { get; set; }
+        public List<ImagenProducto> Imagenes_URL { get; set; }
     }
 }

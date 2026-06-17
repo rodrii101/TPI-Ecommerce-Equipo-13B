@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
@@ -53,34 +54,62 @@ namespace negocioEcommerce
             }
         }
 
-        public void agregar(Producto nuevoProducto, string id="")
+        public void agregar(Producto nuevoProducto, List<ImagenProducto> listaImgenes)//lista
+        {
+            AccesoDatos datos = new AccesoDatos();
+            
+            try
+            {
+                datos.setearProcedimiento("storedAltaProducto");
+                datos.setearParametro("@Nombre", nuevoProducto.Nombre);
+                datos.setearParametro("@Descripcion", nuevoProducto.Descripcion);
+                datos.setearParametro("@Precio", nuevoProducto.Precio);
+                datos.setearParametro("@IdCategoria", nuevoProducto.Categoria.IdCategoria);
+                datos.setearParametro("@Estado", 1);
+                datos.setearParametro("@Stock", nuevoProducto.Stock);
+
+                int idNuevo = datos.ejecutarScalar();
+                datos.cerrarConexion();
+
+
+                foreach (ImagenProducto imagen in listaImgenes)
+                {
+                    AccesoDatos datosImg = new AccesoDatos();
+
+                    datosImg.setearProcedimiento("storedAltaImagen");
+                    datosImg.setearParametro("@IdProducto", idNuevo);
+                    datosImg.setearParametro("@ImagenURL", imagen.ImagenURL);
+                    datosImg.setearParametro("@EsPrincipal", imagen.EsPrincipal);
+                    datosImg.ejecutarAccion();
+                    datosImg.cerrarConexion();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void modificarProducto(Producto producto, string id)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                if(id != "")
-                {
                     datos.setearProcedimiento("storedModificarProducto");
                     datos.setearParametro("@Id", int.Parse(id));
-                    datos.setearParametro("@Nombre", nuevoProducto.Nombre);
-                    datos.setearParametro("@Descripcion", nuevoProducto.Descripcion);
-                    datos.setearParametro("@Precio", nuevoProducto.Precio);
-                    datos.setearParametro("@IdCategoria", nuevoProducto.Categoria.IdCategoria);
-                    datos.setearParametro("@Stock", nuevoProducto.Stock);
-                }
-                else
-                {
-                    datos.setearProcedimiento("storedAltaProducto");
-                    datos.setearParametro("@Nombre", nuevoProducto.Nombre);
-                    datos.setearParametro("@Descripcion", nuevoProducto.Descripcion);
-                    datos.setearParametro("@Precio", nuevoProducto.Precio);
-                    datos.setearParametro("@IdCategoria", nuevoProducto.Categoria.IdCategoria);
-                    datos.setearParametro("@Estado", 1);
-                    datos.setearParametro("@Stock", nuevoProducto.Stock);
-                }
+                    datos.setearParametro("@Nombre", producto.Nombre);
+                    datos.setearParametro("@Descripcion", producto.Descripcion);
+                    datos.setearParametro("@Precio", producto.Precio);
+                    datos.setearParametro("@IdCategoria", producto.Categoria.IdCategoria);
+                    datos.setearParametro("@Stock", producto.Stock);
+                    datos.ejecutarAccion();
 
-                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

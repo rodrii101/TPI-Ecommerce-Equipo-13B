@@ -11,6 +11,20 @@ namespace Ecommerce
 {
     public partial class FormularioProducto : System.Web.UI.Page
     {
+        public List<ImagenProducto> listaImagenes
+        {
+            get
+            {
+                if (Session["listaImagenes"] == null)
+                    Session["listaImagenes"] = new List<ImagenProducto>();
+
+                return (List<ImagenProducto>)Session["listaImagenes"];
+            }
+            set
+            {
+                Session["listaImagenes"] = value;
+            }
+        }
         public bool estadoProducto { get; set; }
         public bool confirmarEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -26,6 +40,7 @@ namespace Ecommerce
 
                     CategoriaNegocio negocioCategoria = new CategoriaNegocio();
                     List<Categoria> listaCategorias = negocioCategoria.listarCategorias();
+                    
 
                     ddlCategoria.DataSource = listaCategorias;
                     ddlCategoria.DataValueField = "IdCategoria";
@@ -34,7 +49,8 @@ namespace Ecommerce
 
                     //CONFIGURACION SI ESTAMOS MODIFICANDO
                     string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                    if(id != "")
+
+                    if (id != "")
                     {
                         txtId.Visible = true;
                         lblId.Visible = true;
@@ -54,11 +70,16 @@ namespace Ecommerce
                         txtPrecio.Text = seleccionado.Precio.ToString();
                         ddlCategoria.SelectedValue = seleccionado.Categoria.IdCategoria.ToString();
                         txtStock.Text = seleccionado.Stock.ToString();
+
                         estadoProducto = seleccionado.Estado;
                         if (estadoProducto)
                             btnDesactivar.Text = "Desactivar";
                         else
                             btnDesactivar.Text = "Activar";
+
+                        //campos de imagen
+                        CargarCarrusel(Convert.ToInt32(Request.QueryString["id"]));
+
                     }
                 }
             }
@@ -84,15 +105,19 @@ namespace Ecommerce
                 productoNuevo.Categoria.IdCategoria = int.Parse(ddlCategoria.SelectedValue);
                 productoNuevo.Stock = int.Parse(txtStock.Text);
 
+
+
                 if (Request.QueryString["id"] != null)
                 {
-                    productoNegocio.agregar(productoNuevo, Request.QueryString["id"].ToString());
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+
+                    productoNegocio.modificarProducto(productoNuevo, Request.QueryString["id"].ToString());
                 }
                 else
                 {
-                    productoNegocio.agregar(productoNuevo);
+                    productoNegocio.agregar(productoNuevo, listaImagenes);
                 }
-                 
+
                 Response.Redirect("ListarProductos.aspx");
             }
             catch (Exception ex)
@@ -140,5 +165,83 @@ namespace Ecommerce
                 throw ex;
             }
         }
+
+        protected void btnGuardarImg_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ImagenProducto aux = new ImagenProducto();
+                aux.ImagenURL = txtImagenUrl.Text;
+                aux.EsPrincipal = listaImagenes.Count == 0; //COMPARA SI listaImagenes es true/false
+
+                //MODIFIACION DE IMAGEN
+                if(Request.QueryString["id"] != null)
+                {
+                    int idProducto = int.Parse(Request.QueryString["id"].ToString());
+                    ImagenNegocio negocioImg = new ImagenNegocio();
+
+                    negocioImg.agregarImagen(idProducto, aux.ImagenURL);
+                    CargarCarrusel(idProducto);//MUESTRO CARRUSEL CON LA IMAGEN NUEVA CARGADA
+                }
+                //ALTA DE IMAGEN
+                else
+                {
+                    listaImagenes.Add(aux);
+                    rptCarrusel.DataSource = listaImagenes;
+                    rptCarrusel.DataBind();
+                }
+
+                txtImagenUrl.Text = string.Empty; 
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+            }
+        }
+
+
+        //FUNCIONES
+        private void CargarCarrusel(int idProducto)
+        {
+            ImagenNegocio negocioImg = new ImagenNegocio();
+            
+            rptCarrusel.DataSource = negocioImg.listarImgProducto(idProducto);
+            rptCarrusel.DataBind();
+        }
+
+
+
+        private void ActualizarImagenPrincipal(string idProducto, int idImagen)
+        {
+            ImagenNegocio negocioImg = new ImagenNegocio();
+            negocioImg.establecerImagenPrincipal(idProducto, idImagen);
+        }
+
+        private void EliminarImagen(int idImagen)
+        {
+            ImagenNegocio negocioImg = new ImagenNegocio();
+            negocioImg.eliminarImagen(idImagen);
+        }
+
+        protected void btnEliminarImg_Click(object sender, EventArgs e)
+        {
+            string idFotoActual = hfImagenActualId.Value;
+            EliminarImagen(int.Parse(idFotoActual));
+
+            string idProducto = Request.QueryString["id"].ToString();
+            CargarCarrusel(int.Parse(idProducto));
+        }
+
+        protected void btnElegirPrincipal_Click(object sender, EventArgs e)
+        {
+            string idProducto = Request.QueryString["id"].ToString();
+            string idFotoActual = hfImagenActualId.Value;
+            ActualizarImagenPrincipal(idProducto, int.Parse(idFotoActual));
+        }
+
+
     }
 }
+
+

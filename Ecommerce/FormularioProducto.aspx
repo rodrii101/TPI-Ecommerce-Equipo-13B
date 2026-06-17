@@ -19,7 +19,7 @@
                 <label for="txtDescripcion" class="form-label">Descripcion></label>
                 <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
             </div>
-            <div class="mb-e">
+            <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="$"></asp:TextBox>
             </div>
@@ -32,6 +32,58 @@
                 <asp:TextBox runat="server" ID="txtStock" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
+        <%-- SECTOR IMAGENES--%>
+        <div class="col-6">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <label for="txtImagenUrl" class="form-label">Url Imagen [La primera imagen sera la principal. Puedes editarlo luego.]</label>
+                        <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                 <%--   <div class="d-flex mb-3">
+                        <asp:Image ID="imgProducto" runat="server"/>
+                    </div>--%>
+                    
+                    <div class="col">
+                         <div id="carouselExample" class="carousel slide carousel-dark" data-bs-ride="carousel" ClientIDMode="Static">
+                              <div class="carousel-inner">
+                                    <asp:Repeater ID="rptCarrusel" runat="server">
+                                        <ItemTemplate>
+                                            <div class='carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>' data-id='<%# Eval("id") %>'>
+                                        
+                                                <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100" alt='Producto <%# Eval("idProducto") %>'>
+            
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                              </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                          </button>
+                        </div>
+                        <%-- ASP:HiddenField ES UTIL PARA OBTENER EL ID DE LA IMAGEN ACTUAL--%>
+                        <asp:HiddenField ID="hfImagenActualId" runat="server" ClientIDMode="Static" />
+
+                    </div>
+                    <div class="col mb-3">
+                        <asp:Button ID="btnEliminarImg" runat="server" CssClass="btn btn-danger" Text="Eliminar imagen" OnClick="btnEliminarImg_Click"/>
+                        <asp:Button ID="btnElegirPrincipal" runat="server" CssClass="btn btn-danger" Text="Imagen Principal" OnClick="btnElegirPrincipal_Click"/>
+                    </div>
+
+
+
+                    <div>
+                        <asp:Button ID="btnGuardarImg" runat="server" CssClass="btn btn-danger" Text="Guardar imagen" OnClick="btnGuardarImg_Click"/>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+
         <div class="mb-3">
             <asp:Button runat="server" ID="btnAgregarProducto" CssClass="btn btn-primary" Text="Agregar" OnClick="btnAgregarProducto_Click"/>
         </div>
@@ -55,4 +107,26 @@
         </div>
     </div>
 
+    <%--SCRIP PARA OBETNER id DE LA IMAGEN ACUTAL--%>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var myCarousel = document.getElementById('carouselExample');
+
+        myCarousel.addEventListener('slid.bs.carousel', function (event) {
+            // event.relatedTarget es el elemento '.carousel-item' que se acaba de activar
+            var itemActivo = event.relatedTarget;
+            
+            // Obtenemos el valor del atributo data-id
+            var idImagenActual = itemActivo.getAttribute('data-id');
+            
+            console.log("ID de la imagen actual en pantalla: " + idImagenActual);
+
+            // OPCIONAL: Guardamos el ID en el HiddenField de ASP.NET
+            var hiddenField = document.getElementById('hfImagenActualId');
+            if (hiddenField) {
+                hiddenField.value = idImagenActual;
+            }
+        });
+    });
+</script>
 </asp:Content>
