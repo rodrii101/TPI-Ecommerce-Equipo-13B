@@ -13,15 +13,18 @@
             </div>
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"/>
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="55"/>
+                <asp:RequiredFieldValidator ControlToValidate="txtNombre" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo."></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label for="txtDescripcion" class="form-label">Descripcion></label>
-                <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" CssClass="form-control" MaxLength="150"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
                 <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="$"></asp:TextBox>
+                <asp:RequiredFieldValidator ControlToValidate="txtPrecio" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo."></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ControlToValidate="txtPrecio" runat="server" Display="Dynamic" ValidationExpression="^\d{1,8}(,\d{1,2})?$" ForeColor="Red" ErrorMessage="Solo admite 8 numeros enteros y 2 decimales (ej: 1234,56)."></asp:RegularExpressionValidator>
             </div>
             <div>
                 <label for="ddlCategoria" class="form-label">Categoria</label>
@@ -30,6 +33,7 @@
             <div class="mb-3">
                 <label for="txtStock" class="form-label">Stock</label>
                 <asp:TextBox runat="server" ID="txtStock" CssClass="form-control"></asp:TextBox>
+                <asp:RegularExpressionValidator ControlToValidate="txtStock" runat="server" Display="Dynamic" ValidationExpression="^[0-9]+$" ForeColor="Red" ErrorMessage="Solo admite numeros enteros."></asp:RegularExpressionValidator>
             </div>
         </div>
         <%-- SECTOR IMAGENES--%>
@@ -40,18 +44,15 @@
                         <label for="txtImagenUrl" class="form-label">Url Imagen [La primera imagen sera la principal. Puedes editarlo luego.]</label>
                         <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                 <%--   <div class="d-flex mb-3">
-                        <asp:Image ID="imgProducto" runat="server"/>
-                    </div>--%>
                     
                     <div class="col">
-                         <div id="carouselExample" class="carousel slide carousel-dark" data-bs-ride="carousel" ClientIDMode="Static">
+                         <div id="carouselExample" class="carousel slide carousel-dark mb-3" data-bs-ride="carousel" ClientIDMode="Static">
                               <div class="carousel-inner">
                                     <asp:Repeater ID="rptCarrusel" runat="server">
                                         <ItemTemplate>
                                             <div class='carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>' data-id='<%# Eval("id") %>'>
                                         
-                                                <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100" alt='Producto <%# Eval("idProducto") %>'>
+                                                <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100" alt='Producto <%# Eval("idProducto") %>'onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'">
             
                                             </div>
                                         </ItemTemplate>
@@ -68,14 +69,12 @@
                         </div>
                         <%-- ASP:HiddenField ES UTIL PARA OBTENER EL ID DE LA IMAGEN ACTUAL--%>
                         <asp:HiddenField ID="hfImagenActualId" runat="server" ClientIDMode="Static" />
-
                     </div>
+
                     <div class="col mb-3">
                         <asp:Button ID="btnEliminarImg" runat="server" CssClass="btn btn-danger" Text="Eliminar imagen" OnClick="btnEliminarImg_Click"/>
                         <asp:Button ID="btnElegirPrincipal" runat="server" CssClass="btn btn-danger" Text="Imagen Principal" OnClick="btnElegirPrincipal_Click"/>
                     </div>
-
-
 
                     <div>
                         <asp:Button ID="btnGuardarImg" runat="server" CssClass="btn btn-danger" Text="Guardar imagen" OnClick="btnGuardarImg_Click"/>

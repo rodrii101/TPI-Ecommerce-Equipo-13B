@@ -95,6 +95,10 @@ namespace Ecommerce
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
                 ProductoNegocio productoNegocio = new ProductoNegocio();
                 Producto productoNuevo = new Producto();
 
