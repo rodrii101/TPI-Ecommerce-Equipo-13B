@@ -43,6 +43,9 @@ namespace Ecommerce
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
                 Categoria nuevaCategoria = new Categoria();
                 CategoriaNegocio negocioCategoria = new CategoriaNegocio();
 

@@ -42,6 +42,9 @@ namespace Ecommerce
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
                 FormasDePagos nuevoPago = new FormasDePagos();
                 FormasDePagoNegocio negocioPago = new FormasDePagoNegocio();
 

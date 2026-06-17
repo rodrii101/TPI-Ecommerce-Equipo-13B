@@ -65,12 +65,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="DetalleProducto.aspx" />
     <Content Include="FormularioCategoria.aspx" />
     <Content Include="FormularioFormasDePago.aspx" />
+    <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListarCategorias.aspx" />
     <Content Include="ListarFormasDePago.aspx" />
+    <Content Include="ListarMarcas.aspx" />
     <Content Include="ListarProductos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Web.config" />
@@ -82,6 +85,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleProducto.aspx.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleProducto.aspx.designer.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioCategoria.aspx.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
@@ -96,6 +106,13 @@
     </Compile>
     <Compile Include="FormularioFormasDePago.aspx.designer.cs">
       <DependentUpon>FormularioFormasDePago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioMarca.aspx.cs">
+      <DependentUpon>FormularioMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioMarca.aspx.designer.cs">
+      <DependentUpon>FormularioMarca.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioProducto.aspx.cs">
       <DependentUpon>FormularioProducto.aspx</DependentUpon>
@@ -120,6 +137,13 @@
     </Compile>
     <Compile Include="ListarFormasDePago.aspx.designer.cs">
       <DependentUpon>ListarFormasDePago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarMarcas.aspx.cs">
+      <DependentUpon>ListarMarcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarMarcas.aspx.designer.cs">
+      <DependentUpon>ListarMarcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListarProductos.aspx.cs">
       <DependentUpon>ListarProductos.aspx</DependentUpon>
