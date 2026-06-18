@@ -6,7 +6,7 @@
     <div class="container ">
         <br />
         <div class="row justify-content-center">
-            <div class="col-4 m-5 border border-info border border-4 rounded">
+            <div class="col-4 m-5 border border-secondary-subtle rounded shadow">
                 <div class="m-4 text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
