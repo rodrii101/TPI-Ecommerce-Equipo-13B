@@ -30,6 +30,7 @@ namespace negocioEcommerce
                     aux.IdMarca = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Estado = (bool)datos.Lector["Estado"];
+                    aux.UrlImagen = (string)datos.Lector["UrlImagen"];
                     lista.Add(aux);
                 }
                 return lista;
@@ -50,6 +51,7 @@ namespace negocioEcommerce
             {
                 datos.setearProcedimiento("AgregarMarca");
                 datos.setearParametro("@Descripcion", nuevaMarca.Descripcion);
+                datos.setearParametro("@UrlImagen", nuevaMarca.UrlImagen);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -69,6 +71,7 @@ namespace negocioEcommerce
                 datos.setearProcedimiento("ModificarMarca");
                 datos.setearParametro("@Id", modificarMarca.IdMarca);
                 datos.setearParametro("@Descripcion", modificarMarca.Descripcion);
+                datos.setearParametro("@UrlImagen", modificarMarca.UrlImagen);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

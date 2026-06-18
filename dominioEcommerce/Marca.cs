@@ -10,6 +10,7 @@ namespace dominioEcommerce
     {
         public int IdMarca { get; set; }
         public string Descripcion { get; set; }
+        public string UrlImagen { get; set; }
         public bool Estado { get; set; }
     }
 }

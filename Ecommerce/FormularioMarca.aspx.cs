@@ -11,6 +11,7 @@ namespace Ecommerce
 {
     public partial class FormularioMarca : System.Web.UI.Page
     {
+        public string UrlImagen { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtIdMarca.Enabled = false;
@@ -27,6 +28,8 @@ namespace Ecommerce
 
                     txtIdMarca.Text = id;
                     txtDescripcionMarca.Text = seleccionada.Descripcion;
+                    txtUrlImagenMarca.Text = seleccionada.UrlImagen;
+                    txtUrlImagenMarca_TextChanged(sender, e);
                     if (!seleccionada.Estado)
                     {
                         btmDesactivarYActivarMarca.Text = "Reactivar";
@@ -51,6 +54,7 @@ namespace Ecommerce
                 MarcaNegocio negocioMarca = new MarcaNegocio();
 
                 nuevaMarca.Descripcion = txtDescripcionMarca.Text;
+                nuevaMarca.UrlImagen = txtUrlImagenMarca.Text;
 
                 if (Request.QueryString["IdMarca"] != null)
                 {
@@ -83,6 +87,11 @@ namespace Ecommerce
                 Session.Add("error", ex);
             }
 
+        }
+
+        protected void txtUrlImagenMarca_TextChanged(object sender, EventArgs e)
+        {      
+            UrlImagen = txtUrlImagenMarca.Text;
         }
     }
 }
