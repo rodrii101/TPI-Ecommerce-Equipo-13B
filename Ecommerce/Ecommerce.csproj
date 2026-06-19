@@ -68,7 +68,10 @@
     <Content Include="Default.aspx" />
     <Content Include="DefaultCliente.aspx" />
     <Content Include="DetalleProducto.aspx" />
+    <Content Include="Direccion.aspx" />
+    <Content Include="EditarPerfil.aspx" />
     <Content Include="FormularioCategoria.aspx" />
+    <Content Include="FormularioDireccion.aspx" />
     <Content Include="FormularioFormasDePago.aspx" />
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProducto.aspx" />
@@ -110,12 +113,33 @@
     <Compile Include="DetalleProducto.aspx.designer.cs">
       <DependentUpon>DetalleProducto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Direccion.aspx.cs">
+      <DependentUpon>Direccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Direccion.aspx.designer.cs">
+      <DependentUpon>Direccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormularioCategoria.aspx.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FormularioCategoria.aspx.designer.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioDireccion.aspx.cs">
+      <DependentUpon>FormularioDireccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioDireccion.aspx.designer.cs">
+      <DependentUpon>FormularioDireccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioFormasDePago.aspx.cs">
       <DependentUpon>FormularioFormasDePago.aspx</DependentUpon>
