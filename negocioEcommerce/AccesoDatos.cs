@@ -18,8 +18,8 @@ namespace negocioEcommerce
         }
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=BaseDatos#2;");
-            //conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=Sql1234!;");
+            //conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=BaseDatos#2;");
+            conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=Sql1234!;");
             comando = new SqlCommand();
         }
         public void ejecutarLectura()
