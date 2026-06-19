@@ -7,38 +7,60 @@ using dominioEcommerce;
 
 namespace negocioEcommerce
 {
-    internal class UsuarioNegocio
+    public class UsuarioNegocio
     {
-       /*public List<Usuario> listarUsuarios()
+        //public List<Usuario> listarusuarios()
+        //{
+        //    List<Usuario> lista = new List<Usuario>();
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        datos.setearProcedimiento("listarusuarios");
+        //        datos.ejecutarLectura();
+        //        while (datos.Lector.Read())
+        //        {
+        //            Usuario auxusuario = new Usuario();
+        //            auxusuario.Nombre = (string)datos.Lector["Nombre"];
+        //            auxusuario.Apellido = (string)datos.Lector["Apellido"];
+        //            auxusuario.DNI = (int)datos.Lector["DNI"];
+        //            auxusuario.Email = (string)datos.Lector["Email"];
+        //            auxusuario.Telefono = (string)datos.Lector["Telefono"];
+        //            lista.Add(auxusuario);
+        //        }
+        //        return lista;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
+        
+        public bool Loguer(Usuario user)
         {
-            List<Usuario> lista = new List<Usuario>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("listarUsuarios");
+                datos.setearProcedimiento("VerificarLogin");
+                datos.setearParametro("@Email", user.Email);
+                datos.setearParametro("@Pass", user.Pass);
                 datos.ejecutarLectura();
-                while(datos.Lector.Read())
-                {
-                    Usuario auxUsuario = new Usuario();
-                    auxUsuario.Nombre = (string)datos.Lector["Nombre"];
-                    auxUsuario.Apellido = (string)datos.Lector["Apellido");
-                    auxUsuario.DNI = (int)datos.Lector["DNI"];
-                    auxUsuario.Email = (string)datos.Lector["Email"];
-                    auxUsuario.Telefono = (string)datos.Lector["Telefono"];
-                    auxUsuario.Domicilio = (Direccion)datos.Lector["Domicilio"];
-                    lista.Add(aux);
+                while (datos.Lector.Read()){
+                    user.Id = (int)datos.Lector["Id"];
+                    user.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
+                    user.Estado = (bool)datos.Lector["Estado"];
+                    return true;
                 }
-                return lista;
+                return false;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }*/
+        }
 
     }
 }

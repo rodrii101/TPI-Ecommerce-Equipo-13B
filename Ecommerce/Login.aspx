@@ -26,7 +26,7 @@
                     <asp:Button Text="Registrarse" CssClass="btn btn-primary btn-sm" runat="server" />
                 </div>
                 <div class="m-4">
-                    <asp:Button Text="Login" CssClass="btn btn-warning btn-sm w-100" runat="server" />
+                    <asp:Button Text="Login" ID="btnLoginUsuario" OnClick="btnLoginUsuario_Click" CssClass="btn btn-warning btn-sm w-100" runat="server" />
                 </div>
             </div>
         </div>
