@@ -33,6 +33,8 @@ namespace Ecommerce
             {
                 if (!IsPostBack)
                 {
+                    LimpiarListaSession("listaImagenes");
+
                     confirmarEliminacion = false;
 
                     txtId.Visible = false;
@@ -77,9 +79,14 @@ namespace Ecommerce
                         else
                             btnDesactivar.Text = "Activar";
 
-                        //campos de imagen
+                        //carrusel
                         CargarCarrusel(Convert.ToInt32(Request.QueryString["id"]));
-
+                    }
+                    else
+                    {
+                        //CARGO CARRUSEL Y SI ESTA VACIO NO MUESTRO BOTON ELIMINAR
+                        CargarCarrusel(listaImagenes);
+                        btnEliminarImg.Visible = false;
                     }
                 }
             }
@@ -122,7 +129,8 @@ namespace Ecommerce
                     productoNegocio.agregar(productoNuevo, listaImagenes);
                 }
 
-                Response.Redirect("ListarProductos.aspx");
+                LimpiarListaSession("listaImagenes");
+                Response.Redirect("ListarProductos.aspx", false);
             }
             catch (Exception ex)
             {
@@ -181,6 +189,9 @@ namespace Ecommerce
                 //MODIFIACION DE IMAGEN
                 if(Request.QueryString["id"] != null)
                 {
+                    if (string.IsNullOrWhiteSpace(txtImagenUrl.Text))
+                        return;
+
                     int idProducto = int.Parse(Request.QueryString["id"].ToString());
                     ImagenNegocio negocioImg = new ImagenNegocio();
 
@@ -191,8 +202,7 @@ namespace Ecommerce
                 else
                 {
                     listaImagenes.Add(aux);
-                    rptCarrusel.DataSource = listaImagenes;
-                    rptCarrusel.DataBind();
+                    CargarCarrusel(listaImagenes);
                 }
 
                 txtImagenUrl.Text = string.Empty; 
@@ -204,17 +214,118 @@ namespace Ecommerce
             }
         }
 
-
-        //FUNCIONES
-        private void CargarCarrusel(int idProducto)
+        protected void btnEliminarImg_Click(object sender, EventArgs e)
         {
-            ImagenNegocio negocioImg = new ImagenNegocio();
+            if (Request.QueryString["id"] == null)
+                return; // Modo nuevo: este botón no debe usarse
             
-            rptCarrusel.DataSource = negocioImg.listarImgProducto(idProducto);
-            rptCarrusel.DataBind();
+            //VERIFICO SI EL id imagen del carrusel ES VALIDO
+            if (string.IsNullOrEmpty(hfImagenActualId.Value) || !int.TryParse(hfImagenActualId.Value, out int id))
+                return;
+
+            //string idFotoActual = hfImagenActualId.Value;
+            EliminarImagen(id);
+            int idProducto = int.Parse(Request.QueryString["id"]);
+            CargarCarrusel(idProducto);
+            //ActualizarHiddenFieldConPrimeraImagen();
+        }
+
+        protected void btnElegirPrincipal_Click(object sender, EventArgs e)
+        {
+            //VERIFICO SI EL id imagen del carrusel ES VALIDO
+            if (string.IsNullOrEmpty(hfImagenActualId.Value) || !int.TryParse(hfImagenActualId.Value, out int id))
+                return;
+
+            string idProducto = Request.QueryString["id"].ToString();
+            string idFotoActual = hfImagenActualId.Value;
+            ActualizarImagenPrincipal(idProducto, int.Parse(idFotoActual));
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarListaSession("listaImagenes");
+            Response.Redirect("ListarProductos.aspx", false);
         }
 
 
+        protected void rptCarrusel2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Button btnEliminar = e.Item.FindControl("btnEliminarItem") as Button;
+                if (btnEliminar != null)
+                {
+                    // Obtener el objeto ImagenProducto de este item
+                    ImagenProducto img = e.Item.DataItem as ImagenProducto;
+
+                    if (Request.QueryString["id"] != null)
+                    {
+                        // Modo edición: usar el ID real de la base de datos
+                        btnEliminar.CommandArgument = img.Id.ToString();
+                    }
+                    else
+                    {
+                        // Modo nuevo: usar el índice del item en la lista
+                        btnEliminar.CommandArgument = e.Item.ItemIndex.ToString();
+                    }
+                }
+            }
+        }
+
+
+        protected void rptCarrusel2_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "EliminarImagen")
+            {
+                string argumento = e.CommandArgument.ToString();
+                EliminarImagen(int.Parse(argumento));
+
+                // Recargar el carrusel según el modo
+                if (Request.QueryString["id"] != null)
+                    CargarCarrusel(int.Parse(Request.QueryString["id"]));
+                else
+                    CargarCarrusel(listaImagenes);
+
+            }
+        }
+
+
+
+        //FUNCIONES
+
+
+        //MODIFICACION
+        private void CargarCarrusel(int idProducto)
+        { 
+            ImagenNegocio negocioImg = new ImagenNegocio();
+            List<ImagenProducto> listaImagenes = new List<ImagenProducto>();
+            listaImagenes = negocioImg.listarImgProducto(idProducto);
+            rptCarrusel.DataSource = listaImagenes;
+            rptCarrusel.DataBind();
+
+            if (listaImagenes.Count > 0)
+            {
+                
+                btnEliminarImg.Enabled = true;
+                btnEliminarImg.Visible = true;
+                rptCarrusel.Visible = true;
+
+            }
+            else
+            {
+                btnEliminarImg.Enabled = false;
+                btnEliminarImg.Visible = false;
+                rptCarrusel.Visible = false;
+            }
+        }
+
+        //ALTA
+        private void CargarCarrusel(List<ImagenProducto> listaImagenes)
+        {
+            rptCarrusel2.DataSource = listaImagenes;
+            rptCarrusel2.DataBind();
+            rptCarrusel2.Visible = listaImagenes.Count > 0;
+        }
 
         private void ActualizarImagenPrincipal(string idProducto, int idImagen)
         {
@@ -224,27 +335,48 @@ namespace Ecommerce
 
         private void EliminarImagen(int idImagen)
         {
-            ImagenNegocio negocioImg = new ImagenNegocio();
-            negocioImg.eliminarImagen(idImagen);
+            if (Request.QueryString["id"] != null)
+            {
+                //MODIFICANDO BORRAMOS DIRECTAMENTE EN LA TABLA DE BASE DE DATOS
+                ImagenNegocio negocioImg = new ImagenNegocio();
+                negocioImg.eliminarImagen(idImagen);
+            }
+            else
+            {
+                //ALTA PRODUCTO BORRAMOS DE LA listaImagenes EN SESSION PORQUE NO EXISTE UNA TABLA IMAGENES AUN. 
+                int indice = idImagen;
+                if(indice >= 0 && indice < listaImagenes.Count)
+                {
+                    listaImagenes.RemoveAt(indice);
+                }
+            }
         }
 
-        protected void btnEliminarImg_Click(object sender, EventArgs e)
+        private void LimpiarListaSession(string nombreLista)
         {
-            string idFotoActual = hfImagenActualId.Value;
-            EliminarImagen(int.Parse(idFotoActual));
-
-            string idProducto = Request.QueryString["id"].ToString();
-            CargarCarrusel(int.Parse(idProducto));
+            if (Session[nombreLista] != null) 
+                Session.Remove(nombreLista);
         }
 
-        protected void btnElegirPrincipal_Click(object sender, EventArgs e)
+        protected void rptCarrusel_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            string idProducto = Request.QueryString["id"].ToString();
-            string idFotoActual = hfImagenActualId.Value;
-            ActualizarImagenPrincipal(idProducto, int.Parse(idFotoActual));
+            if (e.CommandName == "EstablecerPrincipal")
+            {
+                // Validar que el argumento sea un número
+                if (e.CommandArgument != null && int.TryParse(e.CommandArgument.ToString(), out int idImagen))
+                {
+                    string idProducto = Request.QueryString["id"];
+                    if (!string.IsNullOrEmpty(idProducto))
+                    {
+                        // Establecer la imagen como principal
+                        ActualizarImagenPrincipal(idProducto, idImagen);
+                        // Recargar el carrusel para reflejar el cambio (aunque no haya cambio visual, 
+                        // es buena práctica actualizar la interfaz)
+                        CargarCarrusel(int.Parse(idProducto));
+                    }
+                }
+            }
         }
-
-
     }
 }
 

@@ -64,6 +64,7 @@ namespace negocioEcommerce
             }
         }
 
+
         public void eliminarImagen(int idImagen)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -92,6 +93,8 @@ namespace negocioEcommerce
                 datos.setearParametro("@IdProducto", int.Parse(idProducto));
                 datos.ejecutarAccion();
 
+                datos.cerrarConexion();
+
                 datos.limpiarParametros();
                 datos.setearProcedimiento("storedActivarPrincipalImg");
                 datos.setearParametro("@Id", idImagen);
@@ -107,7 +110,7 @@ namespace negocioEcommerce
             }
         }
 
-        public void añadirImagenes(List<ImagenProducto> listaImagenesNuevas)
+        /*public void añadirImagenes(List<ImagenProducto> listaImagenesNuevas)
         {
             ImagenNegocio negocioImg = new ImagenNegocio();
             
@@ -129,7 +132,7 @@ namespace negocioEcommerce
             {
 
             }
-        }
+        }*/
 
     }
 }

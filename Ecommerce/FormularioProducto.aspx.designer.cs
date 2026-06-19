@@ -51,15 +51,6 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
 
         /// <summary>
-        /// Control txtPrecio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
-
-        /// <summary>
         /// Control ddlCategoria.
         /// </summary>
         /// <remarks>
@@ -69,6 +60,15 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
+        /// Control txtPrecio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
+
+        /// <summary>
         /// Control txtStock.
         /// </summary>
         /// <remarks>
@@ -76,6 +76,24 @@ namespace Ecommerce
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStock;
+
+        /// <summary>
+        /// Control btnAgregarProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarProducto;
+
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
         /// Control txtImagenUrl.
@@ -96,6 +114,15 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.Repeater rptCarrusel;
 
         /// <summary>
+        /// Control rptCarrusel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCarrusel2;
+
+        /// <summary>
         /// Control hfImagenActualId.
         /// </summary>
         /// <remarks>
@@ -103,24 +130,6 @@ namespace Ecommerce
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfImagenActualId;
-
-        /// <summary>
-        /// Control btnEliminarImg.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarImg;
-
-        /// <summary>
-        /// Control btnElegirPrincipal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnElegirPrincipal;
 
         /// <summary>
         /// Control btnGuardarImg.
@@ -132,13 +141,13 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.Button btnGuardarImg;
 
         /// <summary>
-        /// Control btnAgregarProducto.
+        /// Control btnEliminarImg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarProducto;
+        protected global::System.Web.UI.WebControls.Button btnEliminarImg;
 
         /// <summary>
         /// Control btnEliminar.
