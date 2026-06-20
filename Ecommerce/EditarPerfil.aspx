@@ -9,7 +9,8 @@
             <div class="col-7 m-3 border border-secondary-subtle rounded shadow">
                 <%-- Aca ira la imagen del usuario --%>
                 <div class="m-4 text-center">
-                    <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/083.png" class="border border-secondary rounded" alt="ImagenDelUsuario" width="100px" height="100px" />
+                    <asp:Image ID="imgEditarFotoPerfil" CssClass="rounded-circle" Width="100px" Height="100px" ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server"/>
+                    
                 </div>
                 <div class="d-flex">
                     <div class="m-4 w-50">
@@ -34,11 +35,15 @@
                     </div>
                 </div>
                 <div class="m-4">
-                    <label for="txtEditarFoto" class="form-label">Url imagen</label>
-                    <asp:TextBox ID="txtEditarFoto" CssClass="form-control border-button" runat="server" />
+                    <label for="txtFechaNacimiento" class="form-label">Fecha nacimiento</label>
+                    <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control border-button" TextMode="Date" runat="server" />
+                </div>
+                <div class="m-4">
+                    <label class="form-label">Url imagen</label>
+                    <input type="file" ID="txtImagenPerfil" runat="server" class="form-control" />
                 </div>
                 <div class="m-4 ">
-                    <asp:Button CssClass="btn btn-success m-1" Text="Agregar" runat="server" />
+                    <asp:Button ID="btnEditarUsuario" OnClick="btnEditarUsuario_Click" CssClass="btn btn-success m-1" Text="Agregar" runat="server" />
                     <a class="btn btn-secondary m-1" href="/Perfil.aspx">Cancelar</a>
                 </div>
             </div>

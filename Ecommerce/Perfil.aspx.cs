@@ -12,6 +12,14 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+            txtEmailUsuario.Text = UsuarioIngresado.Email;
+            txtBoxNombreUsuario.Text = UsuarioIngresado.Nombre;
+            txtApellidoUsuario.Text = UsuarioIngresado.Apellido;
+            txtDniUsuario.Text = UsuarioIngresado.DNI;
+            txtTelefonoUsuario.Text = UsuarioIngresado.Telefono;
+            txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
+            imagenPerfilUsuario.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
         }
     }
 }

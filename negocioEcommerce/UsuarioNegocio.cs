@@ -39,19 +39,37 @@ namespace negocioEcommerce
         //    }
         //}
         
-        public bool Loguer(Usuario user)
+        public bool Loguer(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearProcedimiento("VerificarLogin");
-                datos.setearParametro("@Email", user.Email);
-                datos.setearParametro("@Pass", user.Pass);
+                datos.setearParametro("@Email", usuario.Email);
+                datos.setearParametro("@Pass", usuario.Pass);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read()){
-                    user.Id = (int)datos.Lector["Id"];
-                    user.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
-                    user.Estado = (bool)datos.Lector["Estado"];
+                    usuario.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        usuario.Nombre = (string)datos.Lector["Nombre"];
+
+                    if (!(datos.Lector["Apellido"] is DBNull))
+                        usuario.Apellido = (string)datos.Lector["Apellido"];
+
+                    if (!(datos.Lector["Dni"] is DBNull))
+                        usuario.DNI = (string)datos.Lector["Dni"];
+
+                    if (!(datos.Lector["Telefono"] is DBNull))
+                        usuario.Telefono = (string)datos.Lector["Telefono"];
+
+                    if (!(datos.Lector["FechaNacimiento"] is DBNull))
+                        usuario.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
+        
+                    if (!(datos.Lector["ImagenPefil"] is DBNull))
+                        usuario.ImagenPerfil = (string)datos.Lector["ImagenPefil"];
+
+                    usuario.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
+                    usuario.Estado = (bool)datos.Lector["Estado"];
                     return true;
                 }
                 return false;
@@ -59,6 +77,31 @@ namespace negocioEcommerce
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public void EditarPerfil(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("EditarPerfil");
+                datos.setearParametro("@Nombre", usuario.Nombre);
+                datos.setearParametro("@Apellido", usuario.Apellido);
+                datos.setearParametro("@Telefono", usuario.Telefono);
+                datos.setearParametro("@Dni", usuario.DNI);
+                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
+                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil);
+                datos.setearParametro("@Id", usuario.Id);
+                
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();  
             }
         }
 

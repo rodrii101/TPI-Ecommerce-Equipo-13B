@@ -15,6 +15,15 @@ namespace Ecommerce
     {
 
         /// <summary>
+        /// Control imgEditarFotoPerfil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgEditarFotoPerfil;
+
+        /// <summary>
         /// Control txtBoxNombreEditarUsuario.
         /// </summary>
         /// <remarks>
@@ -51,12 +60,30 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.TextBox txtDniEditarUsuario;
 
         /// <summary>
-        /// Control txtEditarFoto.
+        /// Control txtFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditarFoto;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaNacimiento;
+
+        /// <summary>
+        /// Control txtImagenPerfil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagenPerfil;
+
+        /// <summary>
+        /// Control btnEditarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditarUsuario;
     }
 }

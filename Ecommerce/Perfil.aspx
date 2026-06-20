@@ -26,40 +26,44 @@
             </ul>
             <div class="col-7 m-3 border border-secondary-subtle rounded shadow">
                 <div class="m-4 text-center">
-                    <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/083.png" class="border border-secondary rounded" alt="ImagenDelUsuario" width="100px" height="100px" />
-                </div>
+                    <asp:Image ID="imagenPerfilUsuario" CssClass="rounded-circle" Width="100px" Height="100px" ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server"/>
+                </div> 
                 <div class="d-flex">
                     <div class="m-4 w-50">
                         <label for="txtBoxNombreUsuario" class="form-label">Nombre</label>
-                        <asp:TextBox ID="txtBoxNombreUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtBoxNombreUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
 
                     <div class="m-4 w-50">
                         <label for="txtApellidoUsuario" class="form-label">Apellido</label>
-                        <asp:TextBox ID="txtApellidoUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtApellidoUsuario" CssClass="form-control-plaintext border-button"  ReadOnly="true" runat="server" />
                     </div>
                 </div>
                 <div class="d-flex ">
                     <div class="m-4 w-50">
                         <label for="txtTelefonoUsuario" class="form-label">Telefono</label>
-                        <asp:TextBox ID="txtTelefonoUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtTelefonoUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
 
                     <div class="m-4 w-50">
                         <label for="txtDniUsuario" class="form-label">DNI</label>
-                        <asp:TextBox ID="txtDniUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtDniUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
                 </div>
                 <div class="d-flex ">
                     <div class="m-4 w-50">
                         <label for="txtEmailUsuario" class="form-label">Email</label>
-                        <asp:TextBox ID="txtEmailUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtEmailUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
 
                     <div class="m-4 w-50">
                         <label for="txtPasswordUsuario" class="form-label">Password</label>
-                        <asp:TextBox ID="txtPasswordUsuario" CssClass="form-control-plaintext border-button" runat="server" />
+                        <asp:TextBox ID="txtPasswordUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
+                </div>
+                <div class="m-4">
+                    <label for="txtFechaNacimiento" class="form-label">Fecha nacimiento</label>
+                    <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control border-button" TextMode="Date" ReadOnly="true" runat="server" />
                 </div>
                 <div class="m-4">
                     <a class="btn btn-outline-secondary" href="/EditarPerfil.aspx">Editar</a>
