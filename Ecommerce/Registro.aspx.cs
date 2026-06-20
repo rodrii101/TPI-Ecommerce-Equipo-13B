@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominioEcommerce;
+using negocioEcommerce;
 
 namespace Ecommerce
 {
@@ -17,11 +18,30 @@ namespace Ecommerce
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            lblCorreoNoExiste.Text = "";
+
             Page.Validate();
             if (!Page.IsValid)
                 return;
 
+            Usuario user = new Usuario();
+            UsuarioNegocio negocioUsuario = new UsuarioNegocio();
 
+            if (!negocioUsuario.existeCuenta(txtRegistroEmail.Text))
+            {
+                user.Email = txtRegistroEmail.Text;
+                user.Pass = txtConfirmarPassword.Text;
+                user.Id = negocioUsuario.Registrar(user);//PARA LOGIN AUTOMATICO
+
+                Session.Add("UsuarioIngresado", user); //LOGIN AUTOMATICO
+            }
+            else
+            {
+                lblCorreoNoExiste.Text = "Este correo ya esta asociado a una cuenta.";
+                return;
+            }
+
+            Response.Redirect("DefaultCliente.aspx", false);
         }
     }
 }

@@ -105,5 +105,56 @@ namespace negocioEcommerce
             }
         }
 
+
+        public int Registrar(Usuario user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("storedAltaUsuario");
+                datos.setearParametro("@Email", user.Email);
+                datos.setearParametro("@Pass", user.Pass);
+                datos.setearParametro("@IdTipoUsuario", 1);
+                datos.setearParametro("@Estado", 1);
+                return datos.ejecutarScalar();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool existeCuenta(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Email FROM Usuario WHERE Email = @Email");
+                datos.setearParametro("@Email", email);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

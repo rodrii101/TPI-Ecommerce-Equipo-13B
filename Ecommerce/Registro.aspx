@@ -17,6 +17,7 @@
                     <asp:TextBox ID="txtRegistroEmail" runat="server" CssClass="form-control border-button"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtRegistroEmail" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo con un email."></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ControlToValidate="txtRegistroEmail" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Ingrese un email." ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"></asp:RegularExpressionValidator>
+                    <asp:Label ID="lblCorreoNoExiste" runat="server" ForeColor="Red" Text=""></asp:Label>
                 </div>
                 <div class="m-4 text-center">
                     <%--CONTRASEÑA: AL MENOS 6 CARACTERES, 1 LETRA Y 1 NUMERO--%>

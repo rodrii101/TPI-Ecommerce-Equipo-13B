@@ -18,8 +18,8 @@ namespace negocioEcommerce
         }
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=BaseDatos#2;");
-            //conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=Sql1234!;");
+            //conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=BaseDatos#2;");
+            conexion = new SqlConnection("server=localhost; database=DB_Ecommerce; user id=sa; password=Sql1234!;");
             comando = new SqlCommand();
         }
         public void ejecutarLectura()
@@ -88,6 +88,12 @@ namespace negocioEcommerce
         public void limpiarParametros()
         {
             comando.Parameters.Clear();
+        }
+
+        public void setearConsulta(string consulta)
+        {
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = consulta;
         }
     }
 }

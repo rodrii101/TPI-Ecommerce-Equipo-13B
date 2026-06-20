@@ -21,6 +21,7 @@ namespace dominioEcommerce
         public string ImagenPerfil { get; set; }
         public bool Estado { get; set; }
 
+        public Usuario() { }
         public Usuario(string email, string pass, int tipoUser)
         {
             Email = email;
