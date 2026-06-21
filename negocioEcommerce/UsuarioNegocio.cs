@@ -104,7 +104,7 @@ namespace negocioEcommerce
                 datos.cerrarConexion();  
             }
         }
-
+       
 
         public int Registrar(Usuario user)
         {

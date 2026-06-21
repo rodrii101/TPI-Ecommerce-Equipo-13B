@@ -40,7 +40,7 @@
                     <asp:TextBox ID="txtObservacion" CssClass="form-control rounde w-100" runat="server" />
                 </div>
                 <div class="">
-                    <asp:Button CssClass="btn btn-success m-1" Text="Agregar" runat="server" />
+                    <asp:Button CssClass="btn btn-success m-1" ID="btnAgregarDireccion" OnClick="btnAgregarDireccion_Click" Text="Agregar" runat="server" />
                     <a class="btn btn-secondary m-1" href="/Direccion.aspx">Cancelar</a>
                 </div>
             </div>

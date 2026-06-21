@@ -16,7 +16,7 @@ namespace dominioEcommerce
         public string Email { get; set; }
         public string Pass { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public List<Direccion> Direccion { get; set; } = new List<Direccion>();
+        public List<DireccionUsuario> Direcciones { get; set; } = new List<DireccionUsuario>();
         public TipoUsuario TipoUsuario { get; set; }
         public string ImagenPerfil { get; set; }
         public bool Estado { get; set; }

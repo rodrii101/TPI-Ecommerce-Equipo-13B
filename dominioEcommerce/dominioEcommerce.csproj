@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categoria.cs" />
-    <Compile Include="Direccion.cs" />
+    <Compile Include="DireccionUsuario.cs" />
     <Compile Include="FormasDePagos.cs" />
     <Compile Include="ImagenProducto.cs" />
     <Compile Include="Marca.cs" />

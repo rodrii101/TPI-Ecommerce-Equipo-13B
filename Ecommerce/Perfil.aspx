@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2 class="mt-3">Perfil</h2>
-    <div class="container mt-5 mb-5 d-flex">
-        <div class="row w-100 d-flex justify-content-center">
+    <div class="container mt-5 mb-5">
+        <div class="row w-100">
             <ul class="col-3 m-3 me-5 nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link link-dark" href="/Perfil.aspx">Perfil</a>
