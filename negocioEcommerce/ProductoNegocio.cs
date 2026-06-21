@@ -17,6 +17,8 @@ namespace negocioEcommerce
         {
             List<Producto> lista = new List<Producto>();
             AccesoDatos datos = new AccesoDatos();
+            
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
             try
             {
                 if (id != "")
@@ -40,6 +42,10 @@ namespace negocioEcommerce
                     aux.Categoria.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Stock = (int)datos.Lector["Stock"];
                     aux.Estado = (bool)datos.Lector["Estado"];
+                    //CARGA IMAGENES
+                    aux.Imagenes_URL = new List<ImagenProducto>();
+                    aux.Imagenes_URL = imagenNegocio.listarImgProducto(aux.Id); 
+
                     lista.Add(aux);
                 }
                 return lista;

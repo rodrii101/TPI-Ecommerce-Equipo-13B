@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterCliente.Master" AutoEventWireup="true" CodeBehind="DefaultCliente.aspx.cs" Inherits="Ecommerce.DefaultCliente" %>
-
+<%@ Import Namespace="dominioEcommerce" %>  <%-- Agrego dominios --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -32,7 +32,31 @@
         </button>
     </div>
     <br />
+
     <div class="row justify-content-center">
+        <asp:Repeater ID="rptRepeater" runat="server">
+            <ItemTemplate>
+                <div class="col-3">
+                    <div class="card border border-secondary-subtle rounded shadow m-2" style="width: 20rem;">
+                          
+                        <img src="<%# ObtenerImagenPrincipal((Producto)Container.DataItem) %>" alt="<%#Eval("Nombre") %>" class="card-img-top" onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'"/>
+                        <div class="card-body">
+                            <h2 class="card-title"><%#Eval("Nombre") %></h2>
+                            <h3 class="card-title"><%#Eval("Precio") %></h3>
+                        </div>
+                        <asp:Button CssClass="btn btn-outline-info m-4" Text="Agregar al carrito" runat="server" />
+                        <%--<asp:Button ID="btnVerDetalleProducto" runat="server" OnClick="btnVerDetalleProducto_Click"/>--%>
+                    </div>
+                </div>
+
+            </ItemTemplate>
+
+        </asp:Repeater>
+    </div>
+
+
+
+    <%--<div class="row justify-content-center">
         <%foreach (dominioEcommerce.Producto producto in listaProducto)
             {
         %>
@@ -48,5 +72,5 @@
             </div>
         <%  } %>
 
-    </div>
+    </div>--%>
 </asp:Content>

@@ -109,30 +109,5 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
-
-        /*public void añadirImagenes(List<ImagenProducto> listaImagenesNuevas)
-        {
-            ImagenNegocio negocioImg = new ImagenNegocio();
-            
-            try
-            {
-                foreach (ImagenProducto imagen in listaImagenesNuevas)
-                {
-                    AccesoDatos datos = new AccesoDatos();
-
-                    datos.setearProcedimiento("storedAltaImagen");
-                    datos.setearParametro("@IdProducto", imagen.IdProducto);
-                    datos.setearParametro("@ImagenURL", imagen.ImagenURL);
-                    datos.setearParametro("@EsPrincipal", imagen.EsPrincipal);
-                    datos.ejecutarAccion();
-                    datos.cerrarConexion();
-                }
-            }
-            catch
-            {
-
-            }
-        }*/
-
     }
 }
