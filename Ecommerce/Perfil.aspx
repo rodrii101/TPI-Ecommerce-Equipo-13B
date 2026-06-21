@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link-dark" href="#">Historial pedidos</a>
-                    <hr />
+                    <hr /> 
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link-dark" href="#">Cerrar sesion</a>

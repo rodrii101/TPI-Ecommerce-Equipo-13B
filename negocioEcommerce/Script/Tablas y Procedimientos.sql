@@ -146,7 +146,7 @@
 --Direccion
 
 -- CREATE TABLE Direccion(
---     Id INT IDENTITY(1,1) NOT NULL,
+--     Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 --     IdUsuario INT FOREIGN KEY (IdUsuario) REFERENCES Usuario(Id) NOT NULL,
 --     Calle VARCHAR(33) NOT NULL,
 --     Altura INT NOT NULL,
@@ -196,3 +196,25 @@
 --     AS
 --     UPDATE Direccion SET Calle = @Calle, Altura = @Altura, Piso = @Piso, Departamento = @Departamento, 
 --     CodigoPostal = @CodPostal, Localidad = @Localidad, Observacion = @Observacion WHERE Id = @Id
+    -- CREATE TABLE Carrito(
+    --     Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    --     IdUsuario INT FOREIGN KEY(IdUsuario) REFERENCES Usuario(Id) NOT NULL,
+    --     Fecha DATETIME DEFAULT GETDATE()
+    -- )
+
+    -- CREATE TABLE CarritoDetalle(
+    --     Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    --     IdCarrito INT FOREIGN KEY(IdCarrito) REFERENCES Carrito(Id) NOT NULL,
+    --     IdProducto INT FOREIGN KEY(IdProducto) REFERENCES Producto(Id) NOT NULL,
+    --     CantidadProducto INT NOT NULL, 
+    -- )
+    -- USE DB_Ecommerce
+    -- CREATE TABLE Pedido(
+    --     Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    --     Fecha DATETIME DEFAULT GETDATE() NOT NULL,
+    --     IdUsuario INT FOREIGN KEY(IdUsuario) REFERENCES Usuario(Id) NOT NULL,                                                                               
+    --     IdDireccion INT FOREIGN KEY(IdDireccion) REFERENCES Direccion(Id) NOT NULL,
+    --     IdFormaDePago INT FOREIGN KEY(IdFormaDePago) REFERENCES FormaDePago(Id) NOT NULL,
+    --     Estado VARCHAR(30) NULL,
+    --     MontoTotal DECIMAL(10,2) NOT NULL,
+    -- )
