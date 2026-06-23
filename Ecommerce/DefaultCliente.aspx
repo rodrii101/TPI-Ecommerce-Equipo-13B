@@ -34,7 +34,7 @@
     <br />
 
     <div class="row justify-content-center">
-        <asp:Repeater ID="rptRepeater" runat="server">
+        <asp:Repeater ID="rptRepeater" OnItemCommand="rptRepeater_ItemCommand" runat="server">
             <ItemTemplate>
                 <div class="col-3">
                     <div class="card border border-secondary-subtle rounded shadow m-2" style="width: 20rem;">
@@ -44,7 +44,7 @@
                             <h2 class="card-title"><%#Eval("Nombre") %></h2>
                             <h3 class="card-title"><%#Eval("Precio") %></h3>
                         </div>
-                        <asp:Button CssClass="btn btn-outline-info m-4" Text="Agregar al carrito" runat="server" />
+                        <asp:Button CssClass="btn btn-outline-info m-4" ID="btnAgregarAlCarrito" CommandArgument='<%# Eval("Id") %>' Text="Agregar al carrito" CommandName="AgregarAlCarrito" runat="server"/>
                         <%--<asp:Button ID="btnVerDetalleProducto" runat="server" OnClick="btnVerDetalleProducto_Click"/>--%>
                     </div>
                 </div>

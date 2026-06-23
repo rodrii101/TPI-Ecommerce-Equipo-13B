@@ -12,15 +12,17 @@ namespace Ecommerce
 {
     public partial class DefaultCliente : System.Web.UI.Page
     {
-        public List<Producto> listaProducto {  get; set; }
+        public List<Producto> listaProducto { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductoNegocio negocioProducto = new ProductoNegocio();
             listaProducto = negocioProducto.listarProductos();//YA TENGO LAS IMAGENES CARGADAS
 
-            
-            rptRepeater.DataSource = listaProducto;
-            rptRepeater.DataBind();
+            if (!IsPostBack)
+            {
+                rptRepeater.DataSource = listaProducto;
+                rptRepeater.DataBind();
+            }
         }
 
         public string ObtenerImagenPrincipal(Producto producto)
@@ -45,5 +47,22 @@ namespace Ecommerce
         {
 
         }
+        protected void rptRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+            if (e.CommandName == "AgregarAlCarrito")
+            {
+                string idProducto = e.CommandArgument.ToString();
+                int idUsuario = UsuarioIngresado.Id;
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
+                int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
+                if (IdCarrito == 0)
+                {
+                    IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
+                }
+                negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, int.Parse(idProducto), 1);
+            }
+        }
     }
+
 }
