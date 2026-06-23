@@ -13,7 +13,8 @@ namespace dominioEcommerce
         public string Descripcion { get; set; }
         public decimal Precio { get; set; } //VERIFICAR EL TIPO DE DATO
         public Categoria Categoria { get; set; }
-        //public Marca Marca {get; set}
+        public Marca Marca {get; set;}
+        public int IdVendedor {get; set;}
         public bool Estado { get; set; }
         public int Stock { get; set; }
         public List<ImagenProducto> Imagenes_URL { get; set; }

@@ -49,6 +49,13 @@ namespace Ecommerce
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
 
+                    MarcaNegocio negocioMarca = new MarcaNegocio();
+                    List<Marca> listaMarca = negocioMarca.listarMarca();
+                    ddlMarca.DataSource = listaMarca;
+                    ddlMarca.DataValueField = "IdMarca";
+                    ddlMarca.DataTextField = "Descripcion";
+                    ddlMarca.DataBind();
+
                     //CONFIGURACION SI ESTAMOS MODIFICANDO
                     string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
 
@@ -72,6 +79,7 @@ namespace Ecommerce
                         txtPrecio.Text = seleccionado.Precio.ToString();
                         ddlCategoria.SelectedValue = seleccionado.Categoria.IdCategoria.ToString();
                         txtStock.Text = seleccionado.Stock.ToString();
+                        ddlMarca.SelectedValue = seleccionado.Marca.IdMarca.ToString();
 
                         estadoProducto = seleccionado.Estado;
                         if (estadoProducto)
@@ -114,6 +122,8 @@ namespace Ecommerce
                 productoNuevo.Precio = decimal.Parse(txtPrecio.Text);
                 productoNuevo.Categoria = new Categoria();
                 productoNuevo.Categoria.IdCategoria = int.Parse(ddlCategoria.SelectedValue);
+                productoNuevo.Marca = new Marca();
+                productoNuevo.Marca.IdMarca = int.Parse(ddlMarca.SelectedValue);
                 productoNuevo.Stock = int.Parse(txtStock.Text);
 
 

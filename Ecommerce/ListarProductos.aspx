@@ -14,7 +14,9 @@
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                 <asp:BoundField HeaderText="Precio" DataField="Precio" />
-                <asp:BoundField HeaderText="Categoria" DataField="Categoria.IdCategoria" />
+                <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
+                <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
+                <asp:BoundField HeaderText="TipoVendedor" DataField="IdVendedor" />
                 <asp:CheckBoxField HeaderText="Estado" DataField="Estado" />
                 <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="📝" />

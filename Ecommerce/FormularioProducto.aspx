@@ -25,6 +25,10 @@
                 <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-select border border-dark"></asp:DropDownList>
             </div>
             <div class="mb-3">
+                <label for="ddlMarca" class="form-label fw-bold">Marca</label>
+                <asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-select border border-dark"></asp:DropDownList>
+            </div>
+            <div class="mb-3">
                 <label for="txtPrecio" class="form-label fw-bold">Precio</label>
                 <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control border border-dark" placeholder="$"></asp:TextBox>
                 <asp:RequiredFieldValidator ControlToValidate="txtPrecio" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo."></asp:RequiredFieldValidator>
