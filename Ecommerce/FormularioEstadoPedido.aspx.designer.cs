@@ -11,34 +11,43 @@ namespace Ecommerce
 {
 
 
-    public partial class DetalleProducto
+    public partial class FormularioEstadoPedido
     {
 
         /// <summary>
-        /// Control rptCarrusel.
+        /// Control txtIdEstadoPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCarrusel;
+        protected global::System.Web.UI.WebControls.TextBox txtIdEstadoPedido;
 
         /// <summary>
-        /// Control btnComprarAhora.
+        /// Control txtDescripcionEstadoPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnComprarAhora;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEstadoPedido;
 
         /// <summary>
-        /// Control btnAgregarProductoEnDetalleProducto.
+        /// Control btnAgregarEstadoPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarProductoEnDetalleProducto;
+        protected global::System.Web.UI.WebControls.Button btnAgregarEstadoPedido;
+
+        /// <summary>
+        /// Control btmDesactivarYActivarEstadoPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btmDesactivarYActivarEstadoPedido;
     }
 }

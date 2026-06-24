@@ -43,6 +43,7 @@ namespace negocioEcommerce
                     aux.Marca = new Marca();
                     aux.Marca.IdMarca = (int)datos.Lector["MarcaId"];
                     aux.Marca.Descripcion = (string)datos.Lector["MarcaDescripcion"];
+                    aux.Marca.UrlImagen = (string)datos.Lector["MarcaImagenLogo"];
                     aux.Stock = (int)datos.Lector["Stock"];
                     aux.Estado = (bool)datos.Lector["Estado"];
                     aux.IdVendedor = (int)datos.Lector["IdVendedor"];

@@ -72,11 +72,13 @@
     <Content Include="EditarPerfil.aspx" />
     <Content Include="FormularioCategoria.aspx" />
     <Content Include="FormularioDireccion.aspx" />
+    <Content Include="FormularioEstadoPedido.aspx" />
     <Content Include="FormularioFormasDePago.aspx" />
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListarCategorias.aspx" />
+    <Content Include="ListarEstadoPedido.aspx" />
     <Content Include="ListarFormasDePago.aspx" />
     <Content Include="ListarMarcas.aspx" />
     <Content Include="ListarProductos.aspx" />
@@ -142,6 +144,13 @@
     <Compile Include="FormularioDireccion.aspx.designer.cs">
       <DependentUpon>FormularioDireccion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormularioEstadoPedido.aspx.cs">
+      <DependentUpon>FormularioEstadoPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioEstadoPedido.aspx.designer.cs">
+      <DependentUpon>FormularioEstadoPedido.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormularioFormasDePago.aspx.cs">
       <DependentUpon>FormularioFormasDePago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,6 +181,13 @@
     </Compile>
     <Compile Include="ListarCategorias.aspx.designer.cs">
       <DependentUpon>ListarCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarEstadoPedido.aspx.cs">
+      <DependentUpon>ListarEstadoPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarEstadoPedido.aspx.designer.cs">
+      <DependentUpon>ListarEstadoPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListarFormasDePago.aspx.cs">
       <DependentUpon>ListarFormasDePago.aspx</DependentUpon>

@@ -65,6 +65,26 @@ namespace Ecommerce
             else
                 Response.Redirect("Login.aspx", false);
         }
+
+        protected void btnComprarAhora_Click(object sender, EventArgs e)
+        {
+            if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
+            {
+                Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                int IdProducto = ProductoSeleccionado.Id;
+                int idUsuario = UsuarioIngresado.Id;
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
+                int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
+                if (IdCarrito == 0)
+                {
+                    IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
+                }
+                negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, IdProducto, 1);
+                Response.Redirect("/Carrito.aspx");
+            }
+            else
+                Response.Redirect("Login.aspx", false);
+        }
     }
     
 }

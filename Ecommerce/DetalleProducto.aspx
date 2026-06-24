@@ -26,17 +26,26 @@
                     </button>
                 </div>
             </div>
-            <div class="col-5 border rounded-3 p-6">
+
+            <div class="col-5 border rounded-3 p-3">
                 <div class="m-3">
+                    <img src="<%= ProductoSeleccionado.Marca.UrlImagen %>" class="w-25 h-25" alt="Marca <%= ProductoSeleccionado.Marca.Descripcion%>" />
                     <h2><%=ProductoSeleccionado.Nombre %></h2>
                     <br />
-                    <p class="fs-3">$<%= ProductoSeleccionado.Precio.ToString()%></p>
+                    <div class="mb-4">
+                        <h3>$<%= ProductoSeleccionado.Precio%></h3>
+                        <p class="fs-6 text-muted">Precio s/imp. nac $<%= (ProductoSeleccionado.Precio*79)/100 %></p>
+                    </div>
                     <hr />
-                    <h3>Descripcion</h3>
+                    <h2>Descripcion</h2>
                     <p class="fs-6"><%= ProductoSeleccionado.Descripcion %></p>
                     <hr />
+                    <div class="mb-4">
+                        <p class="text-muted">Stock disponible <%= ProductoSeleccionado.Stock %></p>
+                    </div>
                     <div class="d-flex justify-content-center">
-                        <asp:Button ID="btnAgregarProductoEnDetalleProducto" OnClick="btnAgregarProductoEnDetalleProducto_Click" Text="Agregar al carrito" CssClass="btn btn-success w-75" runat="server" />
+                        <asp:Button Text="Comprar" ID="btnComprarAhora" OnClick="btnComprarAhora_Click" CssClass="btn btn-success w-100 m-2" runat="server" />
+                        <asp:Button ID="btnAgregarProductoEnDetalleProducto" OnClick="btnAgregarProductoEnDetalleProducto_Click" Text="Agregar al carrito" CssClass="btn btn-success w-100 m-2" runat="server" />
                     </div>
                 </div>
             </div>
