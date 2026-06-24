@@ -14,19 +14,26 @@ namespace Ecommerce
         public List<CarritoDetalle> listaCarritoDetalle { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            CarritoNegocio negocioCarrito = new CarritoNegocio();
-            listaCarritoDetalle = (negocioCarrito.listarDetalleCarritoUsuario(UsuarioIngresado.Id));
-
-            
-
-            repRepetidorDetalleCarrito.DataSource = listaCarritoDetalle;
-            repRepetidorDetalleCarrito.DataBind();
+            if (!IsPostBack)
+                CargarCarrito();
         }
 
+        private void CargarCarrito()
+        {
+            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+            if (UsuarioIngresado != null)
+            {
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
+                listaCarritoDetalle = negocioCarrito.listarDetalleCarritoUsuario(UsuarioIngresado.Id);
 
-
-
+                repRepetidorDetalleCarrito.DataSource = listaCarritoDetalle;
+                repRepetidorDetalleCarrito.DataBind();
+            }
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+        }
 
         public string ObtenerImagenPrincipal(CarritoDetalle carritoDetalle)
         {
@@ -43,6 +50,22 @@ namespace Ecommerce
             else
             {
                 return "https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png";
+            }
+        }
+
+        protected void repRepetidorDetalleCarrito_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if(e.CommandName == "Eliminar")
+            { 
+                int idProducto = Convert.ToInt32(e.CommandArgument);
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+
+                CarritoNegocio carritoNegocio = new CarritoNegocio();
+                int idCarrito = carritoNegocio.BuscarCarritoDelUsuario(usuarioIngresado.Id);
+
+                carritoNegocio.EliminarProductoDetalleCarrito(idCarrito, idProducto);
+
+                CargarCarrito();
             }
         }
     }

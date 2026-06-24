@@ -11,7 +11,7 @@
 
                 <%-- COLUMNA IZQUIERDA --%>
                 <div class="col-lg-8">
-                    <asp:Repeater ID="repRepetidorDetalleCarrito" runat="server">
+                    <asp:Repeater ID="repRepetidorDetalleCarrito" OnItemCommand="repRepetidorDetalleCarrito_ItemCommand" runat="server">
                         <ItemTemplate>
                             <div class="mb-3 p-3 border border-secondary-subtle rounded shadow-sm bg-white" style="min-height: 130px">
                                 <div class="pb-2">
@@ -24,7 +24,7 @@
 
                                     <div class="flex-grow-1 ms-3">
                                         <p class="mb-1 fw-semibold"><%# Eval("Producto.Nombre") %></p>
-                                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="text-danger text-decoration-none small" CommandName="Eliminar" CommandArgument='<%# Eval("Producto.Id") %>'>Eliminar</asp:LinkButton>
+                                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="text-danger text-decoration-none small" CommandName="Eliminar" CommandArgument="<%# ((CarritoDetalle)Container.DataItem).Producto.Id %>">Eliminar</asp:LinkButton>
                                     </div>
 
                                     <%-- BOTONES +/- --%>
