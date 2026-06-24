@@ -14,12 +14,18 @@ namespace negocioEcommerce
             AccesoDatos datos = new AccesoDatos();
             try
             {
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                List<Producto> listaProductos = productoNegocio.listarProductos();
+
+                ImagenNegocio auxImagen = new ImagenNegocio();
                 List<CarritoDetalle> lista = new List<CarritoDetalle>();
+
                 datos.setearProcedimiento("ListarDetalleCarritoPorUsuario");
                 datos.setearParametro("@IdUsuario", idUsuario);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
+                    
                     CarritoDetalle aux = new CarritoDetalle();
                     Producto auxProducto = new Producto();
                     aux.IdCarritoDetalle = (int)datos.Lector["IdDetalleCarrito"];
@@ -27,8 +33,15 @@ namespace negocioEcommerce
                     aux.IdProducto = (int)datos.Lector["IdProducto"];
                     aux.Cantidad = (int)datos.Lector["CantidadProducto"];
                     aux.IdProducto = aux.IdProducto;
+
                     auxProducto.Nombre = (string)datos.Lector["Nombre"];
                     auxProducto.Precio = (decimal)datos.Lector["Precio"];
+                    auxProducto.Imagenes_URL = new List<ImagenProducto>();
+                    auxProducto.Imagenes_URL = auxImagen.listarImgProducto(aux.IdProducto);
+
+                    Producto productoConNombreVendedor = listaProductos.FirstOrDefault(p => p.Id == aux.IdProducto); //Devuelve el producto que cumple la condicion
+                    auxProducto.IdVendedor = productoConNombreVendedor.IdVendedor;
+
                     aux.Producto = auxProducto;
                     lista.Add(aux);
                 }

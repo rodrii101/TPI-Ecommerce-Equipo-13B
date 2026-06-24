@@ -19,7 +19,7 @@
                 </div>
                 <div class="m-4">
                     <label for="txtLoginContra" class="form-label">Contraseña</label>
-                    <asp:TextBox ID="txtLoginContra" CssClass="form-control" placeholder="Contraseña" type="password" runat="server" />
+                    <asp:TextBox ID="txtLoginContra" CssClass="form-control" placeholder="Contraseña" TextMode="Password" runat="server" />
                 </div>
                 <div class="m-4">
                     <p>Si no estas registrado ¡Registrate!</p>

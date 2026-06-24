@@ -65,8 +65,8 @@ namespace negocioEcommerce
                     if (!(datos.Lector["FechaNacimiento"] is DBNull))
                         usuario.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
         
-                    if (!(datos.Lector["ImagenPefil"] is DBNull))
-                        usuario.ImagenPerfil = (string)datos.Lector["ImagenPefil"];
+                    if (!(datos.Lector["ImagenPerfil"] is DBNull))
+                        usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
 
                     usuario.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
                     usuario.Estado = (bool)datos.Lector["Estado"];

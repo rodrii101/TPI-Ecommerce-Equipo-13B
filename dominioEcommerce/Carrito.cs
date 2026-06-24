@@ -15,7 +15,6 @@ namespace dominioEcommerce
 
         /*public int IdCarrito { get; set; }
         public Usuario UsuarioCarrito { get; set; }
-
         public DateTime Fecha { get; set; }*/
     }
 }

@@ -41,8 +41,8 @@
                           
                         <img src="<%# ObtenerImagenPrincipal((Producto)Container.DataItem) %>" alt="<%#Eval("Nombre") %>" class="card-img-top" onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'"/>
                         <div class="card-body">
-                            <h2 class="card-title"><%#Eval("Nombre") %></h2>
-                            <h3 class="card-title"><%#Eval("Precio") %></h3>
+                            <h2 class="card-title"><%#Eval("Nombre") %></h2><%-- ESTO SERIA UN LINK AL PRODUCTO --%>
+                            <h3 class="card-title"><%#Eval("Precio", "${0:N2}") %></h3>
                         </div>
                         <asp:Button CssClass="btn btn-outline-info m-4" ID="btnAgregarAlCarrito" CommandArgument='<%# Eval("Id") %>' Text="Agregar al carrito" CommandName="AgregarAlCarrito" runat="server"/>
                         <%--<asp:Button ID="btnVerDetalleProducto" runat="server" OnClick="btnVerDetalleProducto_Click"/>--%>

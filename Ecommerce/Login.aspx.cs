@@ -26,7 +26,7 @@ namespace Ecommerce
                 if (negocioUsuario.Loguer(usuario))
                 {
                     Session.Add("UsuarioIngresado", usuario);
-                    Response.Redirect("Perfil.aspx");
+                    Response.Redirect("DefaultCliente.aspx");
                 }else
                     Response.Redirect("Carrito.aspx");
             }

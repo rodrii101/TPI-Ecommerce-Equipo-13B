@@ -49,19 +49,24 @@ namespace Ecommerce
         }
         protected void rptRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            if (e.CommandName == "AgregarAlCarrito")
+            if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
             {
-                string idProducto = e.CommandArgument.ToString();
-                int idUsuario = UsuarioIngresado.Id;
-                CarritoNegocio negocioCarrito = new CarritoNegocio();
-                int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
-                if (IdCarrito == 0)
+                Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                if (e.CommandName == "AgregarAlCarrito")
                 {
-                    IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
+                    string idProducto = e.CommandArgument.ToString();
+                    int idUsuario = UsuarioIngresado.Id;
+                    CarritoNegocio negocioCarrito = new CarritoNegocio();
+                    int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
+                    if (IdCarrito == 0)
+                    {
+                        IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
+                    }
+                    negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, int.Parse(idProducto), 1);
                 }
-                negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, int.Parse(idProducto), 1);
             }
+            else
+                Response.Redirect("Login.aspx", false);
         }
     }
 
