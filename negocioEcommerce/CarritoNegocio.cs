@@ -87,7 +87,6 @@ namespace negocioEcommerce
 
                 int IdCarrito = datos.ejecutarScalar();
                 return IdCarrito;
-
             }
             catch (Exception ex)
             {

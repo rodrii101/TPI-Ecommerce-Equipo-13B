@@ -44,6 +44,7 @@
                             <h2 class="card-title"><%#Eval("Nombre") %></h2><%-- ESTO SERIA UN LINK AL PRODUCTO --%>
                             <h3 class="card-title"><%#Eval("Precio", "${0:N2}") %></h3>
                         </div>
+                        <a class="btn btn-outline-info m-4" href="/DetalleProducto.aspx?Id=<%# Eval("Id")%>">Detalle producto</a>
                         <asp:Button CssClass="btn btn-outline-info m-4" ID="btnAgregarAlCarrito" CommandArgument='<%# Eval("Id") %>' Text="Agregar al carrito" CommandName="AgregarAlCarrito" runat="server"/>
                         <%--<asp:Button ID="btnVerDetalleProducto" runat="server" OnClick="btnVerDetalleProducto_Click"/>--%>
                     </div>

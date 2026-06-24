@@ -13,5 +13,23 @@ namespace Ecommerce
 
     public partial class DetalleProducto
     {
+
+        /// <summary>
+        /// Control rptCarrusel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCarrusel;
+
+        /// <summary>
+        /// Control btnAgregarProductoEnDetalleProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarProductoEnDetalleProducto;
     }
 }
