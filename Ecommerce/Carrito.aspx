@@ -65,7 +65,8 @@
                                 </div>
                                 <hr />
                                 <div class="gap-2 d-flex flex-column">
-                                    <asp:Button runat="server" Text="Finalizar compra" CssClass="btn btn-primary py-2 w-100 fw-semibold" />
+                                    <a class="btn btn-primary py-2 w-100 fw-semibold" href="/CompraPedido.aspx" <>Finalizar compra</a>
+                                    <%--<asp:Button runat="server" Text="Finalizar compra" CssClass="btn btn-primary py-2 w-100 fw-semibold" />--%>
                                     <asp:LinkButton ID="btnContinuarComprando" runat="server" Text="Continuar comprando" CssClass="btn btn-outline-secondary py-2 w-100" OnClick="btnContinuarComprando_Click"></asp:LinkButton>
                                 </div>
                             </div>

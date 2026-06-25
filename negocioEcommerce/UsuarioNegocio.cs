@@ -9,7 +9,7 @@ namespace negocioEcommerce
 {
     public class UsuarioNegocio
     {
-        //public List<Usuario> listarusuarios()
+        //public List<Usuario> listarusuarios(string id ="")
         //{
         //    List<Usuario> lista = new List<Usuario>();
         //    AccesoDatos datos = new AccesoDatos();
@@ -22,7 +22,7 @@ namespace negocioEcommerce
         //            Usuario auxusuario = new Usuario();
         //            auxusuario.Nombre = (string)datos.Lector["Nombre"];
         //            auxusuario.Apellido = (string)datos.Lector["Apellido"];
-        //            auxusuario.DNI = (int)datos.Lector["DNI"];
+        //            auxusuario.DNI = (string)datos.Lector["DNI"];
         //            auxusuario.Email = (string)datos.Lector["Email"];
         //            auxusuario.Telefono = (string)datos.Lector["Telefono"];
         //            lista.Add(auxusuario);
@@ -38,7 +38,7 @@ namespace negocioEcommerce
         //        datos.cerrarConexion();
         //    }
         //}
-        
+
         public bool Loguer(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
