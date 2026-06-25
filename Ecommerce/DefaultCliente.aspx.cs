@@ -62,7 +62,13 @@ namespace Ecommerce
                     {
                         IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
                     }
-                    negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, int.Parse(idProducto), 1);
+                    List<CarritoDetalle> listaCarritoDetale = negocioCarrito.listarDetalleCarritoUsuario(idUsuario);
+                    bool encontrado = listaCarritoDetale.Any(lcd => lcd.IdProducto == int.Parse(idProducto)); 
+                    
+                    if (!encontrado)
+                        negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, int.Parse(idProducto), 1);
+
+                    Response.Redirect("Carrito.aspx", false);
                 }
             }
             else

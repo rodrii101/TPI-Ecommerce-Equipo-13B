@@ -41,6 +41,7 @@ namespace negocioEcommerce
 
                     Producto productoConNombreVendedor = listaProductos.FirstOrDefault(p => p.Id == aux.IdProducto); //Devuelve el producto que cumple la condicion
                     auxProducto.IdVendedor = productoConNombreVendedor.IdVendedor;
+                    auxProducto.Stock = productoConNombreVendedor.Stock;
 
                     aux.Producto = auxProducto;
                     lista.Add(aux);
@@ -127,6 +128,29 @@ namespace negocioEcommerce
                 datos.setearProcedimiento("storedEliminarProductoDetalleCarrito");
                 datos.setearParametro("@IdCarrito", idCarrito);
                 datos.setearParametro("@IdProducto", idProducto);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void modificarCantidad(int idCarritoDetalle, int nuevaCantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedModificarCantidad");
+                datos.setearParametro("IdCarritoDetalle", idCarritoDetalle);
+                /*datos.setearParametro("IdCarrito", idCarrito);
+                datos.setearParametro("IdProducto", idProducto);*/
+                datos.setearParametro("NuevaCantidad", nuevaCantidad);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

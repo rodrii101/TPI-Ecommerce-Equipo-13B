@@ -41,7 +41,7 @@
                           
                         <img src="<%# ObtenerImagenPrincipal((Producto)Container.DataItem) %>" alt="<%#Eval("Nombre") %>" class="card-img-top" onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'"/>
                         <div class="card-body">
-                            <h2 class="card-title"><%#Eval("Nombre") %></h2><%-- ESTO SERIA UN LINK AL PRODUCTO --%>
+                            <h2 class="card-title"><%#Eval("Nombre") %></h2><%-- ESTO SE PODRIA CAMBIAR POR UN LINK AL PRODUCTO --%>
                             <h3 class="card-title"><%#Eval("Precio", "${0:N2}") %></h3>
                         </div>
                         <a class="btn btn-outline-info m-4" href="/DetalleProducto.aspx?Id=<%# Eval("Id")%>">Detalle producto</a>

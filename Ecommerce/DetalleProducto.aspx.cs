@@ -52,15 +52,21 @@ namespace Ecommerce
             if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
             {
                 Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-                    int IdProducto = ProductoSeleccionado.Id;
-                    int idUsuario = UsuarioIngresado.Id;
-                    CarritoNegocio negocioCarrito = new CarritoNegocio();
-                    int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
-                    if (IdCarrito == 0)
-                    {
-                        IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
-                    }
+                int IdProducto = ProductoSeleccionado.Id;
+                int idUsuario = UsuarioIngresado.Id;
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
+                int IdCarrito = negocioCarrito.BuscarCarritoDelUsuario(idUsuario);
+                if (IdCarrito == 0)
+                {
+                    IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
+                }
+                List<CarritoDetalle> listaCarritoDetale = negocioCarrito.listarDetalleCarritoUsuario(idUsuario);
+                bool encontrado = listaCarritoDetale.Any(lcd => lcd.IdProducto == IdProducto);
+
+                if (!encontrado)
                     negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, IdProducto, 1);
+                
+                Response.Redirect("Carrito.aspx", false);
             }
             else
                 Response.Redirect("Login.aspx", false);
@@ -79,7 +85,12 @@ namespace Ecommerce
                 {
                     IdCarrito = negocioCarrito.CrearCarritoUsuario(idUsuario);
                 }
-                negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, IdProducto, 1);
+                List<CarritoDetalle> listaCarritoDetale = negocioCarrito.listarDetalleCarritoUsuario(idUsuario);
+                bool encontrado = listaCarritoDetale.Any(lcd => lcd.IdProducto == IdProducto);
+
+                if (!encontrado)
+                    negocioCarrito.AgregarProductosDetalleCarrito(IdCarrito, IdProducto, 1);
+
                 Response.Redirect("/Carrito.aspx");
             }
             else
