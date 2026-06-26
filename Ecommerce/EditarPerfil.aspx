@@ -7,7 +7,6 @@
     <div class="container mt-4 mb-5 d-flex">
         <div class="row w-100 d-flex justify-content-center">
             <div class="col-7 m-3 border border-secondary-subtle rounded shadow">
-                <%-- Aca ira la imagen del usuario --%>
                 <div class="m-4 text-center">
                     <asp:Image ID="imgEditarFotoPerfil" CssClass="rounded-circle" Width="100px" Height="100px" ImageUrl="https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" runat="server"/>
                     

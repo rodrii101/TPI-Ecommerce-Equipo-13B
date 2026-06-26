@@ -5,7 +5,7 @@
     <h1>LISTADO DE PRODUCTOS</h1>
 
     <div class="row mb-3">
-        <asp:GridView ID="dgvListaProductos" runat="server" DataKeyNames="Id" 
+        <asp:GridView ID="dgvListaProductos" runat="server" DataKeyNames="Id"
             CssClass="table table-bordered table-striped shadow-sm" 
             Style="text-align: center;"  AutoGenerateColumns="false"
             OnSelectedIndexChanged="dgvListaProductos_SelectedIndexChanged">
@@ -16,7 +16,7 @@
                 <asp:BoundField HeaderText="Precio" DataField="Precio" />
                 <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
                 <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
-                <asp:BoundField HeaderText="TipoVendedor" DataField="IdVendedor" />
+                <asp:BoundField HeaderText="ID Vendedor" DataField="IdVendedor" />
                 <asp:CheckBoxField HeaderText="Estado" DataField="Estado" />
                 <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="📝" />

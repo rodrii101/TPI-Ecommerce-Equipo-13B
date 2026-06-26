@@ -56,6 +56,10 @@ namespace Ecommerce
                     ddlMarca.DataTextField = "Descripcion";
                     ddlMarca.DataBind();
 
+
+                    btnEliminar.Visible = false;
+                    btnDesactivar.Visible = false;
+
                     //CONFIGURACION SI ESTAMOS MODIFICANDO
                     string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
 
@@ -64,6 +68,9 @@ namespace Ecommerce
                         txtId.Visible = true;
                         lblId.Visible = true;
                         txtId.Enabled = false;
+                        btnEliminar.Visible = true;
+                        btnDesactivar.Visible = true;
+
                         btnAgregarProducto.Text = "Modificar";
 
                         ProductoNegocio negocio = new ProductoNegocio();
@@ -87,7 +94,7 @@ namespace Ecommerce
                         else
                             btnDesactivar.Text = "Activar";
 
-                        //carrusel
+                        //CARRUSEL
                         CargarCarrusel(Convert.ToInt32(Request.QueryString["id"]));
                     }
                     else
@@ -114,6 +121,8 @@ namespace Ecommerce
                 if (!Page.IsValid)
                     return;
 
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+
                 ProductoNegocio productoNegocio = new ProductoNegocio();
                 Producto productoNuevo = new Producto();
 
@@ -125,6 +134,7 @@ namespace Ecommerce
                 productoNuevo.Marca = new Marca();
                 productoNuevo.Marca.IdMarca = int.Parse(ddlMarca.SelectedValue);
                 productoNuevo.Stock = int.Parse(txtStock.Text);
+                productoNuevo.IdVendedor = usuarioIngresado.Id;
 
 
 

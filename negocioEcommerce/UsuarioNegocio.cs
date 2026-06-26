@@ -69,6 +69,8 @@ namespace negocioEcommerce
                         usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
 
                     usuario.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
+                    /*AGREGUE LA CARGA DE DESCRIPCION DEL TIPO DE DATO
+                    usuario.TipoUsuario.Descripcion = (string)(datos.Lector["Descripcion"]);*/
                     usuario.Estado = (bool)datos.Lector["Estado"];
                     return true;
                 }
@@ -146,6 +148,32 @@ namespace negocioEcommerce
                 }
 
                 return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void RegistrarVendedor(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedRegistrarVendedor");
+                datos.setearParametro("@Nombre", usuario.Nombre);
+                datos.setearParametro("@Apellido", usuario.Apellido);
+                datos.setearParametro("@Telefono", usuario.Telefono);
+                datos.setearParametro("@Dni", usuario.DNI);
+                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
+                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil);
+                datos.setearParametro("@Id", usuario.Id);
+                datos.setearParametro("@IdTipoUsuario", 2);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

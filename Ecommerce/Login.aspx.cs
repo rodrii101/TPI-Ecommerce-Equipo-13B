@@ -13,7 +13,13 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
+                {
+                    Response.Redirect("DefaultCliente.aspx", false); //POR EL MOMETO VA A DEFAULT CLIENTE
+                }
+            }
         }
 
         protected void btnLoginUsuario_Click(object sender, EventArgs e)

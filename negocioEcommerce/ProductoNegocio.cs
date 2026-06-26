@@ -13,7 +13,7 @@ namespace negocioEcommerce
 {
     public class ProductoNegocio
     {
-        public List<Producto> listarProductos(string id="")
+        public List<Producto> listarProductos(string idProducto="")
         {
             List<Producto> lista = new List<Producto>();
             AccesoDatos datos = new AccesoDatos();
@@ -21,10 +21,10 @@ namespace negocioEcommerce
             ImagenNegocio imagenNegocio = new ImagenNegocio();
             try
             {
-                if (id != "")
+                if (idProducto != "")
                 {
                     datos.setearProcedimiento("buscarProductoSeleccionado");
-                    datos.setearParametro("@IdProducto", int.Parse(id));
+                    datos.setearParametro("@IdProducto", int.Parse(idProducto));
                 }
                 else
                     datos.setearProcedimiento("listarProductos");
@@ -79,7 +79,7 @@ namespace negocioEcommerce
                 datos.setearParametro("@IdMarca", nuevoProducto.Marca.IdMarca);
                 datos.setearParametro("@Estado", 1);
                 datos.setearParametro("@Stock", nuevoProducto.Stock);
-                datos.setearParametro("@IdVendedor", 1);
+                datos.setearParametro("@IdVendedor", nuevoProducto.IdVendedor);
 
                 int idNuevo = datos.ejecutarScalar();
                 datos.cerrarConexion();
@@ -169,6 +169,54 @@ namespace negocioEcommerce
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Producto> listarProductosPorUsuario(int idVendedor)
+        {
+            List<Producto> listaProductosPorUsuario = new List<Producto>();
+
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedListarProductosPorUsuario");
+                datos.setearParametro("@IdVendedor", idVendedor);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.Id = (int)datos.Lector["Id"]; 
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["ProductoDescripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.IdCategoria = (int)datos.Lector["CatId"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["CatDescripcion"];
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = (int)datos.Lector["MarcaId"];
+                    aux.Marca.Descripcion = (string)datos.Lector["MarcaDescripcion"];
+                    aux.Marca.UrlImagen = (string)datos.Lector["MarcaImagenLogo"];
+                    aux.Stock = (int)datos.Lector["Stock"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+                    aux.IdVendedor = (int)datos.Lector["IdVendedor"];
+                    //CARGA IMAGENES
+                    aux.Imagenes_URL = new List<ImagenProducto>();
+                    aux.Imagenes_URL = imagenNegocio.listarImgProducto(aux.Id);
+
+                    listaProductosPorUsuario.Add(aux);
+                }
+                return listaProductosPorUsuario;
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

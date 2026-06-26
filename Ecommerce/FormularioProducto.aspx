@@ -42,7 +42,7 @@
 
             <div class="mt-4">
                 <asp:Button runat="server" ID="btnAgregarProducto" CssClass="btn btn-primary me-2 px-4" Text="Agregar" OnClick="btnAgregarProducto_Click"/>
-                <asp:Button runat="server" ID="btnCancelar" CssClass="btn btn-danger me-2 px-4" Text="Cancelar" OnClick="btnCancelar_Click"/>
+                <asp:Button runat="server" ID="btnCancelar" CssClass="btn btn-secondary me-2 px-4" Text="Cancelar" OnClick="btnCancelar_Click"/>
             </div>
         </div>
 
@@ -59,6 +59,7 @@
 
                         <%if (Request.QueryString["id"] != null)
                         {%>
+                            <%--MODIFICANDO--%>
                              <div id="carouselExample" class="carousel slide carousel-dark mb-3" data-bs-ride="carousel" ClientIDMode="Static">
                                   <div class="carousel-inner">
                                         <asp:Repeater ID="rptCarrusel" runat="server" OnItemCommand="rptCarrusel_ItemCommand">
@@ -66,11 +67,7 @@
                                                 <div class='carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>' data-id='<%# Eval("Id") %>'>
                                                     <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100" style="max-height: 250px; object-fit: contain;" alt='Producto <%# Eval("IdProducto") %>' onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'" />
                                                     <div class="text-center mt-2">
-                                                        <asp:Button ID="btnEstablecerPrincipal" runat="server" 
-                                                            Text="Elegir como Principal" 
-                                                            CommandName="EstablecerPrincipal" 
-                                                            CommandArgument='<%# Eval("Id") %>' 
-                                                            CssClass="btn btn-success btn-sm" />
+                                                        <asp:Button ID="btnEstablecerPrincipal" runat="server" Text="Elegir como Principal" CommandName="EstablecerPrincipal" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-success btn-sm" />
                                                     </div>
                                                 </div>
                                             </ItemTemplate>
@@ -88,16 +85,14 @@
                         <%}
                         else
                         {%>
+                            <%--AGREGANDO--%>
                              <div id="carouselExampleNuevo" class="carousel slide carousel-dark mb-3" data-bs-ride="carousel" ClientIDMode="Static">
                                   <div class="carousel-inner">
                                         <asp:Repeater ID="rptCarrusel2" runat="server" OnItemDataBound="rptCarrusel2_ItemDataBound" OnItemCommand="rptCarrusel2_ItemCommand">
                                             <ItemTemplate>
                                                 <div class='carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>'>
                                                     <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100" style="max-height: 250px; object-fit: contain;" alt='Producto <%# Eval("idProducto") %>' onerror="this.onerror=null; this.src='https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png'">
-                                                    <asp:Button ID="btnEliminarItem" runat="server" 
-                                                        Text="Eliminar esta imagen" 
-                                                        CommandName="EliminarImagen"
-                                                        CssClass="btn btn-danger mt-2" />
+                                                    <asp:Button ID="btnEliminarItem" runat="server" Text="Eliminar esta imagen" CommandName="EliminarImagen" CssClass="btn btn-danger mt-2" />
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -118,7 +113,7 @@
 
                     <div class="d-flex gap-2 mb-3">
                         <asp:Button ID="btnGuardarImg" runat="server" CssClass="btn btn-primary" Text="Guardar imagen" OnClick="btnGuardarImg_Click"/>
-                        <asp:Button ID="btnEliminarImg" runat="server" CssClass="btn text-white" Style="background-color: #ff7f27;" Text="Borrar img" OnClick="btnEliminarImg_Click"/>
+                        <asp:Button ID="btnEliminarImg" runat="server" CssClass="btn btn-danger" Style="background-color: #ff7f27;" Text="Borrar imagen" OnClick="btnEliminarImg_Click"/>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -130,7 +125,7 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
-                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn text-white" Style="background-color: #ff7f27;" Text="borrar producto" OnClick="btnEliminar_Click" />
+                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Style="background-color: #ff7f27;" Text="borrar producto" OnClick="btnEliminar_Click" />
                         <asp:Button ID="btnDesactivar" runat="server" CssClass="btn btn-warning ms-2" Text="Desactivar" OnClick="btnDesactivar_Click"/>
                     </div>
                     <%if (confirmarEliminacion)

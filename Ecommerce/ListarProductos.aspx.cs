@@ -1,10 +1,11 @@
-﻿using System;
+﻿using dominioEcommerce;
+using negocioEcommerce;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using negocioEcommerce;
 
 namespace Ecommerce
 {
@@ -12,15 +13,39 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProductoNegocio negocioProducto = new ProductoNegocio();
-            dgvListaProductos.DataSource = negocioProducto.listarProductos();
-            dgvListaProductos.DataBind();
+            if (!IsPostBack)
+            {
+                if (!Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
+                    Response.Redirect("Login.aspx", false);
+
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                if (usuarioIngresado.TipoUsuario.IdTipoUsuario == 2)
+                {
+                    ProductoNegocio productoNegocio = new ProductoNegocio();
+                    List<Producto> listaProductosDelVendedor = productoNegocio.listarProductosPorUsuario(usuarioIngresado.Id);
+
+                    dgvListaProductos.DataSource = listaProductosDelVendedor;
+                }
+                else if (usuarioIngresado.TipoUsuario.IdTipoUsuario == 3)
+                {
+                    ProductoNegocio productoNegocio = new ProductoNegocio();
+                    List<Producto> listaProductosAdmin = productoNegocio.listarProductos();
+                    dgvListaProductos.DataSource = listaProductosAdmin;
+                }
+                else
+                {
+                    Response.Redirect("DefaultCliente.aspx", false);
+                    //VERIFICAR SI HACE FALTA AVISAR QUE NO TIENE PERMISO
+                }
+                dgvListaProductos.DataBind();
+            }
+            
         }
 
         protected void dgvListaProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = dgvListaProductos.SelectedDataKey.Value.ToString();
-            Response.Redirect("FormularioProducto.aspx?id=" + id, false);
+            string idProducto = dgvListaProductos.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioProducto.aspx?id=" + idProducto, false);
         }
     }
 }

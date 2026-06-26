@@ -22,8 +22,7 @@
                     <asp:TextBox ID="txtLoginContra" CssClass="form-control" placeholder="Contraseña" TextMode="Password" runat="server" />
                 </div>
                 <div class="m-4">
-                    <p>Si no estas registrado ¡Registrate!</p>
-                    <asp:Button Text="Registrarse" CssClass="btn btn-primary btn-sm" runat="server" />
+                    <p>Si no tienes cuenta, </p> <a href="Registro.aspx">¡Registrate!</a>
                 </div>
                 <div class="m-4">
                     <asp:Button Text="Login" ID="btnLoginUsuario" OnClick="btnLoginUsuario_Click" CssClass="btn btn-warning btn-sm w-100" runat="server" />
