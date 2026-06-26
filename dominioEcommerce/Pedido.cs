@@ -12,6 +12,8 @@ namespace dominioEcommerce
         public int IdCliente { get; set; }
         public int IdFormaDePago { get; set; }
         public int IdFormaDeEntrega { get; set; }
+        public string FormaDeEntregaPedido { get; set; }
+        public int IdDireccionDelPedidoUsuario { get; set; }
         public int IdEstadoPedido { get; set; }
         public DateTime FechaPedido { get; set; }
         public decimal MontoTotal { get; set; }

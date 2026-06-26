@@ -14,7 +14,7 @@ namespace Ecommerce
         protected void Page_Load(object sender, EventArgs e)
         {
             string Id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
-            if(Id != "" && !IsPostBack)
+            if (Id != "" && !IsPostBack)
             {
                 DireccionNegocio negocioDireccion = new DireccionNegocio();
                 int IdDireccion = int.Parse(Id);
@@ -30,26 +30,36 @@ namespace Ecommerce
         }
         protected void btnAgregarDireccion_Click(object sender, EventArgs e)
         {
-            Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            DireccionNegocio negocioDireccion = new DireccionNegocio();
-            DireccionUsuario nuevaDireccion = new DireccionUsuario();
-            nuevaDireccion.Calle = txtCalle.Text;
-            nuevaDireccion.Altura = int.Parse(txtAltura.Text);
-            nuevaDireccion.Piso = txtPiso.Text;
-            nuevaDireccion.Departamento = txtDepartamento.Text;
-            nuevaDireccion.CodigoPostal = txtCodigoPostal.Text;
-            nuevaDireccion.Localidad = txtLocalidad.Text;
-            nuevaDireccion.Observacion = txtObservacion.Text;
-            if (Request.QueryString["Id"] != null)
+            try
             {
-                nuevaDireccion.Id = int.Parse(Request.QueryString["Id"]);
-                negocioDireccion.ModificarDireccion(nuevaDireccion);
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                DireccionNegocio negocioDireccion = new DireccionNegocio();
+                DireccionUsuario nuevaDireccion = new DireccionUsuario();
+                nuevaDireccion.Calle = txtCalle.Text;
+                nuevaDireccion.Altura = int.Parse(txtAltura.Text);
+                nuevaDireccion.Piso = txtPiso.Text;
+                nuevaDireccion.Departamento = txtDepartamento.Text;
+                nuevaDireccion.CodigoPostal = txtCodigoPostal.Text;
+                nuevaDireccion.Localidad = txtLocalidad.Text;
+                nuevaDireccion.Observacion = txtObservacion.Text;
+                if (Request.QueryString["Id"] != null)
+                {
+                    nuevaDireccion.Id = int.Parse(Request.QueryString["Id"]);
+                    negocioDireccion.ModificarDireccion(nuevaDireccion);
+                }
+                else
+                {
+                    negocioDireccion.AgregarDireccion(usuarioIngresado.Id, nuevaDireccion);
+                }
+                Response.Redirect("/Direccion.aspx");
             }
-            else
+            catch (Exception ex)
             {
-                negocioDireccion.AgregarDireccion(usuarioIngresado.Id, nuevaDireccion);
+                Session.Add("error", ex.ToString());
             }
-            Response.Redirect("/Direccion.aspx");
         }
     }
 }
