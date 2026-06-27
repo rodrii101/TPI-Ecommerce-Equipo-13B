@@ -19,7 +19,10 @@ namespace Ecommerce
             txtDniUsuario.Text = UsuarioIngresado.DNI;
             txtTelefonoUsuario.Text = UsuarioIngresado.Telefono;
             txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
-            imagenPerfilUsuario.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
+            if (!string.IsNullOrEmpty(UsuarioIngresado.ImagenPerfil))
+            {
+                imagenPerfilUsuario.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
+            }
         }
     }
 }

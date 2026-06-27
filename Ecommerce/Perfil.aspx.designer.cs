@@ -69,15 +69,6 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.TextBox txtEmailUsuario;
 
         /// <summary>
-        /// Control txtPasswordUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPasswordUsuario;
-
-        /// <summary>
         /// Control txtFechaNacimiento.
         /// </summary>
         /// <remarks>

@@ -48,7 +48,8 @@ namespace negocioEcommerce
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Pass", usuario.Pass);
                 datos.ejecutarLectura();
-                while (datos.Lector.Read()){
+                while (datos.Lector.Read())
+                {
                     usuario.Id = (int)datos.Lector["Id"];
                     if (!(datos.Lector["Nombre"] is DBNull))
                         usuario.Nombre = (string)datos.Lector["Nombre"];
@@ -64,7 +65,7 @@ namespace negocioEcommerce
 
                     if (!(datos.Lector["FechaNacimiento"] is DBNull))
                         usuario.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
-        
+
                     if (!(datos.Lector["ImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
 
@@ -80,6 +81,9 @@ namespace negocioEcommerce
             {
                 throw ex;
             }
+            finally { 
+                datos.cerrarConexion();
+            }
         }
         public void EditarPerfil(Usuario usuario)
         {
@@ -92,7 +96,7 @@ namespace negocioEcommerce
                 datos.setearParametro("@Telefono", usuario.Telefono);
                 datos.setearParametro("@Dni", usuario.DNI);
                 datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
-                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil);
+                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : (object)DBNull.Value);
                 datos.setearParametro("@Id", usuario.Id);
                 
                 datos.ejecutarAccion();

@@ -23,7 +23,8 @@
                         </svg>
                     </a>
                     <a class="nav-link" href="RegistroVendedor.aspx">Quiero Vender!</a>
-                    <asp:Image ID="imgPerfil" CssClass="rounded-circle" Width="55px" Height="55px" runat="server" />
+                    <a href="/Perfil.aspx"><asp:Image ID="imgPerfil" CssClass="rounded-circle" Width="55px" Height="55px" runat="server" /></a>
+                    
                 </div>
             </div>
         </nav>

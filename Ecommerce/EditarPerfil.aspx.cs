@@ -30,17 +30,23 @@ namespace Ecommerce
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
                 Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
                 UsuarioNegocio negocioUsuario = new UsuarioNegocio();
-                string ruta = Server.MapPath("./Images/");
-                txtImagenPerfil.PostedFile.SaveAs(ruta + "fotoPerfil-" + UsuarioIngresado.Id + ".jpg");
-
-                UsuarioIngresado.ImagenPerfil = "fotoPerfil-" + UsuarioIngresado.Id + ".jpg";
-                UsuarioIngresado.Nombre = txtBoxNombreEditarUsuario.Text;
+                if (txtImagenPerfil.PostedFile.FileName != "")
+                {
+                    string ruta = Server.MapPath("./Images/");
+                    txtImagenPerfil.PostedFile.SaveAs(ruta + "fotoPerfil-" + UsuarioIngresado.Id + ".jpg");
+                    UsuarioIngresado.ImagenPerfil = "fotoPerfil-" + UsuarioIngresado.Id + ".jpg";
+                    UsuarioIngresado.Nombre = txtBoxNombreEditarUsuario.Text;
+                }
                 UsuarioIngresado.Apellido = txtApellidoEditarUsuario.Text;
                 UsuarioIngresado.Telefono = txtTelefonoEditarUsuario.Text;
                 UsuarioIngresado.DNI = txtDniEditarUsuario.Text;
                 UsuarioIngresado.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+
                 negocioUsuario.EditarPerfil(UsuarioIngresado);
 
                 Image imagenPerfiUsuario = (Image)Master.FindControl("imgPerfil");
@@ -51,7 +57,7 @@ namespace Ecommerce
             {
                 Session.Add("error", ex.ToString());
             }
-            
+
 
         }
     }

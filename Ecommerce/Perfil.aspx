@@ -50,20 +50,16 @@
                         <asp:TextBox ID="txtDniUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
                 </div>
-                <div class="d-flex ">
+                <div class="d-flex mb-4">
                     <div class="m-4 w-50">
-                        <label for="txtEmailUsuario" class="form-label">Email</label>
+                        <label for="txtEmailUsuario" class="form-label">Fecha nacimiento</label>
                         <asp:TextBox ID="txtEmailUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
 
                     <div class="m-4 w-50">
-                        <label for="txtPasswordUsuario" class="form-label">Password</label>
-                        <asp:TextBox ID="txtPasswordUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
+                        <label for="txtFechaNacimiento" class="form-label">Password</label>
+                        <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
-                </div>
-                <div class="m-4">
-                    <label for="txtFechaNacimiento" class="form-label">Fecha nacimiento</label>
-                    <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control border-button" TextMode="Date" ReadOnly="true" runat="server" />
                 </div>
                 <div class="m-4">
                     <a class="btn btn-outline-secondary" href="/EditarPerfil.aspx">Editar</a>
