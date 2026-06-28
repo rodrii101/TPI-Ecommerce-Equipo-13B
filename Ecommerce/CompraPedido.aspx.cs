@@ -133,7 +133,7 @@ namespace Ecommerce
                     total += subTotal;
                 }
                 lblTotalAPagar.Text = "$ " + total.ToString("0.00");
-                
+
                 listarDireccionesUsuario();
                 listarFormasDePago();
 
@@ -206,15 +206,15 @@ namespace Ecommerce
         protected void btnFinalizarCompraPedido_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
 
                 ConfirmarPedido confirmarPedido = new ConfirmarPedido();
                 confirmarPedido.Cliente = usuarioIngresado;
-            
+
 
                 string formaDeEntrega = rblFormaDeEntrega.SelectedValue;
-                if(formaDeEntrega == "LOCAL")
+                if (formaDeEntrega == "LOCAL")
                 {
                     FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
                     List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
@@ -226,7 +226,7 @@ namespace Ecommerce
                     divConfRetiro.Visible = true;
                     lblRetiro.Text = confirmarPedido.FormaEntrega.Direccion;
                 }
-                else if(formaDeEntrega == "DOMICILIO")
+                else if (formaDeEntrega == "DOMICILIO")
                 {
                     FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
                     List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
@@ -263,7 +263,7 @@ namespace Ecommerce
                     lblConfObservaciones.Text = confirmarPedido.DireccionEntrega.Observacion;
                 }
 
-               
+
                 /*foreach (RepeaterItem item in repRepitidorFormaDePago.Items)
                 {
                     var rb = item.FindControl("IdFormasDePago") as System.Web.UI.WebControls.RadioButton;
@@ -298,7 +298,7 @@ namespace Ecommerce
                     total += subTotal;
                 }
                 lblConfTotalAPagar.Text = "$ " + total.ToString("0.00");
-
+                confirmarPedido.ListaDetalleCarrito = listaCarritoDetalle;
                 //DATOS PERSONALES
                 lblConfNombre.Text = confirmarPedido.Cliente.Nombre + " " + confirmarPedido.Cliente.Apellido;
                 lblConfEmail.Text = confirmarPedido.Cliente.Email;
@@ -308,9 +308,9 @@ namespace Ecommerce
                 //FORMA DE PAGO
                 lblConfPago.Text = confirmarPedido.FormaDePago.Descripcion;
 
-
                 panelCargaDatos.Visible = false;
                 panelConfirmarPedido.Visible = true;
+                Session.Add("PedidoConfirmado", confirmarPedido);
             }
             catch (Exception ex)
             {
@@ -388,15 +388,19 @@ namespace Ecommerce
         }
 
         //CONFIRMACIN DE PEDIDO
-        protected void btnAtras_Click(object sender, EventArgs e)
-        {
-            panelConfirmarPedido.Visible = false;
-            panelCargaDatos.Visible = true;
-        }
 
         protected void btnConfirmarPedido_Click(object sender, EventArgs e)
         {
-
+            ConfirmarPedido confirmarPedido = (ConfirmarPedido)Session["PedidoConfirmado"];
+            Pedido nuevoPedido = new Pedido ();
+            nuevoPedido.PedidoConfirmado.DireccionEntrega.Calle = confirmarPedido.DireccionEntrega.Calle;
+            
+        }
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            cargarPedido();
+            panelConfirmarPedido.Visible = false;
+            panelCargaDatos.Visible = true;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -446,6 +450,8 @@ namespace Ecommerce
 
             ValidarEstadoFormulario();
         }
+
+
     }
 
 }
