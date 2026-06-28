@@ -127,5 +127,28 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
+        public bool existeDescripcionCategoria(string descripcionCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT Descripcion FROM Categoria WHERE Descripcion = @Descripcion");
+                datos.setearParametro("@Descripcion", descripcionCategoria);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                    return true;
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

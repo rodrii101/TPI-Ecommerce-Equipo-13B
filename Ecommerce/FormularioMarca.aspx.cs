@@ -14,27 +14,41 @@ namespace Ecommerce
         public string UrlImagen { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtIdMarca.Enabled = false;
-            btmDesactivarYActivarMarca.Visible = false;
+
             try
             {
-                string id = Request.QueryString["IdMarca"] != null ? Request.QueryString["IdMarca"].ToString() : "";
-                if (id != "" && !IsPostBack)
+                UrlImagen = "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+                if (!IsPostBack)
                 {
-                    btmDesactivarYActivarMarca.Visible = true;
-                    MarcaNegocio negocioMarca = new MarcaNegocio();
-                    Marca seleccionada = (negocioMarca.listarMarca(id))[0];
-                    Session.Add("marcaSeleccionada", seleccionada);
+                    txtIdMarca.Enabled = false;
+                    btmDesactivarYActivarMarca.Visible = false;
+                    string id = Request.QueryString["IdMarca"] != null ? Request.QueryString["IdMarca"].ToString() : "";
+                    txtIdMarca.Visible = false;
+                    lblIdMarca.Visible = false;
 
-                    txtIdMarca.Text = id;
-                    txtDescripcionMarca.Text = seleccionada.Descripcion;
-                    txtUrlImagenMarca.Text = seleccionada.UrlImagen;
-                    txtUrlImagenMarca_TextChanged(sender, e);
-                    if (!seleccionada.Estado)
+                    if (id != "")
                     {
-                        btmDesactivarYActivarMarca.Text = "Reactivar";
-                        btmDesactivarYActivarMarca.CssClass = "btn btn-success";
+                        txtIdMarca.Visible = true;
+                        lblIdMarca.Visible = true;
+                        btmDesactivarYActivarMarca.Visible = true;
+                        MarcaNegocio negocioMarca = new MarcaNegocio();
+                        Marca seleccionada = (negocioMarca.listarMarca(id))[0];
+                        Session.Add("marcaSeleccionada", seleccionada);
+
+                        txtIdMarca.Text = id;
+                        txtDescripcionMarca.Text = seleccionada.Descripcion;
+                        txtUrlImagenMarca.Text = seleccionada.UrlImagen;
+                        txtUrlImagenMarca_TextChanged(sender, e);
+                        if (!seleccionada.Estado)
+                        {
+                            btmDesactivarYActivarMarca.Text = "Reactivar";
+                            btmDesactivarYActivarMarca.CssClass = "btn btn-success";
+                        }
                     }
+                }
+                else
+                {
+                    UrlImagen = txtUrlImagenMarca.Text;
                 }
             }
             catch (Exception ex)
@@ -47,6 +61,7 @@ namespace Ecommerce
         {
             try
             {
+                lblExisteMarca.Text = ""; 
                 Page.Validate();
                 if (!Page.IsValid)
                     return;
@@ -55,6 +70,12 @@ namespace Ecommerce
 
                 nuevaMarca.Descripcion = txtDescripcionMarca.Text;
                 nuevaMarca.UrlImagen = txtUrlImagenMarca.Text;
+
+                if (negocioMarca.existeDescripcion(nuevaMarca.Descripcion))
+                {
+                    lblExisteMarca.Text = "Ya existe esta descripcion";
+                    return;
+                }
 
                 if (Request.QueryString["IdMarca"] != null)
                 {
@@ -90,7 +111,7 @@ namespace Ecommerce
         }
 
         protected void txtUrlImagenMarca_TextChanged(object sender, EventArgs e)
-        {      
+        {
             UrlImagen = txtUrlImagenMarca.Text;
         }
     }

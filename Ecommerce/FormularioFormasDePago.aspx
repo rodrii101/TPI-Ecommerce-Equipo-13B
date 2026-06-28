@@ -3,28 +3,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .validacionTextbox {
-            color: black;
-            font-size: 15px;
+            color: red;
+            font-size: 12px;
             text-align: left;
             display: inline;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p class="fs-2 text-center">Formulario de Formas de pago</p>
-    <div class="container text-center m-4">
+    <div class="container text-center mb-5 my-5">
+        <p class="fs-2 text-center mb-4">Formulario de Formas de pago</p>
         <div class="row justify-content-center">
             <div class="col-5">
                 <div class="mb-4">
                     <label for="txtIdFormasDePago" class="form-label">Id</label>
-                    <asp:TextBox ID="txtIdFormasDePago" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtIdFormasDePago" CssClass="form-control text-center" runat="server" />
                 </div>
                 <div class="mb-4">
                     <label for="txtDescripcionFormasDePago" class="form-label">Descripcion</label>
-                    <asp:TextBox ID="txtDescripcionFormasDePago" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtDescripcionFormasDePago" CssClass="form-control text-center" runat="server" />
                     <div class="row">
                         <asp:RequiredFieldValidator Display="Dynamic" CssClass="validacionTextbox" ErrorMessage="Debe ingresar una Descripcion" ControlToValidate="txtDescripcionFormasDePago" runat="server" />
                         <asp:RegularExpressionValidator Display="Dynamic" CssClass="validacionTextbox" ErrorMessage="Solo letras" ControlToValidate="txtDescripcionFormasDePago" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" runat="server" />
+                        <asp:Label Text="" ID="lblDescripcionPago"  CssClass="validacionTextbox" runat="server" />
                     </div>
                 </div>
                 <div class="mb-4">

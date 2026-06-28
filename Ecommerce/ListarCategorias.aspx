@@ -7,12 +7,13 @@
         <p class="fs-1">LISTADO CATEGORIAS </p>
         <div class="row">
             <div class="col">
-                <asp:GridView runat="server" ID="dgvListadoCategorias" DataKeyNames="IdCategoria" OnSelectedIndexChanged="dgvListadoCategorias_SelectedIndexChanged" CssClass="table table-hover border border-dark" AutoGenerateColumns="false">
+                <asp:GridView runat="server" ID="dgvListadoCategorias" DataKeyNames="IdCategoria" OnSelectedIndexChanged="dgvListadoCategorias_SelectedIndexChanged"
+                    CssClass="table table-bordered table-striped shadow-sm text-center" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvListadoCategorias_PageIndexChanging">
                     <Columns>
                         <asp:BoundField HeaderText="Id" DataField="IdCategoria" />
                         <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                         <asp:CheckBoxField HeaderText="Estado" DataField="Estado" />
-                        <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Accion" />
+                        <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
                     </Columns>
                 </asp:GridView>
                 <div>

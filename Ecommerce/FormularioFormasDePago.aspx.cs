@@ -13,22 +13,25 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtIdFormasDePago.Enabled = false;
-            btmDesactivarYActivarFormasDePago.Visible = false;
             try
             {
-                string id = Request.QueryString["IdFormasDePagos"] != null ? Request.QueryString["IdFormasDePagos"].ToString() : "";
-                if (id != "" && !IsPostBack)
+                if (!IsPostBack)
                 {
-                    btmDesactivarYActivarFormasDePago.Visible = true;
-                    FormasDePagoNegocio negocioPago = new FormasDePagoNegocio();
-                    FormasDePagos seleccionado = (negocioPago.listarFormasDePagos(id))[0];
-                    Session.Add("FormaDePagoSeleccionado", seleccionado);
-                    txtIdFormasDePago.Text = id;
-                    txtDescripcionFormasDePago.Text = seleccionado.Descripcion;
-                    if (!seleccionado.Estado)
+                    txtIdFormasDePago.Enabled = false;
+                    btmDesactivarYActivarFormasDePago.Visible = false;
+                    string id = Request.QueryString["IdFormasDePagos"] != null ? Request.QueryString["IdFormasDePagos"].ToString() : "";
+                    if (id != "")
                     {
-                        btmDesactivarYActivarFormasDePago.Text = "Reactivar";
+                        btmDesactivarYActivarFormasDePago.Visible = true;
+                        FormasDePagoNegocio negocioPago = new FormasDePagoNegocio();
+                        FormasDePagos seleccionado = (negocioPago.listarFormasDePagos(id))[0];
+                        Session.Add("FormaDePagoSeleccionado", seleccionado);
+                        txtIdFormasDePago.Text = id;
+                        txtDescripcionFormasDePago.Text = seleccionado.Descripcion;
+                        if (!seleccionado.Estado)
+                        {
+                            btmDesactivarYActivarFormasDePago.Text = "Reactivar";
+                        }
                     }
                 }
             }
@@ -49,7 +52,10 @@ namespace Ecommerce
                 FormasDePagoNegocio negocioPago = new FormasDePagoNegocio();
 
                 nuevoPago.Descripcion = txtDescripcionFormasDePago.Text;
-
+                if(negocioPago.existeDescripcionFormaDePago(txtDescripcionFormasDePago.Text)){
+                    lblDescripcionPago.Text = "Ya existe esta descripcion";
+                    return;
+                }
                 if (Request.QueryString["IdFormasDePagos"] != null)
                 {
                     nuevoPago.IdFormasDePago = int.Parse(txtIdFormasDePago.Text);

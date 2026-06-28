@@ -20,7 +20,10 @@ namespace Ecommerce
                 txtApellidoEditarUsuario.Text = UsuarioIngresado.Apellido;
                 txtDniEditarUsuario.Text = UsuarioIngresado.DNI;
                 txtTelefonoEditarUsuario.Text = UsuarioIngresado.Telefono;
-                txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
+                if (UsuarioIngresado.FechaNacimiento == null || UsuarioIngresado.FechaNacimiento == DateTime.MinValue)
+                    txtFechaNacimiento.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                else
+                    txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
                 if (!string.IsNullOrEmpty(UsuarioIngresado.ImagenPerfil))
                     imgEditarFotoPerfil.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
             }
@@ -39,9 +42,9 @@ namespace Ecommerce
                 {
                     string ruta = Server.MapPath("./Images/");
                     txtImagenPerfil.PostedFile.SaveAs(ruta + "fotoPerfil-" + UsuarioIngresado.Id + ".jpg");
-                    UsuarioIngresado.ImagenPerfil = "fotoPerfil-" + UsuarioIngresado.Id + ".jpg";
-                    UsuarioIngresado.Nombre = txtBoxNombreEditarUsuario.Text;
+                    UsuarioIngresado.ImagenPerfil = "fotoPerfil-" + UsuarioIngresado.Id + ".jpg";    
                 }
+                UsuarioIngresado.Nombre = txtBoxNombreEditarUsuario.Text;
                 UsuarioIngresado.Apellido = txtApellidoEditarUsuario.Text;
                 UsuarioIngresado.Telefono = txtTelefonoEditarUsuario.Text;
                 UsuarioIngresado.DNI = txtDniEditarUsuario.Text;

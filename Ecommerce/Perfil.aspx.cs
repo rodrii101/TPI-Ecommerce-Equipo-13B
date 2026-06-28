@@ -12,17 +12,28 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            txtEmailUsuario.Text = UsuarioIngresado.Email;
-            txtBoxNombreUsuario.Text = UsuarioIngresado.Nombre;
-            txtApellidoUsuario.Text = UsuarioIngresado.Apellido;
-            txtDniUsuario.Text = UsuarioIngresado.DNI;
-            txtTelefonoUsuario.Text = UsuarioIngresado.Telefono;
-            txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
-            if (!string.IsNullOrEmpty(UsuarioIngresado.ImagenPerfil))
+            if (Seguridad.SesionActiva(Session["UsuarioIngresado"]))
             {
-                imagenPerfilUsuario.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
+                Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                txtEmailUsuario.Text = UsuarioIngresado.Email;
+                txtBoxNombreUsuario.Text = UsuarioIngresado.Nombre;
+                txtApellidoUsuario.Text = UsuarioIngresado.Apellido;
+                txtDniUsuario.Text = UsuarioIngresado.DNI;
+                txtTelefonoUsuario.Text = UsuarioIngresado.Telefono;
+                txtFechaNacimiento.Text = UsuarioIngresado.FechaNacimiento.ToString("yyyy-MM-dd");
+                if (!string.IsNullOrEmpty(UsuarioIngresado.ImagenPerfil))
+                {
+                    imagenPerfilUsuario.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
+                }
             }
+            else
+                Response.Redirect("Login.aspx");
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Login.aspx");
         }
     }
 }

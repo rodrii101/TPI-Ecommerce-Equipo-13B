@@ -15,6 +15,15 @@ namespace Ecommerce
     {
 
         /// <summary>
+        /// Control lblIdMarca.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIdMarca;
+
+        /// <summary>
         /// Control txtIdMarca.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace Ecommerce
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionMarca;
+
+        /// <summary>
+        /// Control lblExisteMarca.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblExisteMarca;
 
         /// <summary>
         /// Control txtUrlImagenMarca.

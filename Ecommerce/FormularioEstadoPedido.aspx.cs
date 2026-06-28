@@ -14,24 +14,28 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtIdEstadoPedido.Enabled = false;
-            btmDesactivarYActivarEstadoPedido.Visible = false;
             try
             {
-                string Id = Request.QueryString["IdEstadoPedido"] != null ? Request.QueryString["IdEstadoPedido"].ToString() : "";
-                if (Id != "" && !IsPostBack)
+                if (!IsPostBack)
                 {
-                    btmDesactivarYActivarEstadoPedido.Visible = true;
-                    EstadoPedidoNegocio negocioEstadoPedido = new EstadoPedidoNegocio();
-                    EstadoPedido seleccionado = (negocioEstadoPedido.listarEstadoPedido(Id))[0];
-                    Session.Add("EstadoPedidoSeleccionado", seleccionado);
-                    txtIdEstadoPedido.Text = Id;
-                    txtDescripcionEstadoPedido.Text = seleccionado.Descripcion;
-                    if (!seleccionado.Estado)
+                    txtIdEstadoPedido.Enabled = false;
+                    btmDesactivarYActivarEstadoPedido.Visible = false;
+                    string Id = Request.QueryString["IdEstadoPedido"] != null ? Request.QueryString["IdEstadoPedido"].ToString() : "";
+                    if (Id != "")
                     {
-                        btmDesactivarYActivarEstadoPedido.Text = "Reactivar";
+                        btmDesactivarYActivarEstadoPedido.Visible = true;
+                        EstadoPedidoNegocio negocioEstadoPedido = new EstadoPedidoNegocio();
+                        EstadoPedido seleccionado = (negocioEstadoPedido.listarEstadoPedido(Id))[0];
+                        Session.Add("EstadoPedidoSeleccionado", seleccionado);
+                        txtIdEstadoPedido.Text = Id;
+                        txtDescripcionEstadoPedido.Text = seleccionado.Descripcion;
+                        if (!seleccionado.Estado)
+                        {
+                            btmDesactivarYActivarEstadoPedido.Text = "Reactivar";
+                        }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -49,14 +53,20 @@ namespace Ecommerce
                 EstadoPedido nuevoEstadoPedido = new EstadoPedido();
                 EstadoPedidoNegocio negocioEstadoPedido = new EstadoPedidoNegocio();
                 nuevoEstadoPedido.Descripcion = txtDescripcionEstadoPedido.Text;
+                if (negocioEstadoPedido.existeDescripcionEstadoPedido(txtDescripcionEstadoPedido.Text))
+                {
+                    lblDescripcionEstadoPedido.Text = "Ya existe esta descripcion";
+                    return;
+                }
 
                 if (Request.QueryString["IdEstadoPedido"] != null)
                 {
                     nuevoEstadoPedido.IdEstadoPedido = int.Parse(txtIdEstadoPedido.Text);
                     negocioEstadoPedido.ModificarEstadoPedido(nuevoEstadoPedido);
-                }else
+                }
+                else
                     negocioEstadoPedido.AgregarEstadoPedido(nuevoEstadoPedido);
-                
+
                 Response.Redirect("/ListarEstadoPedido.aspx");
             }
             catch (Exception ex)

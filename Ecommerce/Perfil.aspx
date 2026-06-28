@@ -20,7 +20,7 @@
                     <hr /> 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link-dark" href="#">Cerrar sesion</a>
+                    <asp:Button Text="Cerrar sesion" Id="btnCerrarSesion" OnClick="btnCerrarSesion_Click" CssClass="nav-link link-dark" runat="server" />             
                     <hr />
                 </li>
             </ul>
@@ -52,13 +52,13 @@
                 </div>
                 <div class="d-flex mb-4">
                     <div class="m-4 w-50">
-                        <label for="txtEmailUsuario" class="form-label">Fecha nacimiento</label>
+                        <label for="txtEmailUsuario" class="form-label">Email</label>
                         <asp:TextBox ID="txtEmailUsuario" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
                     </div>
 
                     <div class="m-4 w-50">
-                        <label for="txtFechaNacimiento" class="form-label">Password</label>
-                        <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control-plaintext border-button" ReadOnly="true" runat="server" />
+                        <label for="txtFechaNacimiento" class="form-label">Fecha nacimiento</label>
+                        <asp:TextBox ID="txtFechaNacimiento" CssClass="form-control-plaintext border-button" TextMode="Date" ReadOnly="true" runat="server" />
                     </div>
                 </div>
                 <div class="m-4">

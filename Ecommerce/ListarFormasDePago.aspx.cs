@@ -21,5 +21,11 @@ namespace Ecommerce
             string Id = dgvListadoFormasDePago.SelectedDataKey.Value.ToString();
             Response.Redirect("FormularioFormasDePago.aspx?IdFormasDePagos=" + Id);
         }
+
+        protected void dgvListadoFormasDePago_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvListadoFormasDePago.PageIndex = e.NewPageIndex;
+            dgvListadoFormasDePago.DataBind();
+        }
     }
 }

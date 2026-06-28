@@ -126,5 +126,28 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
+        public bool existeDescripcionFormaDePago(string descripcionFormaDePago)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT Descripcion FROM FormaDePago WHERE Descripcion = @Descripcion");
+                datos.setearParametro("@Descripcion", descripcionFormaDePago);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                    return true;
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
