@@ -18,10 +18,10 @@
                                 <ItemTemplate>
                                     <div class="mb-3 p-3 border border-secondary-subtle rounded shadow-sm bg-white" style="min-height: 130px">
                                         <div class="pb-2">
-                                            <p class="mb-0 fw-bold text-muted small">Vendedor: <span><%#Eval("Producto.IdVendedor") %></span> </p>
+                                            <p class="mb-0 fw-bold text-muted small">Vendedor <span class="text-success"><%#Eval("Usuario.Nombre") %></span> </p>
                                         </div>
                                         <hr class="mt-0 mb-3 text-secondary-50 opacity-25" />
-                                        <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex justify-content-between align-items-center"> 
 
                                             <img src="<%# ObtenerImagenPrincipal((CarritoDetalle)Container.DataItem)%>" alt="<%# Eval("Producto.Nombre") %>" style="max-height: 90px; width: auto;" />
 

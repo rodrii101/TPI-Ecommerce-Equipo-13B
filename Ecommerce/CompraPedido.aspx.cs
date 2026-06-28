@@ -24,15 +24,97 @@ namespace Ecommerce
                 cargarPedido();
             }
         }
+
+        private void ValidarEstadoFormulario()
+        {
+            bool datosPersonalesCompletos = !txtNombre.Enabled && !txtApellido.Enabled && !txtDNI.Enabled && !txtTelefono.Enabled;//PARA QUE SEPA CUANDO ESTN COMPLETOS LOS CAMPOS
+
+            bool formaEntregaValida = false;
+            string formaDeEntrega = rblFormaDeEntrega.SelectedValue;
+
+            if (formaDeEntrega == "LOCAL")
+            {
+                formaEntregaValida = true;
+            }
+            else if (formaDeEntrega == "DOMICILIO")
+            {
+                //BUSCO QUE SE HAYA SELECCIONADO UNA DIRECCION PARA ENTREGAR
+                string idDomicilioSeleccionado = Request.Form["grupoDomicilio"];
+                formaEntregaValida = !string.IsNullOrEmpty(idDomicilioSeleccionado);
+            }
+
+            //VALIDAMOS QUE HAYA UNA FORMA DE PAGO SELECCIONADA
+            string idPagoSeleccionado = Request.Form["grupoPagos"];
+            bool formaPagoValida = !string.IsNullOrEmpty(idPagoSeleccionado);
+
+            btnFinalizarCompraPedido.Enabled = datosPersonalesCompletos && formaEntregaValida && formaPagoValida;//SOLO HABILITA CUANDO TODO ESTE COMPLETO
+        }
+
         public void cargarPedido()
         {
             Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
             if (UsuarioIngresado != null)
             {
-                lblNombreUsuario.Text = UsuarioIngresado.Nombre;
-                lblEmailUsuario.Text = UsuarioIngresado.Email;
-                lblDniUsuario.Text = UsuarioIngresado.DNI;
-                lblTelefonoUsuario.Text = UsuarioIngresado.Telefono;
+                bool tieneDatosIncompletos = false;
+
+                if (UsuarioIngresado.Nombre == null || UsuarioIngresado.Nombre == "")
+                {
+                    txtNombre.Enabled = true;
+                    tieneDatosIncompletos = true;
+                }
+                else
+                {
+                    txtNombre.Text = UsuarioIngresado.Nombre;
+                }
+
+                if (UsuarioIngresado.Apellido == null || UsuarioIngresado.Apellido == "")
+                {
+                    txtApellido.Enabled = true;
+                    tieneDatosIncompletos = true;
+                }
+                else
+                {
+                    txtApellido.Text = UsuarioIngresado.Apellido;
+                }
+
+                if (UsuarioIngresado.DNI == null || UsuarioIngresado.DNI == "")
+                {
+                    txtDNI.Enabled = true;
+                    tieneDatosIncompletos = true;
+                }
+                else
+                {
+                    txtDNI.Text = UsuarioIngresado.DNI;
+                }
+
+                if (UsuarioIngresado.Telefono == null || UsuarioIngresado.Telefono == "")
+                {
+                    txtTelefono.Enabled = true;
+                    tieneDatosIncompletos = true;
+                }
+                else
+                {
+                    txtTelefono.Text = UsuarioIngresado.Telefono;
+                }
+
+                // Controlamos la visibilidad inicial de los botones según el estado de los datos
+                if (tieneDatosIncompletos)
+                {
+                    btnGuardar.Visible = true;
+                    btnGuardar.Enabled = true;
+                    btnModificar.Visible = false;
+                }
+                else
+                {
+                    btnGuardar.Visible = false;
+                    btnModificar.Visible = true;
+                }
+
+                txtEmail.Text = UsuarioIngresado.Email;
+
+
+
+
                 CarritoNegocio negocioCarrito = new CarritoNegocio();
                 listaCarritoDetalle = negocioCarrito.listarDetalleCarritoUsuario(UsuarioIngresado.Id);
                 repRepetidorProductos.DataSource = listaCarritoDetalle;
@@ -54,9 +136,16 @@ namespace Ecommerce
                 
                 listarDireccionesUsuario();
                 listarFormasDePago();
+
+                ValidarEstadoFormulario(); //PARA HABILITAR EL BOTON FINALIZAR COMPRA
             }
             else
                 Response.Redirect("Login.aspx", false);
+        }
+
+
+        public void CargarConfirmacinPedido()
+        {
 
         }
         public string ObtenerImagenPrincipal(CarritoDetalle carritoDetalle)
@@ -101,20 +190,138 @@ namespace Ecommerce
         }
         protected void rblFormaDeEntrega_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rblFormaDeEntrega.SelectedValue == "Domicilio")
+            if (rblFormaDeEntrega.SelectedValue == "DOMICILIO")
             {
                 PanelConDireccionUsuario.Visible = true;
                 PanelRetiroAlLocal.Visible = false;
             }
-            else if (rblFormaDeEntrega.SelectedValue == "Retiro")
+            else if (rblFormaDeEntrega.SelectedValue == "LOCAL")
             {
                 PanelConDireccionUsuario.Visible = false;
                 PanelRetiroAlLocal.Visible = true;
             }
+
+            ValidarEstadoFormulario(); //VALIDA QUE ESTE COMPLETO
         }
         protected void btnFinalizarCompraPedido_Click(object sender, EventArgs e)
         {
             try
+            { 
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+
+                ConfirmarPedido confirmarPedido = new ConfirmarPedido();
+                confirmarPedido.Cliente = usuarioIngresado;
+            
+
+                string formaDeEntrega = rblFormaDeEntrega.SelectedValue;
+                if(formaDeEntrega == "LOCAL")
+                {
+                    FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
+                    List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
+                    FormasDeEntrega entrega = listaFormaDeEntrega.FirstOrDefault(lfde => lfde.Descripcion == "LOCAL");
+
+                    confirmarPedido.FormaEntrega = entrega;
+
+                    divConfDomicilio.Visible = false;
+                    divConfRetiro.Visible = true;
+                    lblRetiro.Text = confirmarPedido.FormaEntrega.Direccion;
+                }
+                else if(formaDeEntrega == "DOMICILIO")
+                {
+                    FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
+                    List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
+                    FormasDeEntrega entrega = listaFormaDeEntrega.FirstOrDefault(lfde => lfde.Descripcion == "DOMICILIO");
+
+                    confirmarPedido.FormaEntrega = entrega;
+
+
+                    /*foreach (RepeaterItem item in repRepetidorDomicilios.Items)
+                    {
+                        var rb = item.FindControl("rbDomicilio") as System.Web.UI.WebControls.RadioButton;
+                        if (rb != null && rb.Checked)
+                        {
+                            // Accedemos de esta manera al atributo asignado
+                            idDomicilioSeleccionado = rb.InputAttributes["value"];
+                            break;
+                        }
+                    }*/
+                    string idDomicilioSeleccionado = Request.Form["grupoDomicilio"];
+                    int idDireccion = int.Parse(idDomicilioSeleccionado);
+
+                    DireccionNegocio direccionNegocio = new DireccionNegocio();
+                    confirmarPedido.DireccionEntrega = direccionNegocio.BuscarDireccion(idDireccion);
+
+
+                    divConfRetiro.Visible = false;
+                    divConfDomicilio.Visible = true;
+                    lblConfCalle.Text = confirmarPedido.DireccionEntrega.Calle;
+                    lblConfAltura.Text = confirmarPedido.DireccionEntrega.Altura.ToString();
+                    lblConfPiso.Text = confirmarPedido.DireccionEntrega.Piso.ToString();
+                    lblConfDepto.Text = confirmarPedido.DireccionEntrega.Departamento;
+                    lblConfLocalidad.Text = confirmarPedido.DireccionEntrega.Localidad;
+                    lblConfCodPostal.Text = confirmarPedido.DireccionEntrega.CodigoPostal;
+                    lblConfObservaciones.Text = confirmarPedido.DireccionEntrega.Observacion;
+                }
+
+               
+                /*foreach (RepeaterItem item in repRepitidorFormaDePago.Items)
+                {
+                    var rb = item.FindControl("IdFormasDePago") as System.Web.UI.WebControls.RadioButton;
+                    if (rb != null && rb.Checked)
+                    {
+                        idPagoSeleccionado = rb.InputAttributes["value"];
+                        break;
+                    }
+                }*/
+
+                string idPagoSeleccionado = Request.Form["grupoPagos"];
+                FormasDePagoNegocio pagosNegocio = new FormasDePagoNegocio();
+                List<FormasDePagos> listaFormaDePago = pagosNegocio.listarFormasDePagos(idPagoSeleccionado);
+                confirmarPedido.FormaDePago = listaFormaDePago[0];
+
+
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
+                listaCarritoDetalle = negocioCarrito.listarDetalleCarritoUsuario(usuarioIngresado.Id);
+                rptConfirmarPedido.DataSource = listaCarritoDetalle;
+                rptConfirmarPedido.DataBind();
+                int cantidadProductos = 0;
+                foreach (CarritoDetalle detalleProducto in listaCarritoDetalle)
+                {
+                    cantidadProductos += detalleProducto.Cantidad;
+                }
+                lblConfCantidadProductos.Text = cantidadProductos.ToString();
+                decimal subTotal = 0;
+                decimal total = 0;
+                foreach (CarritoDetalle detalleProducto in listaCarritoDetalle)
+                {
+                    subTotal = detalleProducto.Cantidad * detalleProducto.Producto.Precio;
+                    total += subTotal;
+                }
+                lblConfTotalAPagar.Text = "$ " + total.ToString("0.00");
+
+                //DATOS PERSONALES
+                lblConfNombre.Text = confirmarPedido.Cliente.Nombre + " " + confirmarPedido.Cliente.Apellido;
+                lblConfEmail.Text = confirmarPedido.Cliente.Email;
+                lblConfDni.Text = confirmarPedido.Cliente.DNI;
+                lblConfTelefono.Text = confirmarPedido.Cliente.Telefono;
+
+                //FORMA DE PAGO
+                lblConfPago.Text = confirmarPedido.FormaDePago.Descripcion;
+
+
+                panelCargaDatos.Visible = false;
+                panelConfirmarPedido.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                throw ex;
+            }
+
+
+
+
+            /*try
             {
                 cargarPedido();
                 //De momento guarda IdUsuario, FormaDeEntrega, IdDireccion, IdPFormaDePago y idEstadoPedido por default 1 o le mandamos en la base de datos default 1?
@@ -133,14 +340,14 @@ namespace Ecommerce
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-            }
+            }*/
         }
 
         protected void NuevaDireccionPedido_Click(object sender, EventArgs e)
         {
             try
             {
-                Page.Validate();
+                Page.Validate("NuevaDireccion");
                 if (!Page.IsValid)
                     return;
                 Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
@@ -178,6 +385,66 @@ namespace Ecommerce
             txtLocalidadPedido.Text = "";
             txtCodPostalPedido.Text = "";
             txtObservacionesPedido.Text = "";
+        }
+
+        //CONFIRMACIN DE PEDIDO
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            panelConfirmarPedido.Visible = false;
+            panelCargaDatos.Visible = true;
+        }
+
+        protected void btnConfirmarPedido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Page.Validate("DatosPersonales");
+            if (!Page.IsValid)
+                return;
+
+            UsuarioNegocio negocioUsuario = new UsuarioNegocio();
+            Usuario usuarioEditado = (Usuario)Session["UsuarioIngresado"];
+
+            usuarioEditado.Nombre = txtNombre.Text;
+            usuarioEditado.Apellido = txtApellido.Text;
+            usuarioEditado.DNI = txtDNI.Text;
+            usuarioEditado.Telefono = txtTelefono.Text;
+
+            negocioUsuario.EditarPerfil(usuarioEditado);
+
+            //BLOQUEO LOS TXT
+            txtNombre.Enabled = false;
+            txtApellido.Enabled = false;
+            txtDNI.Enabled = false;
+            txtTelefono.Enabled = false;
+
+            //OCULTO GUARDAR PARA MOSTRAR MODIFICAR
+            btnGuardar.Visible = false;
+            btnGuardar.Enabled = false;
+
+            btnModificar.Visible = true;
+
+            ValidarEstadoFormulario();//VERIFICO QUE TODO ESTE COMPLETO
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            //HABILITAMS LOS TXT
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
+            txtDNI.Enabled = true;
+            txtTelefono.Enabled = true;
+
+            // MUESTRO GUARDAR
+            btnGuardar.Visible = true;
+            btnGuardar.Enabled = true;
+
+            btnModificar.Visible = false;
+
+            ValidarEstadoFormulario();
         }
     }
 

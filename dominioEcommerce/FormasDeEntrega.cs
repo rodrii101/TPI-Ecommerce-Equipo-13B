@@ -9,7 +9,8 @@ namespace dominioEcommerce
     public class FormasDeEntrega
     {
         public int IdFormasDePago { get; set; }
-        public int Descripcion { get; set; }
+        public string Descripcion { get; set; }
+        public string Direccion { get; set; }
         public bool Estado { get; set; }
     }
 }

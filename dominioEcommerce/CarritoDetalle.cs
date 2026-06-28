@@ -13,6 +13,7 @@ namespace dominioEcommerce
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
         public Producto Producto { get; set; }
+        public Usuario Usuario { get; set; }
 
         /*public int IdCarrioDetalle { get; set; }
         public Carrito Carrito { get; set; }

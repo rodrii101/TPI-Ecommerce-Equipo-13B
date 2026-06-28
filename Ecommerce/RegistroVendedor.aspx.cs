@@ -16,7 +16,11 @@ namespace Ecommerce
             if (!IsPostBack)
             {
                 if (!Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
+                {
                     Response.Redirect("Login.aspx", false);
+                    return;
+                }
+                    
 
                 Usuario usuario = (Usuario)Session["UsuarioINgresado"];
                 if(usuario.TipoUsuario.IdTipoUsuario == 2)

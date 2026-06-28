@@ -9,35 +9,37 @@ namespace negocioEcommerce
 {
     public class UsuarioNegocio
     {
-        //public List<Usuario> listarusuarios(string id ="")
-        //{
-        //    List<Usuario> lista = new List<Usuario>();
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        datos.setearProcedimiento("listarusuarios");
-        //        datos.ejecutarLectura();
-        //        while (datos.Lector.Read())
-        //        {
-        //            Usuario auxusuario = new Usuario();
-        //            auxusuario.Nombre = (string)datos.Lector["Nombre"];
-        //            auxusuario.Apellido = (string)datos.Lector["Apellido"];
-        //            auxusuario.DNI = (string)datos.Lector["DNI"];
-        //            auxusuario.Email = (string)datos.Lector["Email"];
-        //            auxusuario.Telefono = (string)datos.Lector["Telefono"];
-        //            lista.Add(auxusuario);
-        //        }
-        //        return lista;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-        //}
+        public Usuario BuscarUsuario(int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                Usuario usuarioEncontrado = new Usuario();
+                datos.setearProcedimiento("storedBuscarUsuario");
+                datos.setearParametro("@IdUsuario", idUsuario);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    usuarioEncontrado.Nombre = (string)datos.Lector["Nombre"];
+                    usuarioEncontrado.Apellido = (string)datos.Lector["Apellido"];
+                    usuarioEncontrado.DNI = (string)datos.Lector["Dni"];
+                    usuarioEncontrado.Email = (string)datos.Lector["Email"];
+                    usuarioEncontrado.Telefono = (string)datos.Lector["Telefono"];
+                    usuarioEncontrado.TipoUsuario = new TipoUsuario();
+                    usuarioEncontrado.TipoUsuario.IdTipoUsuario = (int)datos.Lector["IdTipoUsuario"];
+                    usuarioEncontrado.Estado = (bool)datos.Lector["Estado"];
+                }
+                return usuarioEncontrado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public bool Loguer(Usuario usuario)
         {
@@ -95,7 +97,8 @@ namespace negocioEcommerce
                 datos.setearParametro("@Apellido", usuario.Apellido);
                 datos.setearParametro("@Telefono", usuario.Telefono);
                 datos.setearParametro("@Dni", usuario.DNI);
-                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
+                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento == DateTime.MinValue ? (object)DBNull.Value : usuario.FechaNacimiento);
+                //datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
                 datos.setearParametro("@UrlImagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : (object)DBNull.Value);
                 datos.setearParametro("@Id", usuario.Id);
                 

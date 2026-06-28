@@ -35,6 +35,8 @@ namespace Ecommerce
             {
                 user.Email = txtRegistroEmail.Text;
                 user.Pass = txtConfirmarPassword.Text;
+                user.TipoUsuario = new TipoUsuario();
+                user.TipoUsuario.IdTipoUsuario = 1;
                 user.Id = negocioUsuario.Registrar(user);//PARA LOGIN AUTOMATICO
 
                 Session.Add("UsuarioIngresado", user); //LOGIN AUTOMATICO

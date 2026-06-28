@@ -17,6 +17,8 @@ namespace negocioEcommerce
                 ProductoNegocio productoNegocio = new ProductoNegocio();
                 List<Producto> listaProductos = productoNegocio.listarProductos();
 
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
                 ImagenNegocio auxImagen = new ImagenNegocio();
                 List<CarritoDetalle> lista = new List<CarritoDetalle>();
 
@@ -43,7 +45,12 @@ namespace negocioEcommerce
                     auxProducto.IdVendedor = productoConNombreVendedor.IdVendedor;
                     auxProducto.Stock = productoConNombreVendedor.Stock;
 
+                    
+                    Usuario usuarioEncontrado = usuarioNegocio.BuscarUsuario(auxProducto.IdVendedor);
+                    //aux.Usuario = new Usuario();
+
                     aux.Producto = auxProducto;
+                    aux.Usuario = usuarioEncontrado;
                     lista.Add(aux);
                 }
                 return lista;
