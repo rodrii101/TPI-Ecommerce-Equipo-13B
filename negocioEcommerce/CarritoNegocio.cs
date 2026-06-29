@@ -27,7 +27,7 @@ namespace negocioEcommerce
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    
+
                     CarritoDetalle aux = new CarritoDetalle();
                     Producto auxProducto = new Producto();
                     aux.IdCarritoDetalle = (int)datos.Lector["IdDetalleCarrito"];
@@ -45,7 +45,7 @@ namespace negocioEcommerce
                     auxProducto.IdVendedor = productoConNombreVendedor.IdVendedor;
                     auxProducto.Stock = productoConNombreVendedor.Stock;
 
-                    
+
                     Usuario usuarioEncontrado = usuarioNegocio.BuscarUsuario(auxProducto.IdVendedor);
                     //aux.Usuario = new Usuario();
 
@@ -158,6 +158,24 @@ namespace negocioEcommerce
                 /*datos.setearParametro("IdCarrito", idCarrito);
                 datos.setearParametro("IdProducto", idProducto);*/
                 datos.setearParametro("NuevaCantidad", nuevaCantidad);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void VaciarDetalleCarrito(int IdCarrito)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("VaciarCarritoDetalle");
+                datos.setearParametro("@IdCarrito", IdCarrito);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

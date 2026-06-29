@@ -10,9 +10,11 @@ namespace dominioEcommerce
     {
         public int IdPedidoDetalle { get; set; }
         public int IdPedido { get; set; }
+
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
-        public int PrecioUnitario { get; set; }//Guarda el precio unitario en caso de que el vendedor cambie el precio en el futuro
+        public decimal PrecioUnitario { get; set; }//Guarda el precio unitario en caso de que el vendedor cambie el precio en el futuro
+        public string NombreDelVendedor { get; set; }
         public Producto Producto { get; set; }//Obtener nombre, idVendedor, etc...
     }
 }

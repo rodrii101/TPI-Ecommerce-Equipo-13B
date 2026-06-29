@@ -231,7 +231,7 @@ namespace Ecommerce
                     FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
                     List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
                     FormasDeEntrega entrega = listaFormaDeEntrega.FirstOrDefault(lfde => lfde.Descripcion == "DOMICILIO");
-                    
+
                     confirmarPedido.FormaEntrega = entrega;
                     string idDomicilioSeleccionado = Request.Form["grupoDomicilio"];
                     int idDireccion = int.Parse(idDomicilioSeleccionado);
@@ -239,7 +239,7 @@ namespace Ecommerce
                     DireccionNegocio direccionNegocio = new DireccionNegocio();
                     confirmarPedido.DireccionEntrega = direccionNegocio.BuscarDireccion(idDireccion);
 
-                    
+
                     divConfRetiro.Visible = false;
                     divConfDomicilio.Visible = true;
                     lblConfCalle.Text = confirmarPedido.DireccionEntrega.Calle;
@@ -285,7 +285,7 @@ namespace Ecommerce
 
                 //FORMA DE PAGO
                 lblConfPago.Text = confirmarPedido.FormaDePago.Descripcion;
-
+                confirmarPedido.MontoTotal = total;
                 panelCargaDatos.Visible = false;
                 panelConfirmarPedido.Visible = true;
                 Session.Add("PedidoConfirmado", confirmarPedido);
@@ -345,10 +345,67 @@ namespace Ecommerce
 
         protected void btnConfirmarPedido_Click(object sender, EventArgs e)
         {
-            ConfirmarPedido confirmarPedido = (ConfirmarPedido)Session["PedidoConfirmado"];
-            Pedido nuevoPedido = new Pedido ();
-            nuevoPedido.PedidoConfirmado.DireccionEntrega.Calle = confirmarPedido.DireccionEntrega.Calle;
-            
+            if (Session["PedidoConfirmado"] == null)
+                Response.Redirect("/Carrito.aspx");
+            try
+            {
+                ConfirmarPedido confirmarPedido = (ConfirmarPedido)Session["PedidoConfirmado"];
+                Pedido nuevoPedido = new Pedido();
+                nuevoPedido.PedidoConfirmado = new ConfirmarPedido();
+                nuevoPedido.PedidoConfirmado.Cliente = new Usuario();
+                nuevoPedido.PedidoConfirmado.DireccionEntrega = new DireccionUsuario();
+                nuevoPedido.PedidoConfirmado.FormaDePago = new FormasDePagos();
+                nuevoPedido.PedidoConfirmado.FormaEntrega = new FormasDeEntrega();
+
+                nuevoPedido.IdCliente = confirmarPedido.Cliente.Id;
+                nuevoPedido.PedidoConfirmado.Cliente.Nombre = confirmarPedido.Cliente.Nombre;
+                nuevoPedido.PedidoConfirmado.Cliente.Apellido = confirmarPedido.Cliente.Apellido;
+                nuevoPedido.PedidoConfirmado.Cliente.Telefono = confirmarPedido.Cliente.Telefono;
+                nuevoPedido.PedidoConfirmado.Cliente.DNI = confirmarPedido.Cliente.DNI;
+
+                nuevoPedido.PedidoConfirmado.FormaDePago.Descripcion = confirmarPedido.FormaDePago.Descripcion;
+                nuevoPedido.PedidoConfirmado.FormaEntrega.Descripcion = confirmarPedido.FormaEntrega.Descripcion;
+                if (confirmarPedido.FormaEntrega.Descripcion == "DOMICILIO")
+                {
+                    nuevoPedido.PedidoConfirmado.FormaEntrega.Descripcion = "Domicilio";
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.Calle = confirmarPedido.DireccionEntrega.Calle;
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.Altura = confirmarPedido.DireccionEntrega.Altura;
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.Piso = confirmarPedido.DireccionEntrega.Piso;
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.Departamento = confirmarPedido.DireccionEntrega.Departamento;
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.Localidad = confirmarPedido.DireccionEntrega.Localidad;
+                    nuevoPedido.PedidoConfirmado.DireccionEntrega.CodigoPostal = confirmarPedido.DireccionEntrega.CodigoPostal;
+                }
+                else
+                    nuevoPedido.PedidoConfirmado.FormaEntrega.Descripcion = "Local";
+
+                nuevoPedido.PedidoConfirmado.MontoTotal = confirmarPedido.MontoTotal;
+                PedidoNegocio negocioPedido = new PedidoNegocio();
+                CarritoNegocio negocioCarrito =  new CarritoNegocio();
+                List<PedidoDetalle> listaPedidoDetalle = new List<PedidoDetalle>();
+                foreach (var listaCarrito in confirmarPedido.ListaDetalleCarrito)
+                {
+                    PedidoDetalle detallePedidos = new PedidoDetalle();
+                    detallePedidos.Producto = new Producto();
+                    detallePedidos.IdProducto = listaCarrito.IdProducto;
+                    detallePedidos.Producto.Nombre = listaCarrito.Producto.Nombre;
+                    detallePedidos.Cantidad = listaCarrito.Cantidad;
+                    detallePedidos.PrecioUnitario = listaCarrito.Producto.Precio;
+                    detallePedidos.Producto.IdVendedor = listaCarrito.Producto.IdVendedor;
+                    detallePedidos.NombreDelVendedor = listaCarrito.Usuario.Nombre;
+                    listaPedidoDetalle.Add(detallePedidos);
+                    negocioPedido.DisminuirStockPorCompra(listaCarrito.IdProducto, listaCarrito.Cantidad);
+                }
+                negocioPedido.CrearPedido(nuevoPedido, listaPedidoDetalle);
+                int IdCarritoDelUsuario = confirmarPedido.ListaDetalleCarrito[0].IdCarrito;
+                negocioCarrito.VaciarDetalleCarrito(IdCarritoDelUsuario);
+                Session["PedidoConfirmado"] = null;
+                Response.Redirect("/DefaultCliente.aspx");
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }
+
         }
         protected void btnAtras_Click(object sender, EventArgs e)
         {
