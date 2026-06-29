@@ -8,7 +8,7 @@ namespace dominioEcommerce
 {
     public class ConfirmarPedido
     {
-        public Usuario Cliente { get; set; }//NOMBRE, APELLIDO, EMAIL, 
+        public Usuario Cliente { get; set; }//NOMBRE, APELLIDO, EMAIL, TELEFONO, DNI
         //public Usuario Vendedor { get; set; } NO LO USO PORQUE EL VENDEDOR FIGURA EN CADA PRODUCTO
         public FormasDeEntrega FormaEntrega { get; set; }
         public DireccionUsuario DireccionEntrega { get; set; }

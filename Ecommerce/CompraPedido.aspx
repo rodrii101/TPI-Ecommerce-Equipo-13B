@@ -171,6 +171,7 @@
                                     <asp:Label Text="SubTotal" runat="server" />
                                     <span class="text-dark">$ <%# (Convert.ToDecimal(Eval("Cantidad")) * Convert.ToDecimal(Eval("Producto.Precio"))).ToString("0.00") %></span>
                                     <p class="text-muted mb-0 fs-6">Catidad del Producto <%# Eval("Cantidad") %></p>
+                                    <p class="text-muted mb-0 fs-6">Vendedor: <%# Eval("Usuario.Nombre") %></p>
                                 </div>
                             </div>
                             <hr />

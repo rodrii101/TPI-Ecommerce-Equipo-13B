@@ -231,27 +231,15 @@ namespace Ecommerce
                     FormasDeEntregaNegocio entregaNegocio = new FormasDeEntregaNegocio();
                     List<FormasDeEntrega> listaFormaDeEntrega = entregaNegocio.listarFormasDeEntrega();
                     FormasDeEntrega entrega = listaFormaDeEntrega.FirstOrDefault(lfde => lfde.Descripcion == "DOMICILIO");
-
+                    
                     confirmarPedido.FormaEntrega = entrega;
-
-
-                    /*foreach (RepeaterItem item in repRepetidorDomicilios.Items)
-                    {
-                        var rb = item.FindControl("rbDomicilio") as System.Web.UI.WebControls.RadioButton;
-                        if (rb != null && rb.Checked)
-                        {
-                            // Accedemos de esta manera al atributo asignado
-                            idDomicilioSeleccionado = rb.InputAttributes["value"];
-                            break;
-                        }
-                    }*/
                     string idDomicilioSeleccionado = Request.Form["grupoDomicilio"];
                     int idDireccion = int.Parse(idDomicilioSeleccionado);
 
                     DireccionNegocio direccionNegocio = new DireccionNegocio();
                     confirmarPedido.DireccionEntrega = direccionNegocio.BuscarDireccion(idDireccion);
 
-
+                    
                     divConfRetiro.Visible = false;
                     divConfDomicilio.Visible = true;
                     lblConfCalle.Text = confirmarPedido.DireccionEntrega.Calle;
@@ -263,16 +251,6 @@ namespace Ecommerce
                     lblConfObservaciones.Text = confirmarPedido.DireccionEntrega.Observacion;
                 }
 
-
-                /*foreach (RepeaterItem item in repRepitidorFormaDePago.Items)
-                {
-                    var rb = item.FindControl("IdFormasDePago") as System.Web.UI.WebControls.RadioButton;
-                    if (rb != null && rb.Checked)
-                    {
-                        idPagoSeleccionado = rb.InputAttributes["value"];
-                        break;
-                    }
-                }*/
 
                 string idPagoSeleccionado = Request.Form["grupoPagos"];
                 FormasDePagoNegocio pagosNegocio = new FormasDePagoNegocio();
@@ -317,30 +295,6 @@ namespace Ecommerce
                 Session.Add("error", ex.ToString());
                 throw ex;
             }
-
-
-
-
-            /*try
-            {
-                cargarPedido();
-                //De momento guarda IdUsuario, FormaDeEntrega, IdDireccion, IdPFormaDePago y idEstadoPedido por default 1 o le mandamos en la base de datos default 1?
-                //En caso que guarde por Retiro permitir null o le mando un IdDireccionPropio?
-                Usuario usuarioIngressado = (Usuario)Session["UsuarioIngresado"];
-                Pedido nuevoPedido = new Pedido();
-                string formaDeEntrega = rblFormaDeEntrega.SelectedValue;
-                nuevoPedido.IdCliente = usuarioIngressado.Id;
-                nuevoPedido.FormaDeEntregaPedido = formaDeEntrega;
-                string IdDomicilioSeleccionado = Request.Form["grupoDomicilio"];
-                nuevoPedido.IdDireccionDelPedidoUsuario = int.Parse(IdDomicilioSeleccionado);
-                string IdPagoSeleccionado = Request.Form["grupoPagos"];
-                nuevoPedido.IdFormaDePago = int.Parse(IdPagoSeleccionado);
-                nuevoPedido.IdEstadoPedido = 1;
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex.ToString());
-            }*/
         }
 
         protected void NuevaDireccionPedido_Click(object sender, EventArgs e)
