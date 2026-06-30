@@ -14,10 +14,9 @@ namespace dominioEcommerce
         public int Cantidad { get; set; }
         public Producto Producto { get; set; }
         public Usuario Usuario { get; set; }
+        //NUEVOS PARA SOLUCIONAR TOMA DE STOCK
+        public bool HayStock { get; set; }
+        public bool HayEsaCantidad { get; set; }
 
-        /*public int IdCarrioDetalle { get; set; }
-        public Carrito Carrito { get; set; }
-        public Producto Producto { get; set; }
-        public int CantidadProducto { get; set; }*/
     }
 }

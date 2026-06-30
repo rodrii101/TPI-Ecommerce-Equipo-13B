@@ -45,6 +45,23 @@ namespace negocioEcommerce
                     auxProducto.IdVendedor = productoConNombreVendedor.IdVendedor;
                     auxProducto.Stock = productoConNombreVendedor.Stock;
 
+                    //VEREFICO SI HAY STOCK PARA LA CANTIDAD SOLICITADA
+                    aux.HayStock = true;
+                    aux.HayEsaCantidad = true;
+
+                    if (auxProducto.Stock == 0)
+                    {
+                        //lblNoHayStock.Visible = true; //YA NO CONTAMOS CON STOCK DE ESTE PRODUCTO
+                        aux.HayStock = false;
+                        aux.Cantidad = 0;
+                    }
+                    else if(auxProducto.Stock < aux.Cantidad)
+                    {
+                        int cantidadAntigua = aux.Cantidad;
+                        //lblNoTenemosEsaCantidad = true; //YA NO CONTAMOS + cantidadAntigua
+                        aux.HayEsaCantidad = false;
+                        aux.Cantidad = 1;
+                    }
 
                     Usuario usuarioEncontrado = usuarioNegocio.BuscarUsuario(auxProducto.IdVendedor);
                     //aux.Usuario = new Usuario();

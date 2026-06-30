@@ -29,6 +29,20 @@
                                                 <p class="mb-1 fw-semibold"><%# Eval("Producto.Nombre") %></p>
                                                 <asp:LinkButton ID="btnEliminar" runat="server" CssClass="text-danger text-decoration-none small" CommandName="Eliminar" CommandArgument="<%# ((CarritoDetalle)Container.DataItem).Producto.Id %>">Eliminar</asp:LinkButton>
                                             </div>
+                                            <%-- MSJ AVISO SI NO HAY STOCK SUFICIENTE --%>
+                                            <div class="mt-2">
+                                                <asp:Label ID="lblSinStock" runat="server" 
+                                                    Text="¡Atención! Ya no contamos con stock de este producto." 
+                                                    ForeColor="Red" 
+                                                    Font-Bold="true"
+                                                    Visible='<%# !(bool)Eval("HayStock") %>' />
+            
+                                                <asp:Label ID="lblCantidadModificada" runat="server" 
+                                                    Text="¡Atención! Cantidad ajustada por stock insuficiente." 
+                                                    ForeColor="OrangeRed" 
+                                                    Font-Bold="true"
+                                                    Visible='<%# !(bool)Eval("HayEsaCantidad") %>' />
+                                            </div>
 
                                             <%-- BOTONES +/- --%>
                                             <div class="d-flex align-items-center border rounded mx-3 bg-light">
@@ -65,7 +79,8 @@
                                 </div>
                                 <hr />
                                 <div class="gap-2 d-flex flex-column">
-                                    <a class="btn btn-primary py-2 w-100 fw-semibold" href="/CompraPedido.aspx" <>Finalizar compra</a>
+                                    <%--<a class="btn btn-primary py-2 w-100 fw-semibold" href="/CompraPedido.aspx" <>Finalizar compra</a>--%>
+                                    <asp:Button ID="btnFinalizarCompra" runat="server" Text="Finalizar Compra" CssClass="btn btn-primary py-2 w-100 fw-semibold" OnClick="btnFinalizarCompra_Click"/>
                                     <%--<asp:Button runat="server" Text="Finalizar compra" CssClass="btn btn-primary py-2 w-100 fw-semibold" />--%>
                                     <asp:LinkButton ID="btnContinuarComprando" runat="server" Text="Continuar comprando" CssClass="btn btn-outline-secondary py-2 w-100" OnClick="btnContinuarComprando_Click"></asp:LinkButton>
                                 </div>

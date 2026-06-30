@@ -154,5 +154,23 @@ namespace Ecommerce
             Response.Redirect("DefaultCliente.aspx", false);
             CargarCarrito();
         }
+
+        protected void btnFinalizarCompra_Click(object sender, EventArgs e)
+        {
+            //VERIFICO QUE EN LA LISTA NO HAYA NINGUN detalleCarrito NO HAYA NINGUN DETALLE CON PROBLEMAS DE STOCK
+            CarritoNegocio negociCarrito = new CarritoNegocio();
+            List<CarritoDetalle> listaCarritoDetalle = negociCarrito.listarDetalleCarritoUsuario(((Usuario)Session["UsuarioIngresado"]).Id);
+
+            foreach(CarritoDetalle detalleCarrito in listaCarritoDetalle)
+            {
+                if(detalleCarrito.HayEsaCantidad == false || detalleCarrito.HayStock == false)
+                {
+                    CargarCarrito();
+                    return;
+                }
+            }
+
+            Response.Redirect("CompraPedido.aspx", false);
+        }
     }
 }

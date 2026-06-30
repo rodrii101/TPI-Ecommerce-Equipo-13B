@@ -144,10 +144,6 @@ namespace Ecommerce
         }
 
 
-        public void CargarConfirmacinPedido()
-        {
-
-        }
         public string ObtenerImagenPrincipal(CarritoDetalle carritoDetalle)
         {
             if (carritoDetalle.Producto.Imagenes_URL != null && carritoDetalle.Producto.Imagenes_URL.Count > 0)
@@ -276,6 +272,7 @@ namespace Ecommerce
                     total += subTotal;
                 }
                 lblConfTotalAPagar.Text = "$ " + total.ToString("0.00");
+                //CARRITO DETALLE
                 confirmarPedido.ListaDetalleCarrito = listaCarritoDetalle;
                 //DATOS PERSONALES
                 lblConfNombre.Text = confirmarPedido.Cliente.Nombre + " " + confirmarPedido.Cliente.Apellido;
@@ -347,6 +344,21 @@ namespace Ecommerce
         {
             if (Session["PedidoConfirmado"] == null)
                 Response.Redirect("/Carrito.aspx");
+
+            //VERIFICO NUEVAMENTE QUE EN LA LISTA NO HAYA NINGUN detalleCarrito CON PROBLEMAS DE STOCK
+            CarritoNegocio negociCarrito = new CarritoNegocio();
+            List<CarritoDetalle> listaCarritoDetalle = negociCarrito.listarDetalleCarritoUsuario(((Usuario)Session["UsuarioIngresado"]).Id);
+
+            foreach (CarritoDetalle detalleCarrito in listaCarritoDetalle)
+            {
+                if (detalleCarrito.HayEsaCantidad == false || detalleCarrito.HayStock == false)
+                {
+                    //ENVIO A CARRITO PARA QUE EL USUARIO VEA EL PRODUCTO CON PROBLEMAS DE STOCK
+                    Response.Redirect("Carrito.aspx", false);
+                    return;
+                }
+            }
+
             try
             {
                 ConfirmarPedido confirmarPedido = (ConfirmarPedido)Session["PedidoConfirmado"];
@@ -399,7 +411,7 @@ namespace Ecommerce
                 int IdCarritoDelUsuario = confirmarPedido.ListaDetalleCarrito[0].IdCarrito;
                 negocioCarrito.VaciarDetalleCarrito(IdCarritoDelUsuario);
                 Session["PedidoConfirmado"] = null;
-                Response.Redirect("/DefaultCliente.aspx");
+                Response.Redirect("/DefaultCliente.aspx", false);
             }
             catch (Exception ex)
             {
