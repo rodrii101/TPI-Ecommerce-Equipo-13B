@@ -14,15 +14,19 @@ namespace Ecommerce
         public decimal  Subtotal { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            string id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
-            if (id != "")
+            if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
             {
-                PedidoNegocio negocioPedido = new PedidoNegocio();
-                List<PedidoDetalle> listadoPedidoDetalle = negocioPedido.BuscarDetallePedido(int.Parse(id));
-                
-                dgvDetallePedido.DataSource = listadoPedidoDetalle;
-                dgvDetallePedido.DataBind();
-            }
+                string id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
+                if (id != "")
+                {
+                    PedidoNegocio negocioPedido = new PedidoNegocio();
+                    List<PedidoDetalle> listadoPedidoDetalle = negocioPedido.BuscarDetallePedido(int.Parse(id));
+
+                    dgvDetallePedido.DataSource = listadoPedidoDetalle;
+                    dgvDetallePedido.DataBind();
+                }
+            } else
+                Response.Redirect("Login.aspx", false);
         }
     }
 }

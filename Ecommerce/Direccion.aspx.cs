@@ -14,12 +14,19 @@ namespace Ecommerce
         public List<DireccionUsuario> listaDirecciones { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            DireccionNegocio negocioDireccion = new DireccionNegocio();
-            listaDirecciones = negocioDireccion.listarDomiciliosUsuario(usuarioIngresado.Id);
+            if (Seguridad.SesionActiva(Session["UsuarioIngresado"]))
+            {
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                DireccionNegocio negocioDireccion = new DireccionNegocio();
+                listaDirecciones = negocioDireccion.listarDomiciliosUsuario(usuarioIngresado.Id);
 
-            repRepetidorDomicilios.DataSource = listaDirecciones;
-            repRepetidorDomicilios.DataBind();
+                repRepetidorDomicilios.DataSource = listaDirecciones;
+                repRepetidorDomicilios.DataBind();
+            }
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
         }
     }
 }

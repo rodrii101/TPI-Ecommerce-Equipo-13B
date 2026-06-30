@@ -22,7 +22,7 @@ namespace Ecommerce
         private void CargarCarrito()
         {
             Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            if (UsuarioIngresado != null)
+            if (Seguridad.SesionActiva(Session["UsuarioIngresado"]))
             {
                 CarritoNegocio negocioCarrito = new CarritoNegocio();
                 listaCarritoDetalle = negocioCarrito.listarDetalleCarritoUsuario(UsuarioIngresado.Id);

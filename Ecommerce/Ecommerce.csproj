@@ -72,6 +72,7 @@
     <Content Include="DetalleProducto.aspx" />
     <Content Include="Direccion.aspx" />
     <Content Include="EditarPerfil.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="FormularioCategoria.aspx" />
     <Content Include="FormularioDireccion.aspx" />
     <Content Include="FormularioEstadoPedido.aspx" />
@@ -147,6 +148,13 @@
     </Compile>
     <Compile Include="EditarPerfil.aspx.designer.cs">
       <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioCategoria.aspx.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>

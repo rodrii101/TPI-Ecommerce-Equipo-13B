@@ -19,6 +19,8 @@ namespace Ecommerce
         //public decimal total { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionActiva(Session["UsuarioIngresado"]))
+                Response.Redirect("Login.aspx",false);
             if (!IsPostBack)
             {
                 cargarPedido();
@@ -392,7 +394,7 @@ namespace Ecommerce
 
                 nuevoPedido.PedidoConfirmado.MontoTotal = confirmarPedido.MontoTotal;
                 PedidoNegocio negocioPedido = new PedidoNegocio();
-                CarritoNegocio negocioCarrito =  new CarritoNegocio();
+                CarritoNegocio negocioCarrito = new CarritoNegocio();
                 List<PedidoDetalle> listaPedidoDetalle = new List<PedidoDetalle>();
                 foreach (var listaCarrito in confirmarPedido.ListaDetalleCarrito)
                 {

@@ -27,7 +27,7 @@ namespace Ecommerce
                 }
             }
             else
-                Response.Redirect("Login.aspx");
+                Response.Redirect("Login.aspx",false);
         }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)

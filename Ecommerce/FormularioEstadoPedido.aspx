@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="FormularioEstadoPedido.aspx.cs" Inherits="Ecommerce.FormularioEstadoPedido" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterCliente.Master" AutoEventWireup="true" CodeBehind="FormularioEstadoPedido.aspx.cs" Inherits="Ecommerce.FormularioEstadoPedido" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>

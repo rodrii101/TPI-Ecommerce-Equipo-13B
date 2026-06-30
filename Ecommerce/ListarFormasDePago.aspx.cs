@@ -11,6 +11,11 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionAdmin(Session["UsuarioIngresado"]))
+            {
+                Session.Add("Error.aspx", "Se necesita permisos de Admin");
+                Response.Redirect("Error.aspx");
+            }
             FormasDePagoNegocio PagoNegocio = new FormasDePagoNegocio();
             dgvListadoFormasDePago.DataSource = PagoNegocio.listarFormasDePagos();
             dgvListadoFormasDePago.DataBind();

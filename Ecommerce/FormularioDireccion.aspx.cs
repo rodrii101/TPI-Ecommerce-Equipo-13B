@@ -13,6 +13,8 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionActiva(Session["UsuarioIngresado"]))
+                Response.Redirect("Login.aspx", false);
             string Id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
             if (Id != "" && !IsPostBack)
             {

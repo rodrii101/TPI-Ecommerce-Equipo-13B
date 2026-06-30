@@ -13,6 +13,11 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionVendedor(Session["UsuarioIngresado"]))
+            {
+                Session.Add("Error.aspx", "Se necesita permisos de vendedor");
+                Response.Redirect("Error.aspx");
+            }
             if (!IsPostBack)
             {
                 if (!Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))

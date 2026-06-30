@@ -13,15 +13,19 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
-            PedidoNegocio negocioPedido = new PedidoNegocio();
-            List<Pedido> listaPedidos = negocioPedido.BuscarPedidoDelUsuario(usuarioIngresado.Id);
-            bool encontrePedido = (listaPedidos != null && listaPedidos.Count > 0);
-            ConCompras.Visible = encontrePedido;
-            SinCompras.Visible  = !encontrePedido;
+            if (Seguridad.SesionActiva(Session["UsuarioIngresado"]))
+            {
+                Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
+                PedidoNegocio negocioPedido = new PedidoNegocio();
+                List<Pedido> listaPedidos = negocioPedido.BuscarPedidoDelUsuario(usuarioIngresado.Id);
+                bool encontrePedido = (listaPedidos != null && listaPedidos.Count > 0);
+                ConCompras.Visible = encontrePedido;
+                SinCompras.Visible = !encontrePedido;
 
-            dgvPedidosUsuario.DataSource = listaPedidos;
-            dgvPedidosUsuario.DataBind();
+                dgvPedidosUsuario.DataSource = listaPedidos;
+                dgvPedidosUsuario.DataBind();
+            }else
+                Response.Redirect("Login.aspx", false);
         }
 
         protected void dgvPedidosUsuario_SelectedIndexChanged(object sender, EventArgs e)

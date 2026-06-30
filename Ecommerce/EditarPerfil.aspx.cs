@@ -13,6 +13,8 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionActiva(Session["UsuarioIngresado"]))
+                Response.Redirect("Login.aspx");
             if (!IsPostBack)
             {
                 Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];

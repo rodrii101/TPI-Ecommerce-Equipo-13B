@@ -176,8 +176,8 @@ namespace negocioEcommerce
                 datos.setearParametro("@Apellido", usuario.Apellido);
                 datos.setearParametro("@Telefono", usuario.Telefono);
                 datos.setearParametro("@Dni", usuario.DNI);
-                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento);
-                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil);
+                datos.setearParametro("@FechaNacimiento", usuario.FechaNacimiento == DateTime.MinValue ? (object)DBNull.Value : usuario.FechaNacimiento);
+                datos.setearParametro("@UrlImagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : (object)DBNull.Value);
                 datos.setearParametro("@Id", usuario.Id);
                 datos.setearParametro("@IdTipoUsuario", 2);
                 datos.ejecutarAccion();
