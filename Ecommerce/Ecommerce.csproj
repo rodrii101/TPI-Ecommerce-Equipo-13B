@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Carrito.aspx" />
+    <Content Include="CompraDelUsuario.aspx" />
     <Content Include="CompraPedido.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DefaultCliente.aspx" />
@@ -87,6 +88,7 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="RegistroVendedor.aspx" />
+    <Content Include="VerDetallePedido.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +98,13 @@
     </Compile>
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompraDelUsuario.aspx.cs">
+      <DependentUpon>CompraDelUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraDelUsuario.aspx.designer.cs">
+      <DependentUpon>CompraDelUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="CompraPedido.aspx.cs">
       <DependentUpon>CompraPedido.aspx</DependentUpon>
@@ -261,6 +270,13 @@
     </Compile>
     <Compile Include="RegistroVendedor.aspx.designer.cs">
       <DependentUpon>RegistroVendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerDetallePedido.aspx.cs">
+      <DependentUpon>VerDetallePedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerDetallePedido.aspx.designer.cs">
+      <DependentUpon>VerDetallePedido.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

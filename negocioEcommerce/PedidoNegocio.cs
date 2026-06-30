@@ -49,6 +49,12 @@ namespace negocioEcommerce
                     datoPedidos.ejecutarAccion();
                     datoPedidos.cerrarConexion();
                 }
+                AccesoDatos datosSeguimiento = new AccesoDatos();
+                datosSeguimiento.setearProcedimiento("storedCrearEstadoSeguimientoPedido");
+                datosSeguimiento.setearParametro("@IdPedido", idNuevoPedido);
+                datosSeguimiento.setearParametro("@IdEstado", 1);
+                datosSeguimiento.ejecutarAccion();
+                datosSeguimiento.cerrarConexion();
             }
             catch (Exception ex)
             {
@@ -77,6 +83,69 @@ namespace negocioEcommerce
             {
                 datos.cerrarConexion();
             }
+        }
+        public List<Pedido> BuscarPedidoDelUsuario(int IdUsuario){
+            AccesoDatos datos = new AccesoDatos();
+            List<Pedido> listaPedido = new List<Pedido>();
+            try
+            {
+                datos.setearProcedimiento("BuscarPedidosUsuario");
+                datos.setearParametro("@IdUsuario", IdUsuario);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Pedido aux = new Pedido();
+                    aux.IdPedido = (int)datos.Lector["Id"];
+                    aux.EstadoActual = new EstadoPedido();
+                    aux.EstadoActual.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.FechaPedido = (DateTime)datos.Lector["Fecha"];
+                    aux.PedidoConfirmado = new ConfirmarPedido();
+                    aux.PedidoConfirmado.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                    listaPedido.Add(aux);
+                }
+                return listaPedido;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+        public List<PedidoDetalle> BuscarDetallePedido(int IdPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<PedidoDetalle> listaPedidoDetalle = new List<PedidoDetalle>();
+            try
+            {
+                datos.setearProcedimiento("VerDatosDetallePedido");
+                datos.setearParametro("@IdPedido", IdPedido);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    PedidoDetalle aux = new PedidoDetalle();
+                    aux.IdPedidoDetalle = (int)datos.Lector["IdPedidoDetalle"];
+                    aux.Producto = new Producto();
+                    aux.Producto.Nombre = (string)datos.Lector["NombreProducto"];
+                    aux.PrecioUnitario = (Decimal)datos.Lector["PrecioUnitario"];
+                    aux.Cantidad = (int)datos.Lector["Cantidad"];
+                    aux.NombreDelVendedor = (string)datos.Lector["NombreVendedor"];
+                    listaPedidoDetalle.Add(aux);
+                }
+                return listaPedidoDetalle;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }
