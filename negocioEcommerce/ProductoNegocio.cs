@@ -225,5 +225,43 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
+
+        /* VALIDACION PRODUCTO */
+        public bool existeNombreProductoPorVendedor(string nombre, int idVendedor, int idProductoActual = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                // ALTA PRODUCTO
+                if (idProductoActual == 0)
+                {
+                    datos.setearConsulta("SELECT Id FROM Producto WHERE Nombre = @Nombre AND IdVendedor = @IdVendedor");
+                }
+                // MODIFICACION PRODUCTO
+                else
+                {
+                    datos.setearConsulta("SELECT Id FROM Producto WHERE Nombre = @Nombre AND IdVendedor = @IdVendedor AND Id != @IdProductoActual");
+                    datos.setearParametro("@IdProductoActual", idProductoActual);
+                }
+
+                datos.setearParametro("@Nombre", nombre);
+                datos.setearParametro("@IdVendedor", idVendedor);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return true; // EXISTE NOMBRE
+                }
+                return false; // NO EXISTE EL NOMBRE
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

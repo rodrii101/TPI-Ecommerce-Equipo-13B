@@ -142,6 +142,18 @@ namespace Ecommerce
                 productoNuevo.IdVendedor = usuarioIngresado.Id;
 
 
+                /* VERIFICAR NOMBRE PRODUCTO */
+                if (Request.QueryString["id"] != null)
+                    productoNuevo.Id = int.Parse(Request.QueryString["id"].ToString());
+
+                if (productoNegocio.existeNombreProductoPorVendedor(productoNuevo.Nombre, productoNuevo.IdVendedor, productoNuevo.Id))
+                {
+                    lblErrorNombre.Text = "Ya tienes un producto registrado con el nombre '" + productoNuevo.Nombre + "'.";
+                    lblErrorNombre.Visible = true;
+                    return;
+                }
+
+
 
                 if (Request.QueryString["id"] != null)
                 {

@@ -58,7 +58,12 @@ namespace Ecommerce
                 nuevoVendedor.FechaNacimiento = DateTime.Parse(txtFechaNacimientoVendedor.Text);
                 negocioUsuario.RegistrarVendedor(nuevoVendedor);
 
-                Response.Redirect("Default.aspx", false);
+                /* LE AVISO A SESSION QUE AHORA EL USUARIO AHORA ES DE TIPO VENDEDOR*/
+                nuevoVendedor.TipoUsuario = new TipoUsuario();
+                nuevoVendedor.TipoUsuario.IdTipoUsuario = 2;
+                Session["UsuarioIngresado"] = nuevoVendedor;
+
+                Response.Redirect("ListarProductos.aspx", false);
             }
             catch(Exception ex)
             {

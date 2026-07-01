@@ -15,6 +15,7 @@
                 <label for="txtNombre" class="form-label fw-bold">Nombre</label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control border border-dark" MaxLength="55"/>
                 <asp:RequiredFieldValidator ControlToValidate="txtNombre" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo."></asp:RequiredFieldValidator>
+                <asp:Label ID="lblErrorNombre" runat="server" ForeColor="Red" Visible="false" ></asp:Label>
             </div>
             <div class="mb-3">
                 <label for="txtDescripcion" class="form-label fw-bold">Descripcion</label>
