@@ -79,6 +79,8 @@
     <Content Include="FormularioFormasDePago.aspx" />
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProducto.aspx" />
+    <Content Include="GestionarEstado.aspx" />
+    <Content Include="GestionEstadoPedido.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListarCategorias.aspx" />
     <Content Include="ListarEstadoPedido.aspx" />
@@ -197,6 +199,20 @@
     </Compile>
     <Compile Include="FormularioProducto.aspx.designer.cs">
       <DependentUpon>FormularioProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionarEstado.aspx.cs">
+      <DependentUpon>GestionarEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarEstado.aspx.designer.cs">
+      <DependentUpon>GestionarEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionEstadoPedido.aspx.cs">
+      <DependentUpon>GestionEstadoPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionEstadoPedido.aspx.designer.cs">
+      <DependentUpon>GestionEstadoPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

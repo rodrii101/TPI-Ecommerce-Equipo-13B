@@ -147,5 +147,85 @@ namespace negocioEcommerce
             }
 
         }
+
+
+
+        public List<Pedido> listarTodosLosPedidos()
+        {
+            List<Pedido> listaPedidos = new List<Pedido>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("storedListarPedidos");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pedido auxPedido = new Pedido();
+                    auxPedido.IdPedido = (int)datos.Lector["Id"];
+                    auxPedido.EstadoActual = new EstadoPedido();
+                    auxPedido.EstadoActual.Descripcion = (string)datos.Lector["EstadoDescripcion"];
+                    auxPedido.FechaPedido = (DateTime)datos.Lector["Fecha"];
+                    auxPedido.PedidoConfirmado = new ConfirmarPedido();
+                    auxPedido.PedidoConfirmado.Cliente = new Usuario();
+                    auxPedido.PedidoConfirmado.Cliente.Nombre = (string)datos.Lector["Nombre"];
+                    auxPedido.PedidoConfirmado.Cliente.Apellido = (string)datos.Lector["Apellido"];
+                    auxPedido.PedidoConfirmado.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                    auxPedido.IdEstadoActual = (int)datos.Lector["IdEstadoActual"];
+                    listaPedidos.Add(auxPedido);
+                }
+                return listaPedidos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
+        public Pedido buscarPedido(int idPedido)
+        {
+            Pedido auxPedido = new Pedido();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("storedTraerUnPedido");
+                datos.setearParametro("@IdPedido", idPedido);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    auxPedido.IdPedido = (int)datos.Lector["Id"];
+                    auxPedido.PedidoConfirmado = new ConfirmarPedido();
+                    auxPedido.PedidoConfirmado.Cliente = new Usuario();
+                    auxPedido.PedidoConfirmado.Cliente.Nombre = (string)datos.Lector["Nombre"];
+                    auxPedido.PedidoConfirmado.Cliente.Apellido = (string)datos.Lector["Apellido"];
+                    auxPedido.PedidoConfirmado.FormaEntrega = new FormasDeEntrega();
+                    auxPedido.PedidoConfirmado.FormaEntrega.Descripcion = (string)datos.Lector["DescripcionFormasDeEntrega"];
+                    auxPedido.PedidoConfirmado.FormaDePago = new FormasDePagos();
+                    auxPedido.PedidoConfirmado.FormaDePago.Descripcion = (string)datos.Lector["DescripcionFormaDePago"];
+                    auxPedido.EstadoActual = new EstadoPedido();
+                    auxPedido.EstadoActual.Descripcion = (string)datos.Lector["EstadoDescripcion"];
+                    auxPedido.FechaPedido = (DateTime)datos.Lector["Fecha"];
+                    auxPedido.PedidoConfirmado.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                }
+                return auxPedido;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

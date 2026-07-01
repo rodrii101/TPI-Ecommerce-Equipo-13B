@@ -48,6 +48,7 @@
     <Compile Include="EstadoPedidoNegocio.cs" />
     <Compile Include="FormasDeEntregaNegocio.cs" />
     <Compile Include="FormasDePagoNegocio.cs" />
+    <Compile Include="HistorialEstadoPedidoNegocio.cs" />
     <Compile Include="ImagenNegocio.cs" />
     <Compile Include="MarcaNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />

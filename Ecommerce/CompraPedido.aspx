@@ -204,7 +204,7 @@
         </div>
     </asp:Panel>
 
-    <%--VISTA CONFIRMAR PEDIDO (Lleva su propio UpdatePanel para cuando hagas el cambio de vista general con btnFinalizarCompraPedido o btnAtras)--%>
+    <%--VISTA CONFIRMAR PEDIDO --%>
     <asp:UpdatePanel ID="upConfirmarPedido" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:Panel ID="panelConfirmarPedido" runat="server" Visible="false">
