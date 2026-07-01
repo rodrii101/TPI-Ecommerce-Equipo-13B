@@ -12,6 +12,11 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.SesionAdmin(Session["UsuarioIngresado"]))
+            {
+                Session.Add("Error", "Debe tener permisos de Admin");
+                Response.Redirect("Error.aspx");
+            }
             PedidoNegocio negocioPedido = new PedidoNegocio();
             dgvTopPedidos.DataSource = negocioPedido.ReporteTopPedidos();
             dgvTopPedidos.DataBind();

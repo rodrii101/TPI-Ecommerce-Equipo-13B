@@ -17,7 +17,7 @@ namespace Ecommerce
             {
                 if (Seguridad.SesionActiva((Usuario)Session["UsuarioIngresado"]))
                 {
-                    Response.Redirect("DefaultCliente.aspx", false); //POR EL MOMETO VA A DEFAULT CLIENTE
+                    Response.Redirect("Login.aspx", false); //POR EL MOMETO VA A DEFAULT CLIENTE
                 }
             }
         }
@@ -33,8 +33,9 @@ namespace Ecommerce
                 {
                     Session.Add("UsuarioIngresado", usuario);
                     Response.Redirect("DefaultCliente.aspx");
-                }else
-                    Response.Redirect("Carrito.aspx");
+                }
+                else
+                    lblIncorrectoDatos.Text = "El email o password son incorrectos";
             }
             
             catch (Exception ex)

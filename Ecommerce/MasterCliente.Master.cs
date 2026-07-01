@@ -24,6 +24,7 @@ namespace Ecommerce
                     Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
                     if (UsuarioIngresado.ImagenPerfil != null)
                         imgPerfil.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
+
                 }
             }
         }

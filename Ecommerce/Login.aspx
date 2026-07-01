@@ -1,6 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterCliente.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Ecommerce.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validacion {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            display: inline;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container ">
@@ -20,9 +28,10 @@
                 <div class="m-4">
                     <label for="txtLoginContra" class="form-label">Contraseña</label>
                     <asp:TextBox ID="txtLoginContra" CssClass="form-control" placeholder="Contraseña" TextMode="Password" runat="server" />
+                    <asp:Label Text="" ID="lblIncorrectoDatos" CssClass="validacion" runat="server" />
                 </div>
                 <div class="m-4">
-                    <p>Si no tienes cuenta,<a href="Registro.aspx">¡Registrate!</a> </p> 
+                    <p>Si no tienes cuenta,<a href="Registro.aspx">¡Registrate!</a> </p>
                 </div>
                 <div class="m-4">
                     <asp:Button Text="Login" ID="btnLoginUsuario" OnClick="btnLoginUsuario_Click" CssClass="btn btn-warning btn-sm w-100" runat="server" />
