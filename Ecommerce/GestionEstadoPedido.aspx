@@ -6,38 +6,55 @@
 
     <asp:ScriptManager runat="server"></asp:ScriptManager>
 
-    <div class="container mb-5 mt-5">
-        <p class="fs-1">GESTION ESTADOS DE PEDIDOS </p>
-        <div class="row">
-            <asp:UpdatePanel runat="server">
-                <ContentTemplate>
-                    <div class="col-3 mb-3">
-                        <asp:Label Text="Filtrado por Id del Pedido" runat="server" />
-                        <asp:TextBox ID="txtIdPedido" CssClass="form-control mt-2" OnTextChanged="txtIdPedido_TextChanged" AutoPostBack="true" runat="server" />
-                    </div>
+    <div class="container my-5">
+        
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="fw-bold text-dark border-bottom pb-2">Gestión de Estados de Pedidos</h2>
+            </div>
+        </div>
 
-                    <div class="col-8">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                
+                <div class="row mb-4">
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card shadow-sm border-0 bg-light p-3">
+                            <label class="form-label small fw-bold text-muted mb-1">Filtrado por ID del Pedido</label>
+                            <asp:TextBox ID="txtIdPedido" CssClass="form-control shadow-sm" OnTextChanged="txtIdPedido_TextChanged" AutoPostBack="true" runat="server" placeholder="Ej: 3" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
-                                <asp:Panel ID="panelPedidos" runat="server" Visible="false">
-                                    <asp:GridView runat="server" ID="dgvPedidos" DataKeyNames="IdPedido" CssClass="table table-bordered table-striped shadow-sm text-center" OnSelectedIndexChanged="dgvPedidos_SelectedIndexChanged" AutoGenerateColumns="false" AllowPaging="true" PageSize="10">
-                                        <Columns>
-                                            <asp:BoundField HeaderText="Id" DataField="IdPedido" />
-                                            <asp:BoundField HeaderText="Nombre" DataField="PedidoConfirmado.Cliente.Nombre"/>
-                                            <asp:BoundField HeaderText="Apellido" DataField="PedidoConfirmado.Cliente.Apellido"/>
-                                            <asp:BoundField HeaderText="Fecha Pedido" DataField="FechaPedido" />
-                                            <asp:BoundField HeaderText="Estado" DataField="EstadoActual.Descripcion" />
-                                            <asp:BoundField HeaderText="Total" DataField="PedidoConfirmado.MontoTotal" />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Gestionar Estado" />
-                                        </Columns>
-                                    </asp:GridView>
+                                
+                                <asp:Panel ID="panelPedidos" runat="server" Visible="false" class="card shadow-sm border-0">
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <asp:GridView runat="server" ID="dgvPedidos" DataKeyNames="IdPedido" CssClass="table table-hover table-striped mb-0 align-middle text-center" OnSelectedIndexChanged="dgvPedidos_SelectedIndexChanged" AutoGenerateColumns="false" AllowPaging="true" PageSize="10">
+                                                <HeaderStyle CssClass="table-light text-secondary text-uppercase fs-7 border-bottom" />
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="Id" DataField="IdPedido" ItemStyle-CssClass="fw-bold text-dark" />
+                                                    <asp:BoundField HeaderText="Nombre" DataField="PedidoConfirmado.Cliente.Nombre" ItemStyle-CssClass="text-dark" />
+                                                    <asp:BoundField HeaderText="Apellido" DataField="PedidoConfirmado.Cliente.Apellido" ItemStyle-CssClass="text-dark" />
+                                                    <asp:BoundField HeaderText="Fecha Pedido" DataField="FechaPedido" ItemStyle-CssClass="text-dark" />
+                                                    <asp:BoundField HeaderText="Estado" DataField="EstadoActual.Descripcion" ItemStyle-CssClass="text-dark" />
+                                                    <asp:BoundField HeaderText="Total" DataField="PedidoConfirmado.MontoTotal" ItemStyle-CssClass="text-dark" />
+                                                    <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Gestionar Estado" ControlStyle-CssClass="text-decoration-none fs-5" />
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
                                 </asp:Panel>
 
-                                <asp:Panel ID="panelSinPedidos" runat="server" Visible="false" >
-                                    <div class="col-7  m-3 d-flex justify-content-center align-items-center border border-secondary-subtle rounded shadow text-center">
-                                        <div class="m-3 p-2">
-                                            <p>En este momento no se encuentran pedidos.</p>
-                                            <a class="btn btn-success" href="/Carrito.aspx">Realice una compra</a>
+                                <asp:Panel ID="panelSinPedidos" runat="server" Visible="false">
+                                    <div class="card shadow-sm border-0 bg-light text-center py-5">
+                                        <div class="card-body">
+                                            <p class="text-muted fs-5 mb-3">En este momento no se encuentran pedidos en el sistema.</p>
+                                            <a class="btn btn-success px-4 py-2 fw-semibold" href="/Carrito.aspx">Realice una compra</a>
                                         </div>
                                     </div>
                                 </asp:Panel>
@@ -45,12 +62,10 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                </div>
 
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
-    <br />
-
 
 </asp:Content>

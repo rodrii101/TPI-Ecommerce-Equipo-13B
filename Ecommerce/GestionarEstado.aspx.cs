@@ -87,6 +87,12 @@ namespace Ecommerce
             negocioHistorial.RegistrarCambio(nuevoHistorial);
             panelResgistrarEstado.Visible = false;
 
+            PedidoNegocio negocioPedido = new PedidoNegocio();
+            negocioPedido.ActualizarEstadoPedido(nuevoHistorial.IdPedido, nuevoHistorial.Estado.IdEstadoPedido);
+
+            Pedido pedido = negocioPedido.buscarPedido(nuevoHistorial.IdPedido);
+            Session.Add("Pedido", pedido);
+            CargarPedido(pedido);
             CargarHistorial(nuevoHistorial.IdPedido);
         }
     }

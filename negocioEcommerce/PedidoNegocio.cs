@@ -383,5 +383,25 @@ namespace negocioEcommerce
                 datos.cerrarConexion();
             }
         }
+
+        public void ActualizarEstadoPedido ( int idPedido, int idEstadoActual)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Pedido SET IdEstadoActual = @IdEstadoActual WHERE Id = @IdPedido;");
+                datos.setearParametro("@IdEstadoActual",idEstadoActual);
+                datos.setearParametro("@IdPedido", idPedido);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

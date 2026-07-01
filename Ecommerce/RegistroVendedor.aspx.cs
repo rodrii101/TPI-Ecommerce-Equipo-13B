@@ -69,8 +69,6 @@ namespace Ecommerce
             {
                 throw ex;
             }
-
-
         }
     }
 }

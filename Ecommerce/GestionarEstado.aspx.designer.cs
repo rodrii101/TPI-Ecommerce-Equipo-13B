@@ -33,6 +33,15 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.Label lblIdPedido;
 
         /// <summary>
+        /// Control lblMontoTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMontoTotal;
+
+        /// <summary>
         /// Control lblCliente.
         /// </summary>
         /// <remarks>
@@ -49,15 +58,6 @@ namespace Ecommerce
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha;
-
-        /// <summary>
-        /// Control lblEstado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstado;
 
         /// <summary>
         /// Control lblFormaDeEntrega.
@@ -78,31 +78,22 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.Label lblFormaDePago;
 
         /// <summary>
-        /// Control lblMontoTotal.
+        /// Control lblEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMontoTotal;
+        protected global::System.Web.UI.WebControls.Label lblEstado;
 
         /// <summary>
-        /// Control divHistorialPedido.
+        /// Control btnRegistrarEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divHistorialPedido;
-
-        /// <summary>
-        /// Control dgvHistorial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvHistorial;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarEstado;
 
         /// <summary>
         /// Control panelResgistrarEstado.
@@ -150,12 +141,21 @@ namespace Ecommerce
         protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
-        /// Control btnRegistrarEstado.
+        /// Control divHistorialPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarEstado;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divHistorialPedido;
+
+        /// <summary>
+        /// Control dgvHistorial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvHistorial;
     }
 }
