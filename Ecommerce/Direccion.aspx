@@ -17,7 +17,7 @@
                     <hr />
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link-dark" href="/CompraDelUsuario.aspx  ">Historial pedidos</a>
+                    <a class="nav-link link-dark" href="/CompraDelUsuario.aspx  ">Compras</a>
                     <hr />
                 </li>
                 <li class="nav-item">

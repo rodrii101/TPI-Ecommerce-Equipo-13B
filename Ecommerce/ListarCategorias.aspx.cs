@@ -14,7 +14,7 @@ namespace Ecommerce
         {
             if (!Seguridad.SesionAdmin(Session["UsuarioIngresado"]))
             {
-                Session.Add("Error.aspx", "Se necesita permisos de Admin");
+                Session.Add("Error", "Se necesita permisos de Admin");
                 Response.Redirect("Error.aspx");
             }
             CategoriaNegocio negocioCategoria = new CategoriaNegocio();

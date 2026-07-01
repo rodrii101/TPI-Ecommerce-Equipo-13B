@@ -11,34 +11,34 @@ namespace Ecommerce
 {
 
 
-    public partial class VerDetallePedido
+    public partial class ReporteAdmin
     {
 
         /// <summary>
-        /// Control PanelDomicilio.
+        /// Control dgvTopPedidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelDomicilio;
+        protected global::System.Web.UI.WebControls.GridView dgvTopPedidos;
 
         /// <summary>
-        /// Control panelRetiroAlLocal.
+        /// Control dgvTopProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelRetiroAlLocal;
+        protected global::System.Web.UI.WebControls.GridView dgvTopProducto;
 
         /// <summary>
-        /// Control dgvDetallePedido.
+        /// Control dgvTopVendedores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvDetallePedido;
+        protected global::System.Web.UI.WebControls.GridView dgvTopVendedores;
     }
 }

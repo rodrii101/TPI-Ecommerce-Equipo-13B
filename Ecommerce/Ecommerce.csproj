@@ -91,6 +91,7 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="RegistroVendedor.aspx" />
+    <Content Include="ReporteAdmin.aspx" />
     <Content Include="VerDetallePedido.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -294,6 +295,13 @@
     </Compile>
     <Compile Include="RegistroVendedor.aspx.designer.cs">
       <DependentUpon>RegistroVendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteAdmin.aspx.cs">
+      <DependentUpon>ReporteAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteAdmin.aspx.designer.cs">
+      <DependentUpon>ReporteAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerDetallePedido.aspx.cs">
       <DependentUpon>VerDetallePedido.aspx</DependentUpon>

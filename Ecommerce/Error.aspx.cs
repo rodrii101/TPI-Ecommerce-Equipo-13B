@@ -11,7 +11,15 @@ namespace Ecommerce
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["Error"] != null)
+            {
+                lblError.Text = Session["Error"].ToString();
+                Session.Remove("Error");
+            }
+            else
+            {
+                lblError.Text = "Ocurrio un error en el sistema";
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Ecommerce
         {
             if (!Seguridad.SesionVendedor(Session["UsuarioIngresado"]))
             {
-                Session.Add("Error.aspx", "Se necesita permisos de vendedor");
+                Session.Add("Error", "Se necesita permisos de vendedor");
                 Response.Redirect("Error.aspx");
             }
             try
