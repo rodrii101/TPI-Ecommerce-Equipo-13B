@@ -24,7 +24,15 @@ namespace Ecommerce
                     Usuario UsuarioIngresado = (Usuario)Session["UsuarioIngresado"];
                     if (UsuarioIngresado.ImagenPerfil != null)
                         imgPerfil.ImageUrl = "~/Images/" + UsuarioIngresado.ImagenPerfil;
-
+                    if (Seguridad.SesionAdmin(Session["UsuarioIngresado"]))
+                    {
+                        PanelCliente.Visible = false;
+                        PanelAdmin.Visible = true;
+                    }
+                    else if (Seguridad.SesionVendedor(Session["UsuarioIngresado"])){
+                        PanelCliente.Visible = false;
+                        PanelVendedor.Visible = true;
+                    }
                 }
             }
         }
