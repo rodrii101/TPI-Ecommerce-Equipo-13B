@@ -35,10 +35,22 @@
                 <asp:RequiredFieldValidator ControlToValidate="txtPrecio" runat="server" Display="Dynamic" ForeColor="Red" ErrorMessage="Debe completar este campo."></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ControlToValidate="txtPrecio" runat="server" Display="Dynamic" ValidationExpression="^\d{1,8}(,\d{1,2})?$" ForeColor="Red" ErrorMessage="Solo admite 8 numeros enteros y 2 decimales (ej: 1234,56)."></asp:RegularExpressionValidator>
             </div>
+
             <div class="mb-3">
-                <label for="txtStock" class="form-label fw-bold">Stock</label>
-                <asp:TextBox runat="server" ID="txtStock" CssClass="form-control border border-dark"></asp:TextBox>
-                <asp:RegularExpressionValidator ControlToValidate="txtStock" runat="server" Display="Dynamic" ValidationExpression="^[0-9]+$" ForeColor="Red" ErrorMessage="Solo admite numeros enteros."></asp:RegularExpressionValidator>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="txtStock" class="form-label fw-bold">Stock</label>
+                        <asp:TextBox runat="server" ID="txtStock" CssClass="form-control border border-dark"></asp:TextBox>
+                        <asp:RegularExpressionValidator ControlToValidate="txtStock" runat="server" Display="Dynamic" ValidationExpression="^[0-9]+$" ForeColor="Red" ErrorMessage="Solo admite numeros enteros."></asp:RegularExpressionValidator>
+                    </div>
+
+                    <div class="col-md-6">
+                        <asp:Label ID="lblAgregarStock" runat="server" AssociatedControlID="txtAgregarStock" class="form-label fw-bold" Text="Agregar Stock"></asp:Label>
+                        <asp:TextBox runat="server" ID="txtAgregarStock" CssClass="form-control border border-dark" placeholder="Ej: 5"></asp:TextBox>
+                        <asp:RegularExpressionValidator ControlToValidate="txtAgregarStock" runat="server" Display="Dynamic" 
+                        ValidationExpression="^[0-9]+$" ForeColor="Red" ErrorMessage="Solo admite números enteros mayores o iguales a 0."></asp:RegularExpressionValidator>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-4">

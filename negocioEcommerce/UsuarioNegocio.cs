@@ -71,6 +71,7 @@ namespace negocioEcommerce
                     if (!(datos.Lector["ImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
 
+                    usuario.TipoUsuario = new TipoUsuario();
                     usuario.TipoUsuario.IdTipoUsuario = (int)(datos.Lector["IdTipoUsuario"]);
                     /*AGREGUE LA CARGA DE DESCRIPCION DEL TIPO DE DATO
                     usuario.TipoUsuario.Descripcion = (string)(datos.Lector["Descripcion"]);*/
@@ -180,6 +181,28 @@ namespace negocioEcommerce
                 datos.setearParametro("@UrlImagen", usuario.ImagenPerfil != null ? usuario.ImagenPerfil : (object)DBNull.Value);
                 datos.setearParametro("@Id", usuario.Id);
                 datos.setearParametro("@IdTipoUsuario", 2);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public void ActualizarPassword(int idUsuario, string nuevaPass)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Usuario SET Pass = @NuevaPass WHERE Id = @IdUsuario");
+                datos.setearParametro("@IdUsuario", idUsuario);
+                datos.setearParametro("@NuevaPass", nuevaPass);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

@@ -20,6 +20,10 @@
                     <hr /> 
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link link-dark" href="CambiarPassword.aspx">Cambiar Contraseña</a>
+                    <hr />
+                </li>
+                <li class="nav-item">
                     <asp:Button Text="Cerrar sesion" Id="btnCerrarSesion" OnClick="btnCerrarSesion_Click" CssClass="nav-link link-dark" runat="server" />             
                     <hr />
                 </li>

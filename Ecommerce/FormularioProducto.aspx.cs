@@ -70,11 +70,15 @@ namespace Ecommerce
 
                     if (id != "")
                     {
+
                         txtId.Visible = true;
                         lblId.Visible = true;
                         txtId.Enabled = false;
                         btnEliminar.Visible = true;
                         btnDesactivar.Visible = true;
+
+                        lblAgregarStock.Visible = true;
+                        txtAgregarStock.Visible = true;
 
                         btnAgregarProducto.Text = "Modificar";
 
@@ -106,6 +110,8 @@ namespace Ecommerce
                     {
                         //CARGO CARRUSEL Y SI ESTA VACIO NO MUESTRO BOTON ELIMINAR
                         CargarCarrusel(listaImagenes);
+                        lblAgregarStock.Visible = false;
+                        txtAgregarStock.Visible = false;
                         btnEliminarImg.Visible = false;
                     }
                 }
@@ -141,9 +147,20 @@ namespace Ecommerce
                 productoNuevo.Stock = int.Parse(txtStock.Text);
                 productoNuevo.IdVendedor = usuarioIngresado.Id;
 
+                int stockBase = int.Parse(txtStock.Text);
+                if (Request.QueryString["id"] != null && !string.IsNullOrWhiteSpace(txtAgregarStock.Text))
+                {
+                    int stockAIngresar = int.Parse(txtAgregarStock.Text);
+                    productoNuevo.Stock = stockBase + stockAIngresar;
+                }
+                else
+                {
+                    productoNuevo.Stock = stockBase;
+                }
 
-                /* VERIFICAR NOMBRE PRODUCTO */
-                if (Request.QueryString["id"] != null)
+
+                    /* VERIFICAR NOMBRE PRODUCTO */
+                    if (Request.QueryString["id"] != null)
                     productoNuevo.Id = int.Parse(Request.QueryString["id"].ToString());
 
                 if (productoNegocio.existeNombreProductoPorVendedor(productoNuevo.Nombre, productoNuevo.IdVendedor, productoNuevo.Id))
