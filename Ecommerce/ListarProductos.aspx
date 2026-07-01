@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterCliente.Master" AutoEventWireup="true" CodeBehind="ListarProductos.aspx.cs" Inherits="Ecommerce.ListarProductos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>LISTADO DE PRODUCTOS</h1>
+    <h1 class="mt-5">LISTADO DE PRODUCTOS</h1>
 
     <div class="row mb-3">
         <asp:GridView ID="dgvListaProductos" runat="server" DataKeyNames="Id"
-            CssClass="table table-bordered table-striped shadow-sm" 
-            Style="text-align: center;"  AutoGenerateColumns="false"
+            CssClass="table table-bordered table-striped shadow-sm"
+            Style="text-align: center;" AutoGenerateColumns="false"
             OnSelectedIndexChanged="dgvListaProductos_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField HeaderText="Id" DataField="Id" />
@@ -21,9 +22,15 @@
                 <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="📝" />
             </Columns>
-        </asp:GridView> 
-
-        <div>
+        </asp:GridView>
+        <asp:Panel ID="PanelSinProducto" CssClass="d-flex justify-content-center align-items-center " runat="server" Visible="false">
+            <div class="col-5 m-3 border border-secondary-subtle rounded shadow text-center">
+                <div class="m-3 p-2">
+                    <p>No se encontro ninguna Producto</p>
+                </div>
+            </div>
+        </asp:Panel>
+        <div class="mb-5">
             <a class="btn btn-primary" href="/FormularioProducto.aspx">➕ Agregar Producto</a>
         </div>
     </div>

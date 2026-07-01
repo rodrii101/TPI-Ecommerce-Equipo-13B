@@ -28,7 +28,8 @@ namespace Ecommerce
                 {
                     ProductoNegocio productoNegocio = new ProductoNegocio();
                     List<Producto> listaProductosDelVendedor = productoNegocio.listarProductosPorUsuario(usuarioIngresado.Id);
-
+                    bool encontroProductos = (listaProductosDelVendedor != null && listaProductosDelVendedor.Count > 0);
+                    PanelSinProducto.Visible = !encontroProductos;
                     dgvListaProductos.DataSource = listaProductosDelVendedor;
                 }
                 else if (usuarioIngresado.TipoUsuario.IdTipoUsuario == 3)

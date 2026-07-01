@@ -12,7 +12,12 @@ namespace Ecommerce
     public partial class GestionEstadoPedido : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
+            if (!Seguridad.SesionAdmin(Session["UsuarioIngresado"]))
+            {
+                Session.Add("Error", "Debe tener permisos de Admin");
+                Response.Redirect("Error.aspx");
+            }
             if (Seguridad.SesionActiva(Session["UsuarioIngresado"]))
             {
                 Usuario usuarioIngresado = (Usuario)Session["UsuarioIngresado"];
